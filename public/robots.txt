@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Cambia el dominio cuando publiques el sitio
+Sitemap: https://bastiansandoval.cl/sitemap.xml

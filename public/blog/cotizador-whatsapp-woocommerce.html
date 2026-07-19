@@ -1,0 +1,79 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Un cotizador por WhatsApp que sí convierte — Bastián Sandoval</title>
+  <meta name="description" content="Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas." />
+  <meta name="theme-color" content="#0C0C0C" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0C0C0C; color: #D7E2EA; font-family: 'Kanit', sans-serif; line-height: 1.75; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    a { color: inherit; }
+    .back { display: inline-block; font-size: .85rem; text-transform: uppercase; letter-spacing: .15em; opacity: .6; text-decoration: none; margin-bottom: 40px; }
+    .back:hover { opacity: 1; }
+    h1 { font-weight: 900; line-height: 1.1; font-size: clamp(1.8rem, 5.5vw, 2.8rem); background: linear-gradient(180deg, #8b929e, #BBCCD7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+    .meta { font-weight: 300; font-size: .85rem; opacity: .5; margin-bottom: 36px; }
+    h2 { font-weight: 500; font-size: 1.3rem; margin: 36px 0 12px; }
+    p { font-weight: 300; margin-bottom: 16px; }
+    ul, ol { font-weight: 300; margin: 0 0 16px 22px; }
+    li { margin-bottom: 6px; }
+    code { font-family: Consolas, monospace; font-size: .85em; background: rgba(215,226,234,.1); padding: 2px 6px; border-radius: 6px; }
+    pre { background: rgba(215,226,234,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px; overflow-x: auto; margin-bottom: 16px; }
+    pre code { background: none; padding: 0; }
+    strong { font-weight: 500; }
+    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .4; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Un cotizador por WhatsApp que sí convierte",
+    "inLanguage": "es-CL",
+    "datePublished": "2026-07-18",
+    "author": { "@type": "Person", "name": "Bastián Sandoval" }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/blog/index.html">← Notas técnicas</a>
+    <h1>Un cotizador por WhatsApp que sí convierte</h1>
+    <p class="meta">Bastián Sandoval · Julio 2026 · E-commerce, WooCommerce</p>
+
+    <p>En Chile, buena parte del comercio B2B no se cierra en un checkout: se cierra conversando. Repuestos, maquinaria, insumos — el cliente quiere confirmar compatibilidad, plazo de despacho y forma de pago antes de pagar. Forzarlo a un checkout tradicional genera carritos abandonados; ignorar la web y vender "solo por WhatsApp" pierde todo el tráfico de Google. El punto medio es un <strong>cotizador por WhatsApp</strong> bien diseñado.</p>
+
+    <h2>El error común: el botón pelado</h2>
+    <p>El típico botón flotante de WhatsApp abre un chat vacío. El cliente tiene que explicar qué estaba mirando, el vendedor tiene que preguntar todo de nuevo, y la mitad de las conversaciones muere ahí.</p>
+
+    <h2>Lo que hice distinto</h2>
+    <p>El cotizador que armé para las tiendas de Motormaq arma el mensaje por el cliente, con el contexto completo:</p>
+    <pre><code>const texto = [
+  'Hola, quiero cotizar:',
+  ...carrito.map(i => `• ${i.qty}x ${i.nombre} (${i.sku})`),
+  `Total referencial: ${formatoCLP(total)}`,
+  `Despacho a: ${comuna}`,
+].join('\n');
+
+location.href = `https://wa.me/${FONO}?text=${encodeURIComponent(texto)}`;</code></pre>
+    <ul>
+      <li><strong>El carrito viaja en el mensaje</strong>: producto, SKU y cantidades. El vendedor responde cotizando, no preguntando.</li>
+      <li><strong>Total referencial visible</strong>: ancla la conversación y filtra al que solo estaba mirando.</li>
+      <li><strong>Registro en el servidor</strong>: antes de redirigir, el clic se guarda como "cotización iniciada" — sin eso no puedes medir conversión ni hacer seguimiento.</li>
+    </ul>
+
+    <h2>Checkout y WhatsApp no compiten</h2>
+    <p>La clave es no elegir uno: el producto estándar y barato se compra directo con checkout; el producto técnico o de alto valor se cotiza. En la práctica ambos botones conviven en la misma ficha, y cada producto define cuál es el principal según su precio y complejidad.</p>
+
+    <h2>Resultados que puedes esperar</h2>
+    <p>Donde mejor rinde este patrón es en catálogos técnicos con precios sobre ~50.000 CLP: ahí la conversación no es fricción, es parte de la venta. Y como el mensaje llega estructurado, un solo vendedor puede atender muchas cotizaciones sin perder el hilo.</p>
+
+    <footer>© 2026 Bastián Sandoval · <a href="/">bastiansandoval — portafolio</a></footer>
+  </div>
+</body>
+</html>

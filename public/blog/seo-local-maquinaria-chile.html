@@ -1,0 +1,86 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO local para vender maquinaria en Chile — Bastián Sandoval</title>
+  <meta name="description" content="Lo que aprendí posicionando sitios de motores y maquinaria en Chile: Schema.org, SEO local, comparadores y contenido que responde búsquedas reales." />
+  <meta name="theme-color" content="#0C0C0C" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0C0C0C; color: #D7E2EA; font-family: 'Kanit', sans-serif; line-height: 1.75; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    a { color: inherit; }
+    .back { display: inline-block; font-size: .85rem; text-transform: uppercase; letter-spacing: .15em; opacity: .6; text-decoration: none; margin-bottom: 40px; }
+    .back:hover { opacity: 1; }
+    h1 { font-weight: 900; line-height: 1.1; font-size: clamp(1.8rem, 5.5vw, 2.8rem); background: linear-gradient(180deg, #8b929e, #BBCCD7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+    .meta { font-weight: 300; font-size: .85rem; opacity: .5; margin-bottom: 36px; }
+    h2 { font-weight: 500; font-size: 1.3rem; margin: 36px 0 12px; }
+    p { font-weight: 300; margin-bottom: 16px; }
+    ul, ol { font-weight: 300; margin: 0 0 16px 22px; }
+    li { margin-bottom: 6px; }
+    code { font-family: Consolas, monospace; font-size: .85em; background: rgba(215,226,234,.1); padding: 2px 6px; border-radius: 6px; }
+    pre { background: rgba(215,226,234,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px; overflow-x: auto; margin-bottom: 16px; }
+    pre code { background: none; padding: 0; }
+    strong { font-weight: 500; }
+    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .4; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "SEO local para vender maquinaria en Chile",
+    "inLanguage": "es-CL",
+    "datePublished": "2026-07-18",
+    "author": { "@type": "Person", "name": "Bastián Sandoval" }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/blog/index.html">← Notas técnicas</a>
+    <h1>SEO local para vender maquinaria en Chile</h1>
+    <p class="meta">Bastián Sandoval · Julio 2026 · SEO técnico</p>
+
+    <p>Posicionar un e-commerce de motores y repuestos en Chile tiene una ventaja enorme: la competencia técnica es baja. La mayoría de las tiendas del rubro son catálogos genéricos sin datos estructurados, sin contenido y sin foco local. Con hacer bien lo básico ya juegas en otra liga. Esto es lo que aplico en los sitios de Motorman.</p>
+
+    <h2>1. La búsqueda real no es la que crees</h2>
+    <p>Nadie busca "soluciones integrales en motores diésel". Buscan <strong>"motor kubota d1105 precio chile"</strong>, <strong>"repuestos kubota santiago"</strong> o <strong>"qué motor le sirve a mi minicargador"</strong>. De ahí salen tres tipos de página:</p>
+    <ul>
+      <li><strong>Ficha por modelo</strong> (una URL por motor, con specs completas): captura las búsquedas de modelo exacto, que son las de mayor intención de compra.</li>
+      <li><strong>Categorías por aplicación</strong> (generación, riego, construcción): capturan al que sabe su problema pero no el modelo.</li>
+      <li><strong>Comparador</strong>: convierte al indeciso y genera enlaces internos entre todas las fichas.</li>
+    </ul>
+
+    <h2>2. Datos estructurados que Google entiende</h2>
+    <p>Cada ficha lleva <code>Product</code> + <code>Offer</code>, y el sitio entero <code>LocalBusiness</code> con dirección, comuna y teléfono:</p>
+    <pre><code>{
+  "@type": "Product",
+  "name": "Motor diésel Kubota D1105",
+  "brand": { "@type": "Brand", "name": "Kubota" },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "CLP"
+  }
+}</code></pre>
+    <p>El <code>LocalBusiness</code> más un perfil de Google Business bien mantenido (categoría correcta, fotos reales del local, respuestas a reseñas) es lo que te mete en el mapa cuando alguien busca "repuestos kubota cerca de mí".</p>
+
+    <h2>3. Lo técnico que sí mueve la aguja</h2>
+    <ul>
+      <li><strong>Core Web Vitals</strong>: imágenes en WebP con tamaños definidos, lazy-loading fuera del viewport y cero JavaScript innecesario. Un catálogo estático puede cargar en menos de un segundo.</li>
+      <li><strong>Sitemap segmentado</strong> y <code>robots.txt</code> limpio: parece obvio, pero la mitad de las tiendas del rubro bloquean sus propias categorías.</li>
+      <li><strong>Title y meta description por página</strong>, con modelo y potencia en el title: eso es lo que se ve en el resultado y define el clic.</li>
+    </ul>
+
+    <h2>4. El contenido que falta en el rubro</h2>
+    <p>Guías simples — "cómo identificar el modelo de tu motor", "filtros compatibles por serie" — atraen tráfico que ningún competidor está capturando, y son el lugar natural para enlazar las fichas. En rubros técnicos, una guía útil vale más que veinte posts de relleno.</p>
+
+    <footer>© 2026 Bastián Sandoval · <a href="/">bastiansandoval — portafolio</a></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar carritos abandonados en WooCommerce sin plugins de pago — Bastián Sandoval</title>
+  <meta name="description" content="Cómo construí un módulo propio de recuperación de carritos abandonados para WooCommerce: detección, cupones automáticos y recordatorios, sin suscripciones." />
+  <meta name="theme-color" content="#0C0C0C" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0C0C0C; color: #D7E2EA; font-family: 'Kanit', sans-serif; line-height: 1.75; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    a { color: inherit; }
+    .back { display: inline-block; font-size: .85rem; text-transform: uppercase; letter-spacing: .15em; opacity: .6; text-decoration: none; margin-bottom: 40px; }
+    .back:hover { opacity: 1; }
+    h1 { font-weight: 900; line-height: 1.1; font-size: clamp(1.8rem, 5.5vw, 2.8rem); background: linear-gradient(180deg, #8b929e, #BBCCD7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+    .meta { font-weight: 300; font-size: .85rem; opacity: .5; margin-bottom: 36px; }
+    h2 { font-weight: 500; font-size: 1.3rem; margin: 36px 0 12px; }
+    p { font-weight: 300; margin-bottom: 16px; }
+    ul, ol { font-weight: 300; margin: 0 0 16px 22px; }
+    li { margin-bottom: 6px; }
+    code { font-family: Consolas, monospace; font-size: .85em; background: rgba(215,226,234,.1); padding: 2px 6px; border-radius: 6px; }
+    pre { background: rgba(215,226,234,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px; overflow-x: auto; margin-bottom: 16px; }
+    pre code { background: none; padding: 0; }
+    strong { font-weight: 500; }
+    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .4; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Recuperar carritos abandonados en WooCommerce sin plugins de pago",
+    "inLanguage": "es-CL",
+    "datePublished": "2026-07-18",
+    "author": { "@type": "Person", "name": "Bastián Sandoval" }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/blog/index.html">← Notas técnicas</a>
+    <h1>Recuperar carritos abandonados en WooCommerce sin plugins de pago</h1>
+    <p class="meta">Bastián Sandoval · Julio 2026 · WooCommerce, PHP</p>
+
+    <p>En una tienda de repuestos y maquinaria, el carrito abandonado es el pan de cada día: el cliente cotiza, compara con la competencia y se va. Los plugins comerciales que resuelven esto cuestan entre 5 y 20 USD al mes por tienda, y casi todos hacen lo mismo por debajo. Para la tienda de Motormaq preferí escribirlo a medida dentro de un plugin propio, y el módulo completo quedó en unos cientos de líneas de PHP.</p>
+
+    <h2>1. Detectar el abandono</h2>
+    <p>WooCommerce ya guarda la sesión del carrito; lo que falta es asociarla a un correo antes de que el cliente llegue al checkout. Dos fuentes:</p>
+    <ul>
+      <li>Si el usuario está logueado, ya tienes su correo.</li>
+      <li>Si es invitado, captura el campo de correo del checkout apenas lo escriba (<code>updated_checkout</code> + un endpoint AJAX) y guarda el carrito serializado en una tabla propia con su timestamp.</li>
+    </ul>
+    <p>Un <em>cron</em> de WordPress revisa cada hora los carritos sin orden asociada. Si pasaron más de N horas (en mi caso 3), se considera abandonado.</p>
+
+    <h2>2. El incentivo: cupón único y con vencimiento</h2>
+    <p>El correo de "se te quedó algo en el carrito" sin incentivo recupera poco. Lo que funciona es un cupón <strong>único, personal y con fecha de vencimiento corta</strong>:</p>
+    <pre><code>$coupon = new WC_Coupon();
+$coupon->set_code( 'VUELVE-' . strtoupper( wp_generate_password( 6, false ) ) );
+$coupon->set_discount_type( 'percent' );
+$coupon->set_amount( 5 );
+$coupon->set_usage_limit( 1 );
+$coupon->set_email_restrictions( [ $correo_cliente ] );
+$coupon->set_date_expires( strtotime( '+7 days' ) );
+$coupon->save();</code></pre>
+    <p>El detalle importante es <code>set_email_restrictions</code>: el cupón solo funciona con el correo del cliente que abandonó, así no termina circulando en grupos de ofertas.</p>
+
+    <h2>3. El recordatorio</h2>
+    <p>Un solo correo, simple, con la lista de productos, el cupón y un botón que restaura el carrito con un clic (un enlace con token que reconstruye la sesión desde la tabla). Evité las secuencias de 3 correos: para productos técnicos, el segundo y tercer correo aportan poco y queman la lista.</p>
+
+    <h2>4. Medir antes de celebrar</h2>
+    <p>El módulo marca cada carrito como <em>recuperado</em> si aparece una orden del mismo correo dentro de los 7 días siguientes, use o no el cupón. Ese matiz importa: parte de la recuperación habría ocurrido igual, y si solo mides usos del cupón te cuentas el cuento.</p>
+
+    <h2>Lo que aprendí</h2>
+    <ul>
+      <li>La tabla propia (en vez de <em>post meta</em>) hace que las consultas del cron sean triviales y no ensucien la base de WordPress.</li>
+      <li>Restaurar el carrito con un clic sube la conversión del correo más que cualquier asunto "creativo".</li>
+      <li>Para rubros B2B chilenos, ofrecer continuar por WhatsApp en el mismo correo funciona mejor que empujar al checkout.</li>
+    </ul>
+
+    <footer>© 2026 Bastián Sandoval · <a href="/">bastiansandoval — portafolio</a></footer>
+  </div>
+</body>
+</html>
