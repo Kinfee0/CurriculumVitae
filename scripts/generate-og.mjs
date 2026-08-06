@@ -1,9 +1,12 @@
 /**
- * Genera public/og.png (1200x630) rasterizando scripts/og-source.html con
- * Chrome o Edge en modo headless. Sin dependencias npm: usa el navegador que
- * ya está instalado en el sistema.
+ * Rasteriza un HTML de scripts/ a PNG con Chrome o Edge en modo headless.
+ * Sin dependencias npm: usa el navegador que ya está instalado en el sistema.
  *
- *   npm run og
+ *   npm run og   ->  scripts/og-source.html  -> public/og.png       (1200x630)
+ *   npm run ig   ->  scripts/ig-source.html  -> public/social/instagram.png (1080x1350)
+ *
+ * También se puede llamar directo con argumentos propios:
+ *   node scripts/generate-og.mjs <source.html> <output.png> [width] [height]
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
@@ -11,8 +14,11 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const source = resolve(root, 'scripts/og-source.html');
-const output = resolve(root, 'public/og.png');
+const [sourceArg, outputArg, widthArg, heightArg] = process.argv.slice(2);
+const source = resolve(root, sourceArg ?? 'scripts/og-source.html');
+const output = resolve(root, outputArg ?? 'public/og.png');
+const width = widthArg ?? '1200';
+const height = heightArg ?? '630';
 
 const CANDIDATES =
   process.platform === 'win32'
@@ -47,7 +53,7 @@ execFileSync(
     '--disable-gpu',
     '--hide-scrollbars',
     '--force-device-scale-factor=1',
-    '--window-size=1200,630',
+    `--window-size=${width},${height}`,
     // Da tiempo a que carguen la fuente Kanit y el retrato antes de capturar
     '--virtual-time-budget=6000',
     `--screenshot=${output}`,
@@ -56,4 +62,4 @@ execFileSync(
   { stdio: 'inherit' }
 );
 
-console.log(`OG image generada en ${output}`);
+console.log(`Imagen generada en ${output}`);

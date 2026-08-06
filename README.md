@@ -53,6 +53,23 @@ npm run og
 Edita `scripts/og-source.html` y vuelve a correr el comando para cambiarla.
 Si el navegador está en otra ruta, exporta `CHROME_PATH`.
 
+## Imagen para Instagram
+
+`public/social/instagram.png` (1080×1350, formato 4:5) es un flyer promocional
+del servicio freelance, pensado para postear directo en el feed. Misma idea
+que la OG image: se genera rasterizando `scripts/ig-source.html`.
+
+```bash
+npm run ig
+```
+
+Ambos comandos usan el mismo script (`scripts/generate-og.mjs`), que también
+se puede llamar directo para otros tamaños:
+
+```bash
+node scripts/generate-og.mjs <fuente.html> <salida.png> [ancho] [alto]
+```
+
 ## Dominio
 
 El sitio asume `https://bastiansandoval.cl`. Si publicas en otro dominio,

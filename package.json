@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "og": "node scripts/generate-og.mjs"
+    "og": "node scripts/generate-og.mjs",
+    "ig": "node scripts/generate-og.mjs scripts/ig-source.html public/social/instagram.png 1080 1350"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",
