@@ -148,6 +148,31 @@ export function ContactButton({
   );
 }
 
+/* ---------------------------- AvailabilityBadge ---------------------------- */
+
+/** Píldora "disponible para proyectos" con punto verde pulsante. */
+export function AvailabilityBadge({
+  label,
+  className = '',
+}: {
+  label: string;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`glass-tile inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 ${className}`}
+    >
+      <span className="relative flex w-2 h-2 shrink-0">
+        <span className="pulse-dot absolute inline-flex w-full h-full rounded-full bg-[#3DDC84] opacity-75" />
+        <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3DDC84]" />
+      </span>
+      <span className="text-[#D7E2EA] font-medium uppercase tracking-widest text-[0.6rem] sm:text-[0.7rem]">
+        {label}
+      </span>
+    </span>
+  );
+}
+
 /* ----------------------------- LiveProjectButton ---------------------------- */
 
 export function LiveProjectButton({

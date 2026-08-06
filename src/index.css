@@ -55,6 +55,32 @@ html {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
+/* Punto de "disponible": onda expansiva suave, no el ping brusco de Tailwind */
+.pulse-dot {
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .glow-blob {
   position: absolute;
   border-radius: 9999px;
