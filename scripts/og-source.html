@@ -1,0 +1,192 @@
+<!doctype html>
+<!--
+  Fuente de la imagen Open Graph (public/og.png, 1200x630).
+  Para regenerarla después de editar este archivo:  npm run og
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #0c0c0c;
+        font-family: 'Kanit', sans-serif;
+        color: #d7e2ea;
+        position: relative;
+      }
+
+      .glow {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(110px);
+        pointer-events: none;
+      }
+
+      .glow-1 {
+        top: -160px;
+        left: -120px;
+        width: 620px;
+        height: 620px;
+        background: radial-gradient(circle, rgba(182, 0, 168, 0.5), transparent 70%);
+      }
+
+      .glow-2 {
+        bottom: -220px;
+        left: 380px;
+        width: 640px;
+        height: 640px;
+        background: radial-gradient(circle, rgba(118, 33, 176, 0.55), transparent 70%);
+      }
+
+      .glow-3 {
+        top: -100px;
+        right: -140px;
+        width: 560px;
+        height: 560px;
+        background: radial-gradient(circle, rgba(190, 76, 0, 0.4), transparent 70%);
+      }
+
+      .content {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 72px;
+        gap: 40px;
+      }
+
+      .left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        min-width: 0;
+      }
+
+      .badge {
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 20px;
+        border-radius: 9999px;
+        background: rgba(215, 226, 234, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 9999px;
+        background: #3ddc84;
+        box-shadow: 0 0 12px rgba(61, 220, 132, 0.9);
+      }
+
+      h1 {
+        font-size: 82px;
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        background: linear-gradient(180deg, #8f96a3 0%, #eaf3fa 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .role {
+        font-size: 27px;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: rgba(215, 226, 234, 0.82);
+      }
+
+      .services {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-width: 600px;
+        margin-top: 4px;
+      }
+
+      .chip {
+        padding: 9px 18px;
+        border-radius: 9999px;
+        background: rgba(215, 226, 234, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 17px;
+        font-weight: 300;
+        color: rgba(215, 226, 234, 0.85);
+      }
+
+      .url {
+        margin-top: 12px;
+        font-size: 21px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: #d7e2ea;
+      }
+
+      .right {
+        width: 380px;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .right img {
+        width: 100%;
+        height: auto;
+        max-height: 560px;
+        object-fit: contain;
+        filter: drop-shadow(0 30px 60px rgba(118, 33, 176, 0.45))
+          drop-shadow(0 8px 24px rgba(0, 0, 0, 0.55));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <div class="content">
+      <div class="left">
+        <span class="badge"><span class="dot"></span>Disponible para proyectos</span>
+        <h1>Bastián<br />Sandoval</h1>
+        <p class="role">Desarrollador web full-stack · Chile</p>
+        <div class="services">
+          <span class="chip">E-commerce</span>
+          <span class="chip">Apps a medida</span>
+          <span class="chip">SEO técnico</span>
+          <span class="chip">Automatización</span>
+        </div>
+        <p class="url">bastiansandoval.cl</p>
+      </div>
+      <div class="right">
+        <img src="../src/assets/bastian-cutout.png" alt="" />
+      </div>
+    </div>
+  </body>
+</html>

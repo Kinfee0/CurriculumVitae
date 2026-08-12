@@ -17,6 +17,7 @@ const es = {
   nav: {
     about: 'Sobre mí',
     services: 'Servicios',
+    freelance: 'Freelance',
     projects: 'Proyectos',
     notes: 'Notas',
     contact: 'Contacto',
@@ -25,6 +26,68 @@ const es = {
     heading: 'Hola, soy Bastián',
     tagline: 'Desarrollador full-stack creando plataformas web rápidas y memorables',
     contact: 'Contáctame',
+    // Más corta que freelance.badge: en el hero convive con el botón de contacto
+    available: 'Disponible para proyectos',
+  },
+  // REVISAR antes de publicar: `facts` afirma boleta de honorarios, idiomas y
+  // herramientas de reunión; `steps` promete soporte incluido las primeras
+  // semanas. Ajusta cualquier punto que no quieras comprometer.
+  freelance: {
+    badge: 'Disponible para proyectos freelance',
+    heading: 'Trabajemos juntos',
+    intro:
+      'Contratar a alguien remoto da miedo: no sabes si va a responder, si el precio va a cambiar a mitad de camino o si el proyecto queda amarrado a una sola persona. Así trabajo yo para que eso no pase.',
+    pillars: [
+      {
+        title: 'Remoto, pero presente',
+        text: 'Reuniones breves cuando las necesites. Quince minutos por videollamada resuelven lo que veinte correos no.',
+      },
+      {
+        title: 'Respondo rápido',
+        text: 'Si algo se cae o necesitas un ajuste, estoy. Los sitios no se caen solo de 9 a 6, así que mi ventana de respuesta tampoco.',
+      },
+      {
+        title: 'Sin sorpresas',
+        text: 'Alcance, plazo y precio claros antes de empezar. Si algo cambia, lo conversamos antes — nunca aparece en la factura.',
+      },
+      {
+        title: 'El código queda tuyo',
+        text: 'Repositorio, accesos y documentación a tu nombre desde el día uno. Nada de quedar amarrado a mí.',
+      },
+    ],
+    stepsHeading: 'Cómo partimos',
+    steps: [
+      {
+        title: 'Conversamos',
+        text: 'Una llamada corta para entender qué necesitas. Sin costo y sin compromiso.',
+      },
+      {
+        title: 'Te propongo',
+        text: 'Alcance, plazo y precio por escrito. Sabes exactamente qué recibes antes de decidir.',
+      },
+      {
+        title: 'Construimos',
+        text: 'Avances visibles cada semana. Ves el proyecto crecer, no un silencio de un mes.',
+      },
+      {
+        title: 'Entrego y acompaño',
+        text: 'Deploy, traspaso de accesos y soporte incluido para los ajustes de las primeras semanas.',
+      },
+    ],
+    modesHeading: 'Modalidades',
+    modes: [
+      { title: 'Proyecto cerrado', text: 'Precio fijo por un alcance definido.' },
+      { title: 'Por horas', text: 'Para mejoras, cambios sueltos y consultoría.' },
+      { title: 'Mantención mensual', text: 'Soporte continuo, monitoreo y mejoras.' },
+    ],
+    factsHeading: 'Datos prácticos',
+    facts: [
+      'Horario de Chile (GMT-3): mismo huso que la costa este de EE.UU., 5 horas de España.',
+      'Español nativo e inglés técnico para leer, escribir y documentar.',
+      'Reuniones por Meet, Zoom o Teams. Coordinación diaria por WhatsApp o Slack.',
+      'Trabajo con boleta de honorarios.',
+    ],
+    cta: 'Cuéntame tu proyecto',
   },
   about: {
     heading: 'Sobre mí',
@@ -166,6 +229,7 @@ const en: typeof es = {
   nav: {
     about: 'About',
     services: 'Services',
+    freelance: 'Freelance',
     projects: 'Projects',
     notes: 'Notes',
     contact: 'Contact',
@@ -174,6 +238,64 @@ const en: typeof es = {
     heading: "Hi, I'm Bastián",
     tagline: 'Full-stack developer building fast, memorable web platforms',
     contact: 'Contact me',
+    available: 'Available for projects',
+  },
+  freelance: {
+    badge: 'Available for freelance work',
+    heading: "Let's work together",
+    intro:
+      "Hiring someone remote is scary: you don't know if they'll answer, whether the price will shift halfway through, or if the project ends up locked to one person. Here's how I work so that none of that happens.",
+    pillars: [
+      {
+        title: 'Remote, but present',
+        text: 'Short calls whenever you need them. Fifteen minutes on video settles what twenty emails cannot.',
+      },
+      {
+        title: 'Fast to respond',
+        text: "If something breaks or you need a tweak, I'm there. Sites don't only go down between 9 and 6, so neither does my response window.",
+      },
+      {
+        title: 'No surprises',
+        text: 'Scope, timeline and price agreed before we start. If something changes, we talk about it first — it never shows up in the invoice.',
+      },
+      {
+        title: 'The code is yours',
+        text: 'Repository, access and documentation in your name from day one. No lock-in to me.',
+      },
+    ],
+    stepsHeading: 'How we start',
+    steps: [
+      {
+        title: 'We talk',
+        text: 'A short call to understand what you need. Free, no strings attached.',
+      },
+      {
+        title: 'I send a proposal',
+        text: 'Scope, timeline and price in writing. You know exactly what you get before deciding.',
+      },
+      {
+        title: 'We build',
+        text: 'Visible progress every week. You watch the project grow instead of waiting a month in silence.',
+      },
+      {
+        title: 'I ship and stay',
+        text: 'Deploy, handover of all access, and support included for the first weeks of adjustments.',
+      },
+    ],
+    modesHeading: 'Engagement models',
+    modes: [
+      { title: 'Fixed project', text: 'Flat price for a defined scope.' },
+      { title: 'Hourly', text: 'For improvements, one-off changes and consulting.' },
+      { title: 'Monthly retainer', text: 'Ongoing support, monitoring and improvements.' },
+    ],
+    factsHeading: 'Practical details',
+    facts: [
+      'Chile time (GMT-3): same hours as the US East Coast, 5 hours from Spain.',
+      'Native Spanish and technical English for reading, writing and documentation.',
+      'Meetings on Meet, Zoom or Teams. Day-to-day over WhatsApp or Slack.',
+      'I invoice as an independent contractor (boleta de honorarios).',
+    ],
+    cta: 'Tell me about your project',
   },
   about: {
     heading: 'About me',

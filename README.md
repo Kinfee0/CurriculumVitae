@@ -34,10 +34,54 @@ npm run build    # genera dist/, listo para Cloudflare Pages / Vercel / Netlify
 | Sobre mí | `src/components/AboutSection.tsx` | Texto animado + decoraciones en `public/img/decor/` |
 | Servicios | `src/components/ServicesSection.tsx` | Lista `SERVICES` |
 | Proyectos | `src/components/ProjectsSection.tsx` | Lista `PROJECTS` (tarjetas apiladas con scroll) |
+| Freelance | `src/components/FreelanceSection.tsx` | Pilares, proceso, modalidades y datos prácticos |
 | Contacto | `src/components/Footer.tsx` | Email, GitHub y LinkedIn |
 
 Datos de contacto centralizados en `src/components/Shared.tsx`
 (`EMAIL`, `GITHUB_URL`, `LINKEDIN_URL`).
+
+## Imagen para redes (Open Graph)
+
+`public/og.png` (1200×630) es lo que se ve al compartir el link en LinkedIn,
+WhatsApp o X. Se genera rasterizando `scripts/og-source.html` con el Chrome o
+Edge que ya tengas instalado:
+
+```bash
+npm run og
+```
+
+Edita `scripts/og-source.html` y vuelve a correr el comando para cambiarla.
+Si el navegador está en otra ruta, exporta `CHROME_PATH`.
+
+## Imagen para Instagram
+
+`public/social/instagram.png` (1080×1350, formato 4:5) es un flyer promocional
+del servicio freelance, pensado para postear directo en el feed. Misma idea
+que la OG image: se genera rasterizando `scripts/ig-source.html`.
+
+```bash
+npm run ig
+```
+
+Ambos comandos usan el mismo script (`scripts/generate-og.mjs`), que también
+se puede llamar directo para otros tamaños:
+
+```bash
+node scripts/generate-og.mjs <fuente.html> <salida.png> [ancho] [alto]
+```
+
+## Dominio
+
+El sitio asume `https://bastiansandoval.cl`. Si publicas en otro dominio,
+reemplaza esa cadena en:
+
+- `index.html` (canonical, `og:url`, `og:image`, `twitter:image` y JSON-LD)
+- `public/robots.txt`
+- `public/sitemap.xml`
+- `scripts/og-source.html` (el texto de la imagen) → luego `npm run og`
+
+Las URLs de `og:image` deben ser absolutas: las redes sociales no resuelven
+rutas relativas y el preview sale sin imagen.
 
 ## Notas
 

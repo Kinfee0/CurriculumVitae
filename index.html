@@ -10,26 +10,40 @@
     />
     <meta name="theme-color" content="#0C0C0C" />
     <meta name="author" content="Bastián Sandoval" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <!-- Open Graph / redes sociales. NOTA: cuando tengas dominio, cambia
-         las URLs relativas de og:image/og:url por absolutas (https://tudominio/...) -->
+    <!-- IMPORTANTE: si tu dominio final NO es bastiansandoval.cl, reemplaza esa
+         cadena en TODO este archivo, en public/robots.txt, en public/sitemap.xml
+         y en el texto de scripts/og-source.html (luego corre `npm run og`).
+         Las URLs de og:image y canonical deben ser absolutas: las redes
+         sociales no resuelven rutas relativas y el preview sale sin imagen. -->
+    <link rel="canonical" href="https://bastiansandoval.cl/" />
+
+    <!-- Open Graph / redes sociales -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bastián Sandoval" />
+    <meta property="og:url" content="https://bastiansandoval.cl/" />
     <meta property="og:title" content="Bastián Sandoval — Desarrollador Web Full-Stack" />
     <meta
       property="og:description"
-      content="E-commerce, aplicaciones a medida, SEO técnico y automatización. Proyectos reales para Motorman, Kubota, Yanmar y más."
+      content="Disponible para proyectos freelance: e-commerce, aplicaciones a medida, SEO técnico y automatización. Proyectos reales para Motorman, Kubota, Yanmar y más."
     />
-    <meta property="og:image" content="/og.png" />
+    <meta property="og:image" content="https://bastiansandoval.cl/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Bastián Sandoval, desarrollador web full-stack en Chile"
+    />
     <meta property="og:locale" content="es_CL" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Bastián Sandoval — Desarrollador Web Full-Stack" />
     <meta
       name="twitter:description"
-      content="E-commerce, aplicaciones a medida, SEO técnico y automatización."
+      content="Disponible para proyectos freelance: e-commerce, aplicaciones a medida, SEO técnico y automatización."
     />
-    <meta name="twitter:image" content="/og.png" />
+    <meta name="twitter:image" content="https://bastiansandoval.cl/og.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,32 +56,84 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Bastián Sandoval",
-        "jobTitle": "Desarrollador Web Full-Stack",
-        "email": "mailto:bastiansandovaal@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Santiago",
-          "addressCountry": "CL"
-        },
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Motorman S.A.",
-          "url": "https://www.motorman.cl"
-        },
-        "knowsAbout": [
-          "Desarrollo web",
-          "React",
-          "Next.js",
-          "TypeScript",
-          "WooCommerce",
-          "SEO técnico",
-          "Supabase"
-        ],
-        "sameAs": [
-          "https://github.com/Kinfee0",
-          "https://www.linkedin.com/in/bastiansandovals/"
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://bastiansandoval.cl/#bastian",
+            "name": "Bastián Sandoval",
+            "url": "https://bastiansandoval.cl/",
+            "image": "https://bastiansandoval.cl/og.png",
+            "jobTitle": "Desarrollador Web Full-Stack",
+            "email": "mailto:bastiansandovaal@gmail.com",
+            "telephone": "+56942230004",
+            "knowsLanguage": ["es", "en"],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Santiago",
+              "addressCountry": "CL"
+            },
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Motorman S.A.",
+              "url": "https://www.motorman.cl"
+            },
+            "knowsAbout": [
+              "Desarrollo web",
+              "React",
+              "Next.js",
+              "TypeScript",
+              "WooCommerce",
+              "SEO técnico",
+              "Supabase"
+            ],
+            "sameAs": [
+              "https://github.com/Kinfee0",
+              "https://www.linkedin.com/in/bastiansandovals/"
+            ]
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://bastiansandoval.cl/#servicio",
+            "name": "Bastián Sandoval — Desarrollo web freelance",
+            "url": "https://bastiansandoval.cl/#freelance",
+            "image": "https://bastiansandoval.cl/og.png",
+            "description": "Desarrollo web freelance remoto desde Chile: e-commerce, aplicaciones a medida, SEO técnico y automatización.",
+            "provider": { "@id": "https://bastiansandoval.cl/#bastian" },
+            "areaServed": [
+              { "@type": "Country", "name": "Chile" },
+              { "@type": "Place", "name": "Remoto / LATAM / EE.UU. / España" }
+            ],
+            "availableLanguage": ["es", "en"],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Servicios",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": { "@type": "Service", "name": "Desarrollo web a medida" }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": { "@type": "Service", "name": "E-commerce y WooCommerce" }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Aplicaciones internas, CRM y dashboards"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": { "@type": "Service", "name": "SEO técnico" }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": { "@type": "Service", "name": "Automatización de procesos" }
+                }
+              ]
+            }
+          }
         ]
       }
     </script>

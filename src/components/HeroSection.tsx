@@ -1,4 +1,4 @@
-import { FadeIn, Magnet, ContactButton } from './Shared';
+import { FadeIn, Magnet, ContactButton, AvailabilityBadge } from './Shared';
 import { useLang, useT } from '../i18n';
 import bastianPhoto from '../assets/bastian-cutout.png';
 
@@ -10,6 +10,7 @@ export function HeroSection() {
     { label: t.nav.about, href: '#about' },
     { label: t.nav.services, href: '#services' },
     { label: t.nav.projects, href: '#projects' },
+    { label: t.nav.freelance, href: '#freelance' },
     { label: t.nav.notes, href: '/blog/index.html' },
     { label: t.nav.contact, href: '#contact' },
   ];
@@ -80,7 +81,10 @@ export function HeroSection() {
 
       {/* Barra inferior */}
       <div className="flex justify-between items-end pb-7 sm:pb-8 md:pb-10 px-6 md:px-10 mt-auto relative z-20">
-        <FadeIn delay={0.35} y={20}>
+        <FadeIn delay={0.35} y={20} className="flex flex-col items-start gap-3">
+          <a href="#freelance" className="hover:opacity-80 transition-opacity duration-200">
+            <AvailabilityBadge label={t.hero.available} />
+          </a>
           <p
             className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[260px]"
             style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
