@@ -266,7 +266,7 @@ function ProjectCard({
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-10 mb-3 sm:mb-4">
               <FadeIn x={-60} y={0} delay={0.05} duration={0.8}>
                 <span
-                  className="hero-heading font-black leading-none"
+                  className="project-number font-black leading-none"
                   style={{ fontSize: 'clamp(2.2rem, 6.2vw, 90px)' }}
                 >
                   {project.number}
@@ -295,10 +295,10 @@ function ProjectCard({
             <div className="hidden sm:grid grid-cols-3 gap-4 md:gap-6 mb-3 md:mb-4">
               {caseCols.map((col, i) => (
                 <FadeIn key={col.label} y={24} delay={0.25 + i * 0.1} duration={0.7}>
-                  <p className="text-[#D7E2EA]/50 font-medium uppercase tracking-widest text-[0.6rem] md:text-[0.7rem] mb-1">
+                  <p className="text-[#E0AFFF]/90 font-semibold uppercase tracking-wide text-[0.7rem] md:text-[0.8rem] mb-1.5">
                     {col.label}
                   </p>
-                  <p className="text-[#D7E2EA]/85 font-light leading-snug text-[0.7rem] md:text-[0.8rem]">
+                  <p className="text-[#D7E2EA] font-normal leading-relaxed text-[0.82rem] md:text-[0.95rem]">
                     {col.text}
                   </p>
                 </FadeIn>
