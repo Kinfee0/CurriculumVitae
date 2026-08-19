@@ -97,3 +97,18 @@ html {
   filter: blur(110px);
   pointer-events: none;
 }
+
+/* Fila que se desliza de lado sin barra a la vista.
+   overflow-y va en hidden a propósito: al declarar overflow-x, el navegador
+   convierte el eje vertical de `visible` a `auto` y aparece una segunda barra
+   que corta las tarjetas por el costado. */
+.fila-deslizable {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.fila-deslizable::-webkit-scrollbar {
+  display: none;
+}
