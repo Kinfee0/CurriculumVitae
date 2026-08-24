@@ -12,8 +12,8 @@
     "ig": "node scripts/generate-og.mjs scripts/ig-source.html public/social/instagram.png 1080 1350"
   },
   "dependencies": {
-    "framer-motion": "^12.42.2",
-    "lucide-react": "^1.25.0",
+    "framer-motion": "^12.43.0",
+    "lucide-react": "^1.31.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },

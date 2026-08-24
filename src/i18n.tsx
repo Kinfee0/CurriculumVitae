@@ -127,6 +127,12 @@ const es = {
     heading: 'Proyectos',
     view: 'Ver proyecto',
     internal: 'Proyecto interno',
+    spinHint: '↺ Arrastra para girar',
+    filters: { sites: 'Sitios web', systems: 'Portales y sistemas', mobile: 'Móvil' },
+    desktopLabel: 'Escritorio',
+    mobileLabel: 'Celular',
+    mobileLead:
+      'Así se ven en el celular. Cada sitio se arma primero para esta pantalla y desde ahí se expande al escritorio, porque es donde termina la conversación por WhatsApp.',
     caseLabels: { problem: 'Problema', solution: 'Solución', result: 'Resultado' },
     cases: {
       yanmaq: {
@@ -148,13 +154,13 @@ const es = {
           'Un sitio que responde exactamente lo que el cliente busca en Google: qué motor le sirve y dónde comprarlo en Chile.',
       },
       portal: {
-        category: 'CRM + RRHH · Interno',
+        category: 'Portal interno · Motorman',
         problem:
-          'Ventas y RRHH operaban con planillas, papeles y correos manuales para cada solicitud del personal.',
+          'Los avisos de la empresa, el menú del casino, los feriados y los beneficios circulaban en correos sueltos y papeles en el mural.',
         solution:
-          'Portal interno con Next.js + Prisma: CRM de ventas, aprobaciones de feriados y salidas, PDFs oficiales y correos automáticos, desplegado en Railway.',
+          'Portal interno al estilo Talana o Buk, con Next.js + Prisma sobre Railway: avisos, casino del día, calendario de feriados, cumpleaños del mes, beneficios y ficha de cada persona.',
         result:
-          'Cada aprobación genera su comprobante PDF y su correo sin intervención: menos papeleo para todo el personal.',
+          'Un solo lugar con todo lo que antes se preguntaba de boca en boca, y cada sección con su propia vista y su administración.',
       },
       motormaq: {
         category: 'Plugin WooCommerce · Motormaq',
@@ -182,6 +188,51 @@ const es = {
           'E-commerce estático ultrarrápido en Cloudflare Pages: catálogo generado por script, pedidos por WhatsApp y SEO desde el día uno.',
         result:
           'Tienda completa sin costo de hosting ni mantención, con despacho a todo Chile y carga instantánea.',
+      },
+      motormanWeb: {
+        category: 'Sitio corporativo · Motorman',
+        problem:
+          'La casa matriz de Motorman corría sobre una base antigua y estática, difícil de actualizar, siendo la puerta de entrada a todas sus marcas y servicios.',
+        solution:
+          'Rehice la experiencia completa: recorrido por línea de negocio (maquinaria, repuestos, servicio técnico, Antipincho y cursos IPAF), movimiento en toda la página y contacto directo con el ejecutivo que corresponde.',
+        result:
+          'El hub que reparte hacia Yanmar, Kubota, la tienda de repuestos y los cursos, con la marca al día y cada consulta entrando por WhatsApp.',
+      },
+      ipaf: {
+        category: 'Formación certificada · Motorman',
+        problem:
+          'El centro de formación vendía certificación internacional desde una página estática que no alcanzaba a explicar en qué se diferencian las cuatro categorías de curso.',
+        solution:
+          'Sitio dedicado a los cursos 1A, 1B, 3A y 3B: qué habilita la tarjeta PAL, descuentos por tamaño de grupo, preguntas frecuentes y cotización propia para cada curso.',
+        result:
+          'Cada categoría tiene su explicación y su botón de cotizar: el alumno llega sabiendo cuál necesita en vez de preguntarlo.',
+      },
+      mtqchile: {
+        category: 'Catálogo técnico · Motormaq',
+        problem:
+          'La tienda online no servía a quien busca un repuesto puntual y necesita asesoría antes de comprar: neumáticos, filtros y rodados cambian según la máquina.',
+        solution:
+          'Sitio informativo separado de la tienda, ordenado por línea de producto y por compatibilidad con las grandes marcas, con cotización por WhatsApp y asesoría técnica gratuita.',
+        result:
+          'Dos caminos según el cliente: el que sabe qué quiere compra en la tienda, y el que necesita ayuda cotiza y pregunta.',
+      },
+      delcarpio: {
+        category: 'SEO y contenido · Del Carpio',
+        problem:
+          'Un distribuidor de instrumentación analítica con un catálogo enorme y muy técnico que no aparecía en Google para los equipos que vendía.',
+        solution:
+          'Trabajé la estructura y el posicionamiento del catálogo: categorías por técnica analítica, carga y fichas de producto completas, y SEO on-page en todo el sitio.',
+        result:
+          'Catálogo ordenado por técnica —ICP, cromatografía, espectrometría— y encontrable por quien busca el equipo exacto.',
+      },
+      portalYanmaq: {
+        category: 'Portal de clientes · Yanmaq',
+        problem:
+          'Después de comprar su máquina, el dueño quedaba sin canal propio: repuestos, mantenciones y dudas volvían todas al teléfono.',
+        solution:
+          'Portal privado de post-venta: cada cliente entra con su clave y encuentra su máquina, sus repuestos, su plan de mantención y las respuestas que más se preguntan.',
+        result:
+          'La post-venta deja de depender de llamadas y el cliente Yanmar tiene un lugar propio al que volver.',
       },
     },
   },
@@ -335,6 +386,12 @@ const en: typeof es = {
     heading: 'Projects',
     view: 'View project',
     internal: 'Internal project',
+    spinHint: '↺ Drag to spin',
+    filters: { sites: 'Websites', systems: 'Portals & systems', mobile: 'Mobile' },
+    desktopLabel: 'Desktop',
+    mobileLabel: 'Phone',
+    mobileLead:
+      'How they look on a phone. Every site starts at this width and expands to desktop from there, because this is where the WhatsApp conversation ends up.',
     caseLabels: { problem: 'Problem', solution: 'Solution', result: 'Result' },
     cases: {
       yanmaq: {
@@ -356,13 +413,13 @@ const en: typeof es = {
           'A site that answers exactly what customers search on Google: which engine fits and where to buy it in Chile.',
       },
       portal: {
-        category: 'CRM + HR · Internal',
+        category: 'Internal portal · Motorman',
         problem:
-          'Sales and HR ran on spreadsheets, paper forms and manual emails for every staff request.',
+          'Company notices, the canteen menu, public holidays and staff benefits all travelled through scattered emails and notes on a wall.',
         solution:
-          'Internal portal with Next.js + Prisma: sales CRM, leave approvals, official PDFs and automatic emails, deployed on Railway.',
+          'An internal portal in the vein of Talana or Buk, on Next.js + Prisma over Railway: notices, the day’s canteen menu, a holiday calendar, birthdays of the month, benefits and a record for each person.',
         result:
-          'Every approval generates its PDF receipt and email on its own: less paperwork for the whole staff.',
+          'One place for everything that used to travel by word of mouth, each section with its own view and its own admin.',
       },
       motormaq: {
         category: 'WooCommerce plugin · Motormaq',
@@ -390,6 +447,51 @@ const en: typeof es = {
           'Ultra-fast static e-commerce on Cloudflare Pages: script-generated catalog, WhatsApp ordering and SEO from day one.',
         result:
           'A complete store with zero hosting or maintenance costs, shipping across Chile, loading instantly.',
+      },
+      motormanWeb: {
+        category: 'Corporate site · Motorman',
+        problem:
+          "Motorman's head site ran on an old static base that was hard to update, while being the front door to every brand and service they offer.",
+        solution:
+          'Rebuilt the whole experience: a walkthrough by business line (machinery, parts, technical service, Antipincho and IPAF courses), motion throughout, and direct contact with the right sales rep.',
+        result:
+          'The hub that feeds Yanmar, Kubota, the parts store and the courses, with the brand up to date and every enquiry arriving on WhatsApp.',
+      },
+      ipaf: {
+        category: 'Certified training · Motorman',
+        problem:
+          'The training centre sold international certification from a static page that never quite explained how its four course categories differ.',
+        solution:
+          'A site devoted to courses 1A, 1B, 3A and 3B: what the PAL card unlocks, group-size discounts, FAQs and its own quote button per course.',
+        result:
+          'Each category has its own explanation and quote button: students arrive already knowing which one they need.',
+      },
+      mtqchile: {
+        category: 'Technical catalog · Motormaq',
+        problem:
+          'The online store did not serve buyers hunting one specific part who need advice first: tyres, filters and undercarriage change with every machine.',
+        solution:
+          'An informational site split off from the store, organised by product line and by compatibility with the major brands, with WhatsApp quoting and free technical advice.',
+        result:
+          'Two paths by customer: those who know what they want buy in the store, those who need help ask first.',
+      },
+      delcarpio: {
+        category: 'SEO & content · Del Carpio',
+        problem:
+          'An analytical instrumentation distributor with a huge, highly technical catalog that never surfaced on Google for the equipment it sells.',
+        solution:
+          'I worked the catalog structure and its ranking: categories by analytical technique, full product loading and spec sheets, and on-page SEO across the site.',
+        result:
+          'A catalog ordered by technique — ICP, chromatography, spectrometry — and findable by whoever searches for that exact instrument.',
+      },
+      portalYanmaq: {
+        category: 'Customer portal · Yanmaq',
+        problem:
+          'Once they bought the machine, owners had no channel of their own: parts, servicing and questions all went back to the phone.',
+        solution:
+          'A private after-sales portal: each customer signs in and finds their machine, their parts, their service plan and answers to what they ask most.',
+        result:
+          'After-sales stops depending on phone calls and the Yanmar owner gets a place of their own to come back to.',
       },
     },
   },

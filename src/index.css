@@ -30,6 +30,16 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
+/* Numeración de las tarjetas de proyectos: mismo acento morado-naranja del
+   botón de contacto y los glow-blobs, para que el número destaque en vez de
+   perderse en gris plata como el resto de los títulos "hero-heading". */
+.project-number {
+  background: linear-gradient(120deg, #ff8ae8 0%, #d3009c 35%, #7621b0 68%, #ff8a3d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 ::selection {
   background: #b600a8;
   color: #fff;
@@ -86,4 +96,19 @@ html {
   border-radius: 9999px;
   filter: blur(110px);
   pointer-events: none;
+}
+
+/* Fila que se desliza de lado sin barra a la vista.
+   overflow-y va en hidden a propósito: al declarar overflow-x, el navegador
+   convierte el eje vertical de `visible` a `auto` y aparece una segunda barra
+   que corta las tarjetas por el costado. */
+.fila-deslizable {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.fila-deslizable::-webkit-scrollbar {
+  display: none;
 }
