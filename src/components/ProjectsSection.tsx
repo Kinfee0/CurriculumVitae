@@ -26,6 +26,7 @@ type CaseId =
   | 'mtqchile'
   | 'motormaq'
   | 'ipaf'
+  | 'sfpizza'
   | 'nebuna'
   | 'delcarpio'
   | 'portalYanmaq'
@@ -96,6 +97,16 @@ const PROJECTS: Project[] = [
     button: 'view',
     col1: ['ipaf-cursos', 'ipaf-beneficios'],
     col2: 'ipaf',
+  },
+  {
+    id: 'sfpizza',
+    movil: 'sfpizza',
+    name: 'San Francisco Pizza',
+    grupo: 'sites',
+    href: 'https://www.sanfranciscopizza.cl',
+    button: 'view',
+    col1: ['sfpizza-armador', 'sfpizza-pedido'],
+    col2: 'sfpizza',
   },
   {
     id: 'mtqchile',

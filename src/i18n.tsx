@@ -180,6 +180,15 @@ const es = {
         result:
           'Cierre de mes en un clic: la app calcula quién debe cuánto y deja las cuentas saldadas entre los dos.',
       },
+      sfpizza: {
+        category: 'Pedidos online · Cliente',
+        problem:
+          'Pedirle a una pizzería de barrio por WhatsApp era un ida y vuelta: qué ingredientes hay, cuánto sale con uno extra, dónde queda la casa.',
+        solution:
+          'Carta interactiva pensada para el celular: la pizza se arma tocando ingredientes, las burgers se desarman capa por capa y el pedido sale listo por WhatsApp, sin app ni comisiones.',
+        result:
+          'El local recibe cada pedido completo —productos, total, dirección y forma de pago— y el mismo día del lanzamiento ya entraban pedidos por la página.',
+      },
       nebuna: {
         category: 'E-commerce · Cliente',
         problem:
@@ -438,6 +447,15 @@ const en: typeof es = {
           'App with React 19 + Supabase + Cloudflare Workers: shared expenses, budgets, recurring items and automatic couple balance.',
         result:
           'Month-end close in one click: the app calculates who owes what and settles the balance between both.',
+      },
+      sfpizza: {
+        category: 'Online ordering · Client',
+        problem:
+          'Ordering from a neighbourhood pizzeria over WhatsApp meant endless back and forth: which toppings they have, how much an extra costs, where the house is.',
+        solution:
+          'A mobile-first interactive menu: you build the pizza by tapping toppings, burgers come apart layer by layer, and the order goes out ready on WhatsApp, with no app and no commissions.',
+        result:
+          'The shop gets every order complete —items, total, address and payment method— and orders were already coming in through the site on launch day.',
       },
       nebuna: {
         category: 'E-commerce · Client',

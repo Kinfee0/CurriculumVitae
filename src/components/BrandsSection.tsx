@@ -7,7 +7,7 @@ const LOGOS = [
   { src: '/img/logos/yanmaq.webp', alt: 'Yanmaq' },
 ];
 
-const TEXT_BRANDS = ['Nebuna', 'Motormaq'];
+const TEXT_BRANDS = ['Nebuna', 'Motormaq', 'San Francisco Pizza'];
 
 export function BrandsSection() {
   const t = useT();
