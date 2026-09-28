@@ -27,6 +27,7 @@ type CaseId =
   | 'motormaq'
   | 'ipaf'
   | 'sfpizza'
+  | 'gaspy'
   | 'nebuna'
   | 'delcarpio'
   | 'portalYanmaq'
@@ -107,6 +108,16 @@ const PROJECTS: Project[] = [
     button: 'view',
     col1: ['sfpizza-armador', 'sfpizza-pedido'],
     col2: 'sfpizza',
+  },
+  {
+    id: 'gaspy',
+    movil: 'gaspy',
+    name: 'Gaspy Burgers',
+    grupo: 'sites',
+    href: 'https://gaspy-burgers.bastiansandovaal.workers.dev',
+    button: 'view',
+    col1: ['gaspy-armador', 'gaspy-pedido'],
+    col2: 'gaspy',
   },
   {
     id: 'mtqchile',

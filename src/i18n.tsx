@@ -187,7 +187,16 @@ const es = {
         solution:
           'Carta interactiva pensada para el celular: la pizza se arma tocando ingredientes, las burgers se desarman capa por capa y el pedido sale listo por WhatsApp, sin app ni comisiones.',
         result:
-          'El local recibe cada pedido completo —productos, total, dirección y forma de pago— y el mismo día del lanzamiento ya entraban pedidos por la página.',
+          'El local recibe cada pedido completo —productos, total, delivery o retiro en tienda y forma de pago— y el mismo día del lanzamiento ya entraban pedidos por la página.',
+      },
+      gaspy: {
+        category: 'Menú interactivo · Hamburguesería',
+        problem:
+          'Una hamburguesería de smash burgers con carta larga —simples, dobles, triples y veggie— donde elegir y personalizar por mensaje era lento y confuso.',
+        solution:
+          'Landing mobile-first con estética de aviso de los 50: la mascota presenta la carta con el scroll, cada burger se arma arrastrando ingredientes y el pedido sale listo por WhatsApp. Instalable como app (PWA) y con modo mesa vía NFC.',
+        result:
+          'El cliente ve el precio cambiar con cada agregado y manda el pedido completo —extras, delivery o retiro y forma de pago— sin descargar nada.',
       },
       nebuna: {
         category: 'E-commerce · Cliente',
@@ -455,7 +464,16 @@ const en: typeof es = {
         solution:
           'A mobile-first interactive menu: you build the pizza by tapping toppings, burgers come apart layer by layer, and the order goes out ready on WhatsApp, with no app and no commissions.',
         result:
-          'The shop gets every order complete —items, total, address and payment method— and orders were already coming in through the site on launch day.',
+          'The shop gets every order complete —items, total, delivery or in-store pickup and payment method— and orders were already coming in through the site on launch day.',
+      },
+      gaspy: {
+        category: 'Interactive menu · Burger joint',
+        problem:
+          'A smash burger joint with a long menu —singles, doubles, triples and veggie— where choosing and customising over chat was slow and confusing.',
+        solution:
+          'A mobile-first landing with a 1950s-ad look: the mascot walks you through the menu as you scroll, every burger is built by dragging toppings, and the order goes out ready on WhatsApp. Installable as an app (PWA), with table ordering via NFC.',
+        result:
+          'Customers watch the price change with every extra and send a complete order —extras, delivery or pickup and payment method— without downloading anything.',
       },
       nebuna: {
         category: 'E-commerce · Client',
