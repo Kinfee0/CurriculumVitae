@@ -14,7 +14,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 
-export const EMAIL = 'bastiansandovaal@gmail.com';
+export const EMAIL = 'contacto@bastiansandoval.cl';
 export const GITHUB_URL = 'https://github.com/Kinfee0';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/bastiansandovals/';
 // Número de WhatsApp para el formulario de contacto, formato internacional sin
