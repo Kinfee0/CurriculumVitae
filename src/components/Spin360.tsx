@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from './Shared';
 
 /**
  * Visor 360 arrastrable, el mismo recurso que está en vivo en yanmaq.cl:

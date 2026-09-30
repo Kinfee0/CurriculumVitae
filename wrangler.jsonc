@@ -1,0 +1,19 @@
+// Configuración del Worker que sirve bastiansandoval.cl (Cloudflare Workers
+// Builds hace `npm run build` + `npx wrangler deploy` en cada push a main).
+// Antes no había archivo y Cloudflare generaba uno automático con
+// not_found_handling "single-page-application": cualquier URL inexistente
+// respondía 200 con la home (soft 404). El sitio no tiene rutas del lado del
+// cliente —navega con anclas #— así que no necesita ese modo.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "curriculumvitae",
+  "compatibility_date": "2026-07-19",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "./dist",
+    // Responde public/404.html con estado 404 real
+    "not_found_handling": "404-page"
+  }
+}

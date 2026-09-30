@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
 } from 'framer-motion';
 import { FileCheck2, Users } from 'lucide-react';
-import { FadeIn, LiveProjectButton } from './Shared';
+import { FadeIn, LiveProjectButton, useReducedMotion } from './Shared';
 import { Spin360 } from './Spin360';
 import { MobileShowcase } from './MobileShowcase';
 import { useT } from '../i18n';
@@ -212,13 +211,17 @@ const TILT = [-2, 1.5, -1.2, 1.8, -1.6, 1.1];
 
 function Tile({
   item,
+  fallbackAlt,
   className,
   style,
 }: {
   item: string | IconTile;
+  // Por si una captura nueva todavía no tiene su texto en `projects.shots`
+  fallbackAlt: string;
   className?: string;
   style?: React.CSSProperties;
 }) {
+  const t = useT();
   // En celular la tarjeta tiene 28px de radio y 16px de relleno: con 22px las
   // esquinas de las capturas casi tocaban las de la tarjeta.
   const radius = 'rounded-[14px] sm:rounded-[40px] md:rounded-[52px]';
@@ -226,7 +229,9 @@ function Tile({
     return (
       <img
         src={`/img/shots/${item}.webp`}
-        alt=""
+        alt={t.projects.shots[item] ?? fallbackAlt}
+        width={1200}
+        height={750}
         loading="lazy"
         decoding="async"
         className={`${radius} object-cover object-top w-full ${className ?? ''}`}
@@ -449,12 +454,14 @@ function ProjectCard({
                   <FadeIn x={-50} y={0} delay={0.25} duration={0.8} className="min-w-0 flex-1 sm:flex-none">
                     <Tile
                       item={project.col1[0]}
+                      fallbackAlt={project.name}
                       className="h-[clamp(96px,30vw,132px)] sm:h-[clamp(100px,min(11vw,19vh),170px)]"
                     />
                   </FadeIn>
                   <FadeIn x={-50} y={0} delay={0.35} duration={0.8} className="min-w-0 flex-1 sm:flex-none">
                     <Tile
                       item={project.col1[1]}
+                      fallbackAlt={project.name}
                       className="h-[clamp(96px,30vw,132px)] sm:h-[clamp(130px,min(14vw,24vh),230px)]"
                     />
                   </FadeIn>
@@ -469,7 +476,7 @@ function ProjectCard({
                         className="h-full rounded-[14px] sm:rounded-[40px] md:rounded-[52px]"
                       />
                     ) : (
-                      <Tile item={project.col2} className="h-full" />
+                      <Tile item={project.col2} fallbackAlt={project.name} className="h-full" />
                     )}
                   </FadeIn>
                 </div>

@@ -1,0 +1,19 @@
+# Cabeceras que Cloudflare Workers agrega a los archivos estáticos.
+# https://developers.cloudflare.com/workers/static-assets/headers/
+
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Vite pone un hash en el nombre de todo lo que va en /assets: si el archivo
+# cambia, cambia el nombre, así que el navegador lo puede guardar para siempre.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Capturas e imágenes de public/img: sin hash, así que caché corta. Si
+# reemplazas una captura con el mismo nombre, se ve en máximo un día.
+/img/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

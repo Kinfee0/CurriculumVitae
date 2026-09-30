@@ -3,9 +3,9 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
 } from 'framer-motion';
+import { useReducedMotion } from './Shared';
 import { useT } from '../i18n';
 
 export type ItemMovil = {

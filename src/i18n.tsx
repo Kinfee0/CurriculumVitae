@@ -24,6 +24,9 @@ const es = {
   },
   hero: {
     heading: 'Hola, soy Bastián',
+    // Solo para lectores de pantalla y buscadores: completa el H1 con apellido,
+    // rol y ciudad sin tocar el título gigante del hero.
+    headingSr: ' — Bastián Sandoval, desarrollador web full-stack en Santiago, Chile',
     tagline: 'Desarrollador full-stack creando plataformas web rápidas y memorables',
     contact: 'Contáctame',
     // Más corta que freelance.badge: en el hero convive con el botón de contacto
@@ -128,6 +131,45 @@ const es = {
     view: 'Ver proyecto',
     internal: 'Proyecto interno',
     spinHint: '↺ Arrastra para girar',
+    // Texto alternativo de cada captura (clave = archivo en public/img/shots)
+    shots: {
+      'yanmaq-2026': 'Portada de yanmaq.cl: maquinaria Yanmar para grandes desafíos',
+      'yanmaq-ficha': 'Ficha de la miniexcavadora Yanmar ViO35 en yanmaq.cl con potencia, capacidad y peso',
+      'kubota-2': 'Sección de marca de motoreskubota.cl con las cifras de Kubota',
+      'kubota-comparador': 'Comparador de motores Kubota lado a lado en motoreskubota.cl',
+      kubota: 'Portada de motoreskubota.cl: motores y repuestos Kubota originales',
+      'motorman-maquinaria': 'Catálogo de equipos para cada faena en motorman.cl',
+      'motorman-antipincho': 'Página del sistema antipinchazos para neumáticos en motorman.cl',
+      'motorman-2026': 'Portada de motorman.cl: venta de maquinaria, repuestos y servicio técnico en Chile',
+      'ipaf-cursos': 'Catálogo de cursos de formación IPAF en ipaf.cl',
+      'ipaf-beneficios': 'Beneficios y ofertas por volumen de los cursos IPAF',
+      ipaf: 'Portada de ipaf.cl: cursos IPAF Chile y tarjeta PAL internacional',
+      'sfpizza-armador': 'Armador de pizzas y hamburguesas en la carta online de San Francisco Pizza',
+      'sfpizza-pedido': 'Resumen del pedido de San Francisco Pizza listo para enviar por WhatsApp',
+      sfpizza: 'Portada de la carta online de San Francisco Pizza',
+      'gaspy-armador': 'Armador de smash burgers en la carta de Gaspy Burgers',
+      'gaspy-pedido': 'Carta de Gaspy Burgers con el pedido listo para WhatsApp',
+      gaspy: 'Portada de Gaspy Burgers con su mascota al estilo de los años 50',
+      'mtqchile-productos': 'Productos y servicio de mantención en motormaqchile.cl',
+      'mtqchile-equipos': 'Tipos de equipos que atiende Motormaq Chile',
+      mtqchile: 'Portada de motormaqchile.cl: repuestos para mantener la maquinaria en marcha',
+      'motormaq-catalogo': 'Categorías de repuestos en la tienda WooCommerce de motormaq.cl',
+      'motormaq-grid': 'Grilla de neumáticos y accesorios en la tienda motormaq.cl',
+      'motormaq-2026': 'Portada de la tienda motormaq.cl: repuestos para motor',
+      'nebuna-2': 'Sección sobre hongos adaptógenos en nebuna.cl',
+      'nebuna-producto': 'Ficha del Extracto de Melena de León en la tienda nebuna.cl',
+      nebuna: 'Portada de nebuna.cl: hongos adaptógenos para el foco y la calma',
+      'delcarpio-productos': 'Áreas de instrumentación analítica en delcarpio.cl',
+      'delcarpio-categoria': 'Catálogo de equipos de laboratorio con filtros en delcarpio.cl',
+      delcarpio: 'Portada de delcarpio.cl: soluciones para laboratorio e industria alimentaria',
+      'portal-yanmaq-login': 'Inicio de sesión del Portal Clientes de Yanmaq',
+      'yanmaq-visor360': 'Visor 360° de la miniexcavadora ViO35 en el Portal Clientes Yanmaq',
+      'portal-yanmaq': 'Ficha de la máquina del cliente en el Portal Clientes Yanmaq',
+      'portal-motorman': 'Inicio del portal interno de Motorman con avisos y novedades',
+      'gastos-nosotros': 'Resumen de gastos compartidos de la pareja en Gastos Hogar',
+      'gastos-presupuestos': 'Presupuestos por categoría en la app Gastos Hogar',
+      'gastos-dashboard': 'Dashboard mensual de Gastos Hogar con gráficos de gastos',
+    } as Record<string, string>,
     filters: { sites: 'Sitios web', systems: 'Portales y sistemas', mobile: 'Móvil' },
     // En celular las tres pestañas completas no caben en 360-390px
     filtersShort: { sites: 'Sitios', systems: 'Sistemas', mobile: 'Móvil' },
@@ -264,17 +306,17 @@ const es = {
     readMore: 'Leer nota',
     items: [
       {
-        href: '/blog/carritos-abandonados-woocommerce.html',
+        href: '/blog/carritos-abandonados-woocommerce',
         title: 'Recuperar carritos abandonados en WooCommerce sin plugins de pago',
         summary: 'Cómo armé un módulo propio con cupones y recordatorios automáticos.',
       },
       {
-        href: '/blog/seo-local-maquinaria-chile.html',
+        href: '/blog/seo-local-maquinaria-chile',
         title: 'SEO local para vender maquinaria en Chile',
         summary: 'Schema.org, Google Business y contenido que responde búsquedas reales.',
       },
       {
-        href: '/blog/cotizador-whatsapp-woocommerce.html',
+        href: '/blog/cotizador-whatsapp-woocommerce',
         title: 'Un cotizador por WhatsApp que sí convierte',
         summary: 'Por qué en Chile el checkout a veces sobra, y cómo reemplazarlo bien.',
       },
@@ -307,6 +349,7 @@ const en: typeof es = {
   },
   hero: {
     heading: "Hi, I'm Bastián",
+    headingSr: ' — Bastián Sandoval, full-stack web developer in Santiago, Chile',
     tagline: 'Full-stack developer building fast, memorable web platforms',
     contact: 'Contact me',
     available: 'Available for projects',
@@ -407,6 +450,44 @@ const en: typeof es = {
     view: 'View project',
     internal: 'Internal project',
     spinHint: '↺ Drag to spin',
+    shots: {
+      'yanmaq-2026': 'yanmaq.cl home page: Yanmar machinery for big challenges',
+      'yanmaq-ficha': 'Yanmar ViO35 mini excavator spec page on yanmaq.cl with power, capacity and weight',
+      'kubota-2': 'Brand section of motoreskubota.cl with Kubota key figures',
+      'kubota-comparador': 'Side-by-side Kubota engine comparison tool on motoreskubota.cl',
+      kubota: 'motoreskubota.cl home page: genuine Kubota engines and parts',
+      'motorman-maquinaria': 'Equipment catalog by job type on motorman.cl',
+      'motorman-antipincho': 'Anti-puncture tire system page on motorman.cl',
+      'motorman-2026': 'motorman.cl home page: machinery sales, parts and service in Chile',
+      'ipaf-cursos': 'IPAF training course catalog on ipaf.cl',
+      'ipaf-beneficios': 'IPAF course benefits and volume discounts',
+      ipaf: 'ipaf.cl home page: IPAF courses in Chile and the international PAL card',
+      'sfpizza-armador': 'Pizza and burger builder on the San Francisco Pizza online menu',
+      'sfpizza-pedido': 'San Francisco Pizza order summary ready to send via WhatsApp',
+      sfpizza: 'San Francisco Pizza online menu home page',
+      'gaspy-armador': 'Smash burger builder on the Gaspy Burgers menu',
+      'gaspy-pedido': 'Gaspy Burgers menu with the order ready for WhatsApp',
+      gaspy: 'Gaspy Burgers home page with its 1950s-style mascot',
+      'mtqchile-productos': 'Products and maintenance service on motormaqchile.cl',
+      'mtqchile-equipos': 'Equipment types serviced by Motormaq Chile',
+      mtqchile: 'motormaqchile.cl home page: parts to keep machinery running',
+      'motormaq-catalogo': 'Parts categories in the motormaq.cl WooCommerce store',
+      'motormaq-grid': 'Tires and accessories grid in the motormaq.cl store',
+      'motormaq-2026': 'motormaq.cl store home page: engine parts',
+      'nebuna-2': 'Adaptogenic mushrooms section on nebuna.cl',
+      'nebuna-producto': "Lion's Mane extract product page on nebuna.cl",
+      nebuna: 'nebuna.cl home page: adaptogenic mushrooms for focus and calm',
+      'delcarpio-productos': 'Analytical instrumentation areas on delcarpio.cl',
+      'delcarpio-categoria': 'Filterable lab equipment catalog on delcarpio.cl',
+      delcarpio: 'delcarpio.cl home page: solutions for labs and the food industry',
+      'portal-yanmaq-login': 'Yanmaq Customer Portal sign-in screen',
+      'yanmaq-visor360': '360° viewer of the ViO35 mini excavator in the Yanmaq Customer Portal',
+      'portal-yanmaq': "Customer's machine page in the Yanmaq Customer Portal",
+      'portal-motorman': 'Motorman intranet home with announcements and news',
+      'gastos-nosotros': "Couple's shared expenses summary in Gastos Hogar",
+      'gastos-presupuestos': 'Budgets by category in the Gastos Hogar app',
+      'gastos-dashboard': 'Gastos Hogar monthly dashboard with spending charts',
+    },
     filters: { sites: 'Websites', systems: 'Portals & systems', mobile: 'Mobile' },
     filtersShort: { sites: 'Websites', systems: 'Systems', mobile: 'Mobile' },
     desktopLabel: 'Desktop',
@@ -542,17 +623,17 @@ const en: typeof es = {
     readMore: 'Read note',
     items: [
       {
-        href: '/blog/carritos-abandonados-woocommerce.html',
+        href: '/blog/carritos-abandonados-woocommerce',
         title: 'Recovering abandoned carts in WooCommerce without paid plugins',
         summary: 'How I built a custom module with automatic coupons and reminders. (Spanish)',
       },
       {
-        href: '/blog/seo-local-maquinaria-chile.html',
+        href: '/blog/seo-local-maquinaria-chile',
         title: 'Local SEO for selling machinery in Chile',
         summary: 'Schema.org, Google Business and content that answers real searches. (Spanish)',
       },
       {
-        href: '/blog/cotizador-whatsapp-woocommerce.html',
+        href: '/blog/cotizador-whatsapp-woocommerce',
         title: 'A WhatsApp quote flow that actually converts',
         summary: 'Why checkout is sometimes the wrong tool in Chile, and what to build instead. (Spanish)',
       },
@@ -577,10 +658,15 @@ const LangContext = createContext<{
 }>({ lang: 'es', setLang: () => {} });
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>(() => {
-    const saved = localStorage.getItem('lang');
-    return saved === 'en' ? 'en' : 'es';
-  });
+  // Siempre parte en español: el HTML prerenderizado (scripts/prerender.mjs)
+  // viene en español y el primer render del cliente tiene que coincidir con él
+  // para que React lo hidrate sin rehacerlo. La preferencia guardada se aplica
+  // recién después de montar.
+  const [lang, setLang] = useState<Lang>('es');
+
+  useEffect(() => {
+    if (localStorage.getItem('lang') === 'en') setLang('en');
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('lang', lang);

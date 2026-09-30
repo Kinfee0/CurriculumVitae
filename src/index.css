@@ -82,8 +82,28 @@ html {
   }
 }
 
+/* Entrada de los elementos del hero (ver HeroIn en HeroSection.tsx). Es la
+   misma subida + fundido que hace FadeIn (0.7s, misma curva), pero en CSS:
+   arranca apenas se pinta el HTML prerenderizado, sin esperar al JavaScript.
+   Retraso y desplazamiento llegan por variables desde cada elemento. */
+.hero-in {
+  animation: hero-in 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) var(--hero-delay, 0s) both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--hero-y, 30px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .pulse-dot {
+  .pulse-dot,
+  .hero-in {
     animation: none;
   }
   html {

@@ -3,12 +3,12 @@ import {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
   type CSSProperties,
   type ReactNode,
 } from 'react';
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
@@ -23,6 +23,29 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/bastiansandovals/';
 export const WHATSAPP = '56942230004';
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;
+
+/* ----------------------------- useReducedMotion ----------------------------- */
+
+// Reemplaza al de framer-motion. El de framer lee la media query en el primer
+// render, así que en el servidor (prerender) da null y en el cliente true para
+// quien pide menos movimiento: el árbol no coincide y React descarta el HTML
+// prerenderizado. Con useSyncExternalStore la hidratación usa el valor del
+// servidor (false) y justo después se corrige con el real.
+const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
+
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION);
+  mq.addEventListener('change', onChange);
+  return () => mq.removeEventListener('change', onChange);
+}
+
+export function useReducedMotion() {
+  return useSyncExternalStore(
+    subscribeReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false
+  );
+}
 
 /* ---------------------------------- FadeIn ---------------------------------- */
 
@@ -240,15 +263,12 @@ function Char({
   progress: MotionValue<number>;
   range: [number, number];
 }) {
-  const opacity = useTransform(progress, range, [0.2, 1]);
-  return (
-    <span className="relative inline-block">
-      <span className="opacity-20">{char}</span>
-      <motion.span className="absolute left-0 top-0" style={{ opacity }}>
-        {char}
-      </motion.span>
-    </span>
-  );
+  // Una sola capa por letra. Antes eran dos (una fija al 20% y otra encima que
+  // iba de 20% a 100%) y el texto quedaba duplicado en el DOM: Google y los
+  // bots leían "DDeessaarrrroollllaaddoorr". Dos capas al 20% se ven como una al
+  // 36% (1 − 0,8 × 0,8), así que partir de 0.36 se ve igual que antes.
+  const opacity = useTransform(progress, range, [0.36, 1]);
+  return <motion.span style={{ opacity }}>{char}</motion.span>;
 }
 
 export function AnimatedText({

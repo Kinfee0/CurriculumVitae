@@ -26,3 +26,6 @@ dist-ssr
 # Claude Code
 .claude/
 CLAUDE.md
+
+# Caché local de wrangler dev
+.wrangler
