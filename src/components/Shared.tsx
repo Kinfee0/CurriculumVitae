@@ -13,6 +13,7 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion';
+import { ArrowUpRight, Lock } from 'lucide-react';
 
 export const EMAIL = 'contacto@bastiansandoval.cl';
 export const GITHUB_URL = 'https://github.com/Kinfee0';
@@ -178,10 +179,39 @@ export function AvailabilityBadge({
 export function LiveProjectButton({
   href,
   label = 'Ver proyecto',
+  compact = false,
 }: {
   href?: string;
   label?: string;
+  // Botón redondo solo con ícono, para el encabezado de las tarjetas en
+  // celular: la píldora con texto no cabe al lado del nombre y bajaba a una
+  // fila propia.
+  compact?: boolean;
 }) {
+  if (compact) {
+    const circle =
+      'glass-tile flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[#D7E2EA]';
+    if (!href) {
+      return (
+        <span className={`${circle} opacity-60`} title={label} aria-label={label} role="img">
+          <Lock className="h-[18px] w-[18px]" strokeWidth={1.75} />
+        </span>
+      );
+    }
+    return (
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        className={circle}
+        whileTap={{ scale: 0.88 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+      >
+        <ArrowUpRight className="h-5 w-5" strokeWidth={1.75} />
+      </motion.a>
+    );
+  }
   const classes =
     'glass-tile inline-block rounded-full text-[#D7E2EA] font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base whitespace-nowrap transition-colors duration-200';
   if (!href) {

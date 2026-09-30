@@ -129,6 +129,8 @@ const es = {
     internal: 'Proyecto interno',
     spinHint: '↺ Arrastra para girar',
     filters: { sites: 'Sitios web', systems: 'Portales y sistemas', mobile: 'Móvil' },
+    // En celular las tres pestañas completas no caben en 360-390px
+    filtersShort: { sites: 'Sitios', systems: 'Sistemas', mobile: 'Móvil' },
     desktopLabel: 'Escritorio',
     mobileLabel: 'Celular',
     mobileLead:
@@ -406,6 +408,7 @@ const en: typeof es = {
     internal: 'Internal project',
     spinHint: '↺ Drag to spin',
     filters: { sites: 'Websites', systems: 'Portals & systems', mobile: 'Mobile' },
+    filtersShort: { sites: 'Websites', systems: 'Systems', mobile: 'Mobile' },
     desktopLabel: 'Desktop',
     mobileLabel: 'Phone',
     mobileLead:

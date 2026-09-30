@@ -219,7 +219,9 @@ function Tile({
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const radius = 'rounded-[22px] sm:rounded-[40px] md:rounded-[52px]';
+  // En celular la tarjeta tiene 28px de radio y 16px de relleno: con 22px las
+  // esquinas de las capturas casi tocaban las de la tarjeta.
+  const radius = 'rounded-[14px] sm:rounded-[40px] md:rounded-[52px]';
   if (typeof item === 'string') {
     return (
       <img
@@ -235,14 +237,15 @@ function Tile({
   const Icon = ICONS[item.icon];
   return (
     <div
-      className={`${radius} glass-tile w-full flex flex-col items-center justify-center gap-2 sm:gap-3 text-center px-6 ${className ?? ''}`}
+      className={`${radius} glass-tile w-full flex flex-col items-center justify-center gap-1.5 sm:gap-3 text-center px-3 sm:px-6 ${className ?? ''}`}
       style={style}
     >
-      <Icon className="w-7 h-7 sm:w-10 sm:h-10 text-[#D7E2EA]" strokeWidth={1.5} />
-      <p className="text-[#D7E2EA] font-medium uppercase tracking-wide text-xs sm:text-sm">
+      <Icon className="w-6 h-6 sm:w-10 sm:h-10 text-[#D7E2EA]" strokeWidth={1.5} />
+      <p className="text-[#D7E2EA] font-medium uppercase tracking-wide text-[0.68rem] leading-tight sm:text-sm">
         {item.title}
       </p>
-      <p className="text-[#D7E2EA]/60 font-light text-[0.65rem] sm:text-xs leading-snug">
+      {/* En celular la baldosa mide ~150x110 y el subtítulo no cabe */}
+      <p className="hidden sm:block text-[#D7E2EA]/60 font-light text-xs leading-snug">
         {item.subtitle}
       </p>
     </div>
@@ -260,9 +263,13 @@ type Deck = {
   // tarjetas y un notebook de 720px no cabe un escalón por tarjeta, y forzarlo
   // aplasta el abanico a cero. Un mazo real tampoco muestra ocho cantos.
   escalones: number;
+  // Cuánto se sube el mazo sobre las pestañas (solo celular, ver `update`)
+  tiron: number;
 };
 
 const MAX_ESCALONES = 4;
+// Hasta dónde baja el primer naipe en escritorio
+const BASE_MAX = 88;
 
 function ProjectCard({
   project,
@@ -368,8 +375,11 @@ function ProjectCard({
               style={{ opacity: shade }}
               aria-hidden
             />
-            {/* Fila superior: número y textos entran por la izquierda, botón por la derecha */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-10 mb-3 sm:mb-4">
+            {/* Fila superior: número y textos entran por la izquierda, botón por la derecha.
+                En celular no hay wrap: la píldora con texto bajaba a una fila
+                propia y se comía el alto de la tarjeta, así que ahí va el botón
+                redondo con ícono al lado del nombre. */}
+            <div className="flex items-center gap-x-3 gap-y-3 sm:flex-wrap sm:gap-x-10 mb-3 sm:mb-4">
               <FadeIn x={-60} y={0} delay={0.05} duration={0.8}>
                 <span
                   className="project-number font-black leading-none"
@@ -378,24 +388,39 @@ function ProjectCard({
                   {String(index + 1).padStart(2, '0')}
                 </span>
               </FadeIn>
-              <FadeIn x={-40} y={0} delay={0.15} duration={0.8} className="flex flex-col min-w-0">
+              <FadeIn
+                x={-40}
+                y={0}
+                delay={0.15}
+                duration={0.8}
+                className="flex flex-col min-w-0 flex-1 sm:flex-initial"
+              >
                 <span
-                  className="text-[#D7E2EA]/60 font-light uppercase tracking-widest text-[0.65rem] sm:text-xs md:text-sm"
+                  className="text-[#D7E2EA]/60 font-light uppercase tracking-widest text-[0.62rem] sm:text-xs md:text-sm"
                 >
                   {caso.category}
                 </span>
                 <h3
                   className="text-[#D7E2EA] font-medium uppercase leading-tight"
-                  style={{ fontSize: 'clamp(1.1rem, 2.5vw, 2.1rem)' }}
+                  style={{ fontSize: 'clamp(1.05rem, 2.5vw, 2.1rem)' }}
                 >
                   {project.name}
                 </h3>
               </FadeIn>
-              <FadeIn x={50} y={0} delay={0.2} duration={0.8} className="ml-auto">
-                <LiveProjectButton
-                  href={project.button === 'internal' ? undefined : project.href}
-                  label={buttonLabel}
-                />
+              <FadeIn x={50} y={0} delay={0.2} duration={0.8} className="ml-auto shrink-0">
+                <div className="sm:hidden">
+                  <LiveProjectButton
+                    compact
+                    href={project.button === 'internal' ? undefined : project.href}
+                    label={buttonLabel}
+                  />
+                </div>
+                <div className="hidden sm:block">
+                  <LiveProjectButton
+                    href={project.button === 'internal' ? undefined : project.href}
+                    label={buttonLabel}
+                  />
+                </div>
               </FadeIn>
             </div>
 
@@ -414,30 +439,34 @@ function ProjectCard({
             </div>
 
             {
-              /* Grilla de imágenes: columna izquierda desde la izquierda, grande desde la derecha */
-              <div className="flex gap-3 sm:gap-4 md:gap-5">
-                <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 w-[40%]">
-                  <FadeIn x={-50} y={0} delay={0.25} duration={0.8}>
+              /* Grilla de imágenes: columna izquierda desde la izquierda, grande desde la derecha.
+                 En celular se reordena: la captura grande arriba a todo el ancho
+                 y en 16:10 (la proporción de la captura, así se ve entera), y
+                 las dos chicas lado a lado debajo. En 40/60 las capturas de
+                 escritorio quedaban de 130px de ancho y no se leía nada. */
+              <div className="flex flex-col-reverse gap-2.5 sm:flex-row sm:gap-4 md:gap-5">
+                <div className="flex gap-2.5 sm:flex-col sm:gap-4 md:gap-5 sm:w-[40%]">
+                  <FadeIn x={-50} y={0} delay={0.25} duration={0.8} className="min-w-0 flex-1 sm:flex-none">
                     <Tile
                       item={project.col1[0]}
-                      style={{ height: 'clamp(100px, min(11vw, 19vh), 170px)' }}
+                      className="h-[clamp(96px,30vw,132px)] sm:h-[clamp(100px,min(11vw,19vh),170px)]"
                     />
                   </FadeIn>
-                  <FadeIn x={-50} y={0} delay={0.35} duration={0.8}>
+                  <FadeIn x={-50} y={0} delay={0.35} duration={0.8} className="min-w-0 flex-1 sm:flex-none">
                     <Tile
                       item={project.col1[1]}
-                      style={{ height: 'clamp(130px, min(14vw, 24vh), 230px)' }}
+                      className="h-[clamp(96px,30vw,132px)] sm:h-[clamp(130px,min(14vw,24vh),230px)]"
                     />
                   </FadeIn>
                 </div>
-                <div className="w-[60%]">
+                <div className="aspect-[16/10] sm:aspect-auto sm:w-[60%]">
                   <FadeIn x={60} y={0} delay={0.3} duration={0.8} className="h-full">
                     {typeof project.col2 === 'object' ? (
                       <Spin360
                         base={project.col2.spin}
                         alt={`${project.name} — vista 360°`}
                         hint={t.projects.spinHint}
-                        className="h-full rounded-[22px] sm:rounded-[40px] md:rounded-[52px]"
+                        className="h-full rounded-[14px] sm:rounded-[40px] md:rounded-[52px]"
                       />
                     ) : (
                       <Tile item={project.col2} className="h-full" />
@@ -478,7 +507,7 @@ export function ProjectsSection() {
   const onCard = useCallback((i: number, el: HTMLDivElement | null) => {
     cardsRef.current[i] = el;
   }, []);
-  const [deck, setDeck] = useState<Deck>({ cajaH: null, base: 0, paso: 0, escalones: 0 });
+  const [deck, setDeck] = useState<Deck>({ cajaH: null, base: 0, paso: 0, escalones: 0, tiron: 0 });
 
   const total = visibles.length;
   useEffect(() => {
@@ -492,16 +521,29 @@ export function ProjectsSection() {
       const alto = Math.max(...els.map((el) => el.offsetHeight));
       const vh = window.innerHeight;
       const escalones = Math.min(total - 1, MAX_ESCALONES);
+      // Mismo corte que el `sm` de Tailwind, donde cambia el diseño de la tarjeta
+      const movil = window.innerWidth < 640;
       // El escalón se reparte el aire que sobra, pero nunca baja de 9px: por
       // debajo de eso el abanico deja de leerse y el mazo parece una tarjeta.
+      // En celular el tope es 12px porque la tarjeta tiene solo 16px de
+      // relleno: con 24px asomaba media línea de la categoría de cada naipe
+      // enterrado, cortada por el de encima.
       const sobra = Math.max(0, vh - alto - 24);
-      const paso = Math.max(9, Math.min(24, sobra / Math.max(1, escalones)));
-      const base = Math.max(10, Math.min(88, (vh - alto - paso * escalones) / 2));
+      const paso = Math.max(9, Math.min(movil ? 12 : 24, sobra / Math.max(1, escalones)));
+      // En celular el mazo se centra en la pantalla: con el tope de escritorio
+      // quedaba pegado arriba y con ~300px vacíos abajo.
+      const centrado = (vh - alto - paso * escalones) / 2;
+      const base = Math.max(10, movil ? centrado : Math.min(BASE_MAX, centrado));
       setDeck({
         cajaH: Math.round(Math.min(vh, alto + 260)),
         base: Math.round(base),
         paso: Math.round(paso),
         escalones,
+        // Centrarlo agranda el hueco entre las pestañas y el primer naipe (el
+        // naipe se posa `base` más abajo del inicio del contenedor). El tirón
+        // sube el contenedor lo que se bajó el naipe, así el hueco queda igual
+        // que en escritorio.
+        tiron: movil ? Math.round(Math.max(0, base - BASE_MAX)) : 0,
       });
     };
     update();
@@ -571,7 +613,7 @@ export function ProjectsSection() {
                 role="tab"
                 aria-selected={activo}
                 onClick={() => cambiarGrupo(g)}
-                className={`relative rounded-full px-5 py-2 text-xs font-medium uppercase tracking-widest transition-colors duration-200 sm:px-7 sm:py-2.5 sm:text-sm ${
+                className={`relative rounded-full px-4 py-2.5 text-xs font-medium uppercase tracking-widest transition-colors duration-200 sm:px-7 sm:text-sm ${
                   activo ? 'text-[#0C0C0C]' : 'text-[#D7E2EA]/70 hover:text-[#D7E2EA]'
                 }`}
               >
@@ -583,7 +625,8 @@ export function ProjectsSection() {
                   />
                 )}
                 <span className="relative z-10 whitespace-nowrap">
-                  {t.projects.filters[g]}
+                  <span className="sm:hidden">{t.projects.filtersShort[g]}</span>
+                  <span className="hidden sm:inline">{t.projects.filters[g]}</span>
                 </span>
               </button>
             );
@@ -601,7 +644,11 @@ export function ProjectsSection() {
           <MobileShowcase items={proyectosMovil} />
         </div>
       ) : (
-        <div ref={containerRef} className="max-w-6xl mx-auto relative">
+        <div
+          ref={containerRef}
+          className="max-w-6xl mx-auto relative"
+          style={{ marginTop: -deck.tiron }}
+        >
           {visibles.map((project, i) => (
             <ProjectCard
               key={`${grupo}-${project.id}`}
