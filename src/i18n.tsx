@@ -125,6 +125,13 @@ const es = {
           'Integraciones y procesos que ahorran horas de trabajo: importación de datos, generación de documentos, correos automáticos y reportes.',
       },
     ],
+    // Enlaces a las páginas de servicio con precio (public/*.html)
+    offersHeading: 'Para emprendimientos y locales de comida',
+    offersCta: 'Ver qué incluye →',
+    offers: [
+      { name: 'Página web para tu emprendimiento', price: 'Desde $50.000', href: '/paginas-web-emprendedores' },
+      { name: 'Menú digital con pedidos por WhatsApp', price: 'Desde $70.000', href: '/menu-digital-restaurantes' },
+    ],
   },
   projects: {
     heading: 'Proyectos',
@@ -444,6 +451,12 @@ const en: typeof es = {
           'Integrations and processes that save hours of work: data imports, document generation, automatic emails and reports.',
       },
     ],
+    offersHeading: 'For small businesses and restaurants in Chile',
+    offersCta: "See what's included (in Spanish) →",
+    offers: [
+      { name: 'A website for your small business', price: 'From CLP 50,000', href: '/paginas-web-emprendedores' },
+      { name: 'Digital menu with WhatsApp orders', price: 'From CLP 70,000', href: '/menu-digital-restaurantes' },
+    ],
   },
   projects: {
     heading: 'Projects',
@@ -657,7 +670,10 @@ const LangContext = createContext<{
   setLang: (l: Lang) => void;
 }>({ lang: 'es', setLang: () => {} });
 
-export function LangProvider({ children }: { children: ReactNode }) {
+// `fixed`: páginas de un solo idioma (las de servicio, solo en español). No
+// leen ni guardan la preferencia y no tocan <title> ni la meta description,
+// que son los de esa página y no los de la home.
+export function LangProvider({ children, fixed }: { children: ReactNode; fixed?: Lang }) {
   // Siempre parte en español: el HTML prerenderizado (scripts/prerender.mjs)
   // viene en español y el primer render del cliente tiene que coincidir con él
   // para que React lo hidrate sin rehacerlo. La preferencia guardada se aplica
@@ -665,19 +681,21 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>('es');
 
   useEffect(() => {
+    if (fixed) return;
     if (localStorage.getItem('lang') === 'en') setLang('en');
-  }, []);
+  }, [fixed]);
 
   useEffect(() => {
+    if (fixed) return;
     localStorage.setItem('lang', lang);
     document.documentElement.lang = lang;
     document.title = T[lang].meta.title;
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute('content', T[lang].meta.description);
-  }, [lang]);
+  }, [lang, fixed]);
 
   return (
-    <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>
+    <LangContext.Provider value={{ lang: fixed ?? lang, setLang }}>{children}</LangContext.Provider>
   );
 }
 

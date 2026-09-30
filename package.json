@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "wrangler dev",
     "og": "node scripts/generate-og.mjs",
-    "ig": "node scripts/generate-og.mjs scripts/ig-source.html public/social/instagram.png 1080 1350"
+    "ig": "node scripts/generate-og.mjs scripts/ig-source.html public/social/instagram.png 1080 1350",
+    "og:pages": "node scripts/generate-pages-og.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.43.0",

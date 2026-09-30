@@ -50,6 +50,34 @@ export function ServicesSection() {
             </div>
           </FadeIn>
         ))}
+
+        {/* Ofertas con precio: llevan a las páginas de servicio estáticas */}
+        <FadeIn delay={0.1} y={30}>
+          <div className="mt-12 sm:mt-16">
+            <p className="text-[#0C0C0C]/60 font-medium uppercase tracking-widest text-xs sm:text-sm mb-4 sm:mb-6">
+              {t.services.offersHeading}
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              {t.services.offers.map((offer) => (
+                <a
+                  key={offer.href}
+                  href={offer.href}
+                  className="flex flex-col gap-2 rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 border border-[#0C0C0C]/15 text-[#0C0C0C] hover:bg-[#0C0C0C] hover:text-white transition-colors duration-300"
+                >
+                  <span className="font-medium uppercase leading-snug" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.4rem)' }}>
+                    {offer.name}
+                  </span>
+                  <span className="font-black leading-none" style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}>
+                    {offer.price}
+                  </span>
+                  <span className="font-medium uppercase tracking-widest text-xs mt-2 opacity-70">
+                    {t.services.offersCta}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

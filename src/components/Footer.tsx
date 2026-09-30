@@ -140,7 +140,7 @@ export function Footer() {
         </div>
       </FadeIn>
 
-      <p className="text-[#D7E2EA]/40 font-light text-xs sm:text-sm tracking-wide text-center">
+      <p className="text-[#D7E2EA]/60 font-light text-xs sm:text-sm tracking-wide text-center">
         {t.contact.footer}
       </p>
     </footer>

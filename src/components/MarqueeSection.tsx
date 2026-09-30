@@ -68,7 +68,16 @@ function Row({
   );
 }
 
-export function MarqueeSection() {
+// `rows` permite que las páginas de servicio muestren solo sus proyectos.
+// Cada fila necesita ~6 capturas para cubrir una pantalla ancha mientras se
+// desplaza (se duplica una vez).
+export function MarqueeSection({
+  rows = [ROW_1, ROW_2],
+  className = 'pt-24 sm:pt-32 md:pt-40 pb-10',
+}: {
+  rows?: [string[], string[]];
+  className?: string;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(0);
   const [tileW, setTileW] = useState(420);
@@ -99,11 +108,11 @@ export function MarqueeSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden"
+      className={`bg-[#0C0C0C] overflow-hidden ${className}`}
     >
       <div className="flex flex-col gap-3">
-        <Row images={ROW_1} offset={offset} direction={1} tileW={tileW} />
-        <Row images={ROW_2} offset={offset} direction={-1} tileW={tileW} />
+        <Row images={rows[0]} offset={offset} direction={1} tileW={tileW} />
+        <Row images={rows[1]} offset={offset} direction={-1} tileW={tileW} />
       </div>
     </section>
   );

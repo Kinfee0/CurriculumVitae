@@ -1,36 +1,6 @@
-import type { CSSProperties, ReactNode } from 'react';
-import { Magnet, ContactButton, AvailabilityBadge } from './Shared';
+import { HeroIn, Magnet, ContactButton, AvailabilityBadge } from './Shared';
 import { useLang, useT } from '../i18n';
 import bastianPhoto from '../assets/bastian-cutout.webp';
-
-/**
- * Entrada del hero en CSS (.hero-in en index.css) en vez de FadeIn: misma
- * subida + fundido, mismos retrasos y misma curva, pero arranca apenas se pinta
- * el HTML prerenderizado. Con FadeIn todo el hero —y con él el LCP— quedaba
- * invisible hasta que bajaba y corría el bundle de JavaScript (~3 s en 4G).
- */
-function HeroIn({
-  as: Tag = 'div',
-  delay,
-  y,
-  className,
-  children,
-}: {
-  as?: 'div' | 'nav';
-  delay: number;
-  y: number;
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <Tag
-      className={`hero-in ${className ?? ''}`}
-      style={{ '--hero-delay': `${delay}s`, '--hero-y': `${y}px` } as CSSProperties}
-    >
-      {children}
-    </Tag>
-  );
-}
 
 export function HeroSection() {
   const t = useT();

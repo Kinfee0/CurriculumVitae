@@ -86,6 +86,37 @@ export function FadeIn({
   );
 }
 
+/* ---------------------------------- HeroIn ---------------------------------- */
+
+/**
+ * Entrada de los heros en CSS (.hero-in en index.css) en vez de FadeIn: misma
+ * subida + fundido, mismos retrasos y misma curva, pero arranca apenas se pinta
+ * el HTML prerenderizado. Con FadeIn todo el hero —y con él el LCP— quedaba
+ * invisible hasta que bajaba y corría el bundle de JavaScript (~3 s en 4G).
+ */
+export function HeroIn({
+  as: Tag = 'div',
+  delay,
+  y,
+  className,
+  children,
+}: {
+  as?: 'div' | 'nav';
+  delay: number;
+  y: number;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <Tag
+      className={`hero-in ${className ?? ''}`}
+      style={{ '--hero-delay': `${delay}s`, '--hero-y': `${y}px` } as CSSProperties}
+    >
+      {children}
+    </Tag>
+  );
+}
+
 /* ---------------------------------- Magnet ---------------------------------- */
 
 type MagnetProps = {

@@ -18,7 +18,7 @@ const GLOWS = [
   { top: '82%', right: '-4%', width: 520, height: 520, background: 'radial-gradient(circle, rgba(0,151,166,0.30), transparent 70%)' },
 ] as const;
 
-type CaseId =
+export type CaseId =
   | 'yanmaq'
   | 'kubota'
   | 'motormanWeb'
@@ -273,6 +273,7 @@ type Deck = {
 };
 
 const MAX_ESCALONES = 4;
+
 // Hasta dónde baja el primer naipe en escritorio
 const BASE_MAX = 88;
 
@@ -489,7 +490,43 @@ function ProjectCard({
   );
 }
 
-export function ProjectsSection() {
+// Versión de solo contenido de un caso, para el panel `hidden` de las pestañas
+// inactivas: sin animaciones ni mazo, porque hidratar tarjetas completas que
+// nadie ve subía el tiempo de bloqueo de la home. Las imágenes van lazy y
+// dentro de `hidden`, así que no se descargan.
+function ProjectSummary({ project }: { project: Project }) {
+  const t = useT();
+  const caso = t.projects.cases[project.id];
+  const capturas = [...project.col1, project.col2].filter((x): x is string => typeof x === 'string');
+  return (
+    <article>
+      <h3>{project.name}</h3>
+      <p>{caso.category}</p>
+      <p>{t.projects.caseLabels.problem}: {caso.problem}</p>
+      <p>{t.projects.caseLabels.solution}: {caso.solution}</p>
+      <p>{t.projects.caseLabels.result}: {caso.result}</p>
+      {capturas.map((c) => (
+        <img
+          key={c}
+          src={`/img/shots/${c}.webp`}
+          alt={t.projects.shots[c] ?? project.name}
+          width={1200}
+          height={750}
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+      {project.href && project.button !== 'internal' && <a href={project.href}>{project.name}</a>}
+    </article>
+  );
+}
+
+/**
+ * Sin props es la sección completa de la home (tres pestañas). Con `ids`
+ * muestra solo esos proyectos —en ese orden— y las pestañas pasan a ser
+ * Escritorio / Celular: así la usan las páginas de servicio.
+ */
+export function ProjectsSection({ ids, heading }: { ids?: CaseId[]; heading?: string } = {}) {
   const t = useT();
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -502,8 +539,18 @@ export function ProjectsSection() {
   // La pestaña Móvil no usa el mazo: es un recorrido donde la tarjeta queda
   // fija y va cambiando el teléfono. Por eso el mazo no recibe nada ahí.
   const esMovil = grupo === 'mobile';
-  const visibles = esMovil ? [] : PROJECTS.filter((p) => p.grupo === grupo);
-  const proyectosMovil = PROJECTS.filter((p) => p.movil).map((p) => ({
+  const seleccion = ids
+    ? ids.map((id) => PROJECTS.find((p) => p.id === id)).filter((p): p is Project => Boolean(p))
+    : null;
+  const grupos: Grupo[] = seleccion ? ['sites', 'mobile'] : GRUPOS;
+  const visibles = esMovil ? [] : (seleccion ?? PROJECTS.filter((p) => p.grupo === grupo));
+  // Los casos de las otras pestañas también van en el HTML (en un panel
+  // `hidden`): sin esto Google y los bots nunca ven los portales y sistemas,
+  // porque solo aparecen después de un clic.
+  const ocultos = seleccion
+    ? (esMovil ? seleccion : [])
+    : PROJECTS.filter((p) => esMovil || p.grupo !== grupo);
+  const proyectosMovil = (seleccion ?? PROJECTS).filter((p) => p.movil).map((p) => ({
     id: p.id,
     name: p.name,
     movil: p.movil as string,
@@ -600,7 +647,7 @@ export function ProjectsSection() {
           className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-16 sm:mb-20 md:mb-28"
           style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
         >
-          {t.projects.heading}
+          {heading ?? t.projects.heading}
         </h2>
       </FadeIn>
 
@@ -612,7 +659,7 @@ export function ProjectsSection() {
           aria-label={t.projects.heading}
           className="glass-tile relative z-10 mx-auto mb-12 sm:mb-16 md:mb-20 flex w-fit gap-1 rounded-full p-1"
         >
-          {GRUPOS.map((g) => {
+          {grupos.map((g) => {
             const activo = g === grupo;
             return (
               <button
@@ -632,8 +679,14 @@ export function ProjectsSection() {
                   />
                 )}
                 <span className="relative z-10 whitespace-nowrap">
-                  <span className="sm:hidden">{t.projects.filtersShort[g]}</span>
-                  <span className="hidden sm:inline">{t.projects.filters[g]}</span>
+                  {seleccion ? (
+                    g === 'mobile' ? t.projects.mobileLabel : t.projects.desktopLabel
+                  ) : (
+                    <>
+                      <span className="sm:hidden">{t.projects.filtersShort[g]}</span>
+                      <span className="hidden sm:inline">{t.projects.filters[g]}</span>
+                    </>
+                  )}
                 </span>
               </button>
             );
@@ -673,6 +726,14 @@ export function ProjectsSection() {
           <div aria-hidden className="h-[45vh]" />
         </div>
       )}
+
+      {/* Fuera del contenedor del mazo a propósito: así no entran en la
+          medición del sticky ni en su tramo de scroll. */}
+      <div hidden>
+        {ocultos.map((project) => (
+          <ProjectSummary key={`oculto-${project.id}`} project={project} />
+        ))}
+      </div>
     </section>
   );
 }
