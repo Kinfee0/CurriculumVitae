@@ -29,3 +29,11 @@ CLAUDE.md
 
 # Caché local de wrangler dev
 .wrangler
+
+# Fuera del repo (es PÚBLICO): herramientas, documentos personales y capturas
+# sin censurar de los portales. No quitar: un `git add .` los volvería a subir.
+claude-seo/
+bastiansandoval.cl-audit/
+CV-*.pdf
+Diploma-*.jpeg
+portal-*.png
