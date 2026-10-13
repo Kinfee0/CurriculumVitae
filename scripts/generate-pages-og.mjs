@@ -37,6 +37,12 @@ const PAGES = [
     tags: 'WooCommerce · WhatsApp',
   },
   {
+    out: 'public/blog/og/cuanto-cuesta-una-pagina-web-chile.png',
+    kicker: 'Notas',
+    title: '¿Cuánto cuesta una página web en Chile en 2026?',
+    tags: 'Páginas web · Precios',
+  },
+  {
     out: 'public/og/paginas-web-emprendedores.png',
     kicker: 'Para emprendedores',
     title: 'Tu página web,\nlista en 3 a 7 días.\nDesde $50.000',

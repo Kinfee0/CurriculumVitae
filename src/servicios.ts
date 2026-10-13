@@ -3,8 +3,9 @@
 // pesos chilenos. Lo que él definió: tres planes (Básico, Intermedio, Full),
 // solo precios "desde" (sin rangos), hosting sin mensualidad incluido (hosting
 // de pago y dominio, aparte) y plazo de 3 a 7 días hábiles. Los planes se
-// diferencian por secciones/productos, funciones interactivas, textos/fotos y
-// diseño a medida. Precios del menú: PROPUESTA pendiente de que él confirme.
+// diferencian por qué hace la página (presenta / muestra y recoge consultas /
+// hace algo), secciones o productos, diseño (base / propio / desde cero) y
+// quién pone textos y fotos. Precios del menú: PROPUESTA pendiente de que él confirme.
 import type { CaseId } from './components/ProjectsSection';
 
 export type ServiceId = 'paginas-web' | 'menu-digital';
@@ -92,7 +93,7 @@ export const SERVICES: Record<ServiceId, Service> = {
         name: 'Básico',
         price: '$50.000',
         amount: 50000,
-        summary: 'Para partir con presencia en internet.',
+        summary: 'Presenta tu negocio y lleva a tus clientes a WhatsApp.',
         features: [
           'Página de una sección: quién eres, qué ofreces y cómo contactarte',
           'Diseño limpio sobre una base probada, con tus colores y tu logo',
@@ -105,11 +106,10 @@ export const SERVICES: Record<ServiceId, Service> = {
         name: 'Intermedio',
         price: '$120.000',
         amount: 120000,
-        summary: 'Para mostrar tus productos o servicios con detalle.',
+        summary: 'Muestra tu oferta con detalle y recibe consultas.',
         features: [
           'Hasta 5 secciones: servicios, catálogo, galería, preguntas y contacto',
-          'Diseño a medida con la identidad de tu marca',
-          'Animaciones suaves al recorrer la página',
+          'Diseño propio de tu marca sobre la base: tu paleta, tu tipografía y tus fotos',
           'Catálogo o galería con consulta por WhatsApp en cada producto',
           'Formulario que llega a tu WhatsApp o a tu correo',
           'Te ayudo a redactar y ordenar los textos',
@@ -121,11 +121,11 @@ export const SERVICES: Record<ServiceId, Service> = {
         name: 'Full',
         price: '$180.000',
         amount: 180000,
-        summary: 'Para vender en serio desde tu página.',
+        summary: 'Hace cosas por ti: arma pedidos, cotiza, filtra.',
         features: [
           'Todo lo del plan Intermedio, con hasta 10 secciones',
-          'Funciones interactivas: carrito que arma el pedido, filtros o cotizador',
-          'Diseño 100% a medida, con animaciones como las de este portafolio',
+          'Funciones que trabajan por ti: carrito que arma el pedido, filtros o cotizador',
+          'Diseño desde cero, con animaciones como las de este portafolio',
           'Redacción de textos y edición de fotos o imágenes',
           'SEO local para aparecer en las búsquedas de tu zona',
         ],
@@ -151,7 +151,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       { title: 'Publico y te entrego', text: 'La página queda en línea y los accesos, a tu nombre.' },
     ],
     faqs: [
-      { q: '¿Qué plan me conviene?', a: 'Si solo necesitas que te encuentren y te escriban, el Básico. Si quieres mostrar productos o servicios con detalle, el Intermedio. Si quieres que la página venda sola, con carrito o cotizador, el Full. Si no sabes, conversemos y te recomiendo uno.' },
+      { q: '¿Qué plan me conviene?', a: 'Si solo necesitas que te encuentren y te escriban, el Básico. Si quieres mostrar tus productos o servicios con detalle y que te consulten, el Intermedio. Si quieres que el cliente haga algo en la página (arme su pedido, cotice, filtre) y a ti te llegue resuelto, el Full. Si no sabes, conversemos y te recomiendo uno.' },
+      { q: '¿Cuál es la diferencia entre el Intermedio y el Full?', a: 'En el Intermedio el cliente mira y te escribe. En el Full el cliente hace algo en la página, como armar su pedido, cotizar o filtrar, y a ti te llega resuelto.' },
       { q: '¿El dominio está incluido?', a: DOMINIO },
       { q: '¿Tengo que pagar hosting todos los meses?', a: HOSTING },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
@@ -207,8 +208,7 @@ export const SERVICES: Record<ServiceId, Service> = {
           'Hasta 60 productos, con categorías, tamaños y agregados',
           'Pedido completo: productos, total, delivery o retiro, dirección y forma de pago',
           'Horario de atención: muestra si el local está abierto o cerrado',
-          'Diseño a medida con la identidad de tu local',
-          'Animaciones suaves al recorrer la carta',
+          'Diseño propio con la identidad de tu local: tu paleta, tu tipografía y tus fotos',
         ],
         time: 'Lista en 5 días hábiles',
         featured: true,
@@ -223,7 +223,7 @@ export const SERVICES: Record<ServiceId, Service> = {
           'Armador interactivo: pizzas o burgers que se arman tocando los ingredientes',
           'Instalable como app en el celular',
           'Modo mesa: pedidos desde la mesa con QR o NFC',
-          'Diseño 100% a medida, con estética propia y animaciones',
+          'Diseño desde cero, con estética propia y animaciones',
           'Edición de las fotos de tus productos',
         ],
         time: 'Lista en 7 días hábiles',
@@ -248,7 +248,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       { title: 'Publico y te entrego', text: 'La carta queda en línea, lista para Instagram, tus stickers o un QR en la mesa.' },
     ],
     faqs: [
-      { q: '¿Qué plan me conviene?', a: 'Si tienes una carta corta y quieres empezar a recibir pedidos ya, el Básico. Si tienes varias categorías, tamaños o agregados, o haces delivery, el Intermedio. Si quieres que tu carta sea parte de la experiencia del local, el Full.' },
+      { q: '¿Qué plan me conviene?', a: 'Si tienes una carta corta y quieres empezar a recibir pedidos ya, el Básico. Si tienes varias categorías, tamaños o agregados, o haces delivery, el Intermedio. Si tus clientes arman su producto (una pizza, una burger) o piden desde la mesa, el Full.' },
+      { q: '¿Cuál es la diferencia entre el Intermedio y el Full?', a: 'En el Intermedio el cliente elige de tu carta. En el Full el cliente arma su pedido tocando ingredientes, o pide desde la mesa con un QR o NFC.' },
       { q: '¿Mis clientes tienen que descargar una app?', a: 'No. La carta se abre en el navegador del celular desde un link o un QR. En el plan Full también se puede instalar como app, como la de Gaspy Burgers.' },
       { q: '¿Cobras comisión por pedido?', a: 'No. Los pedidos llegan directo a tu WhatsApp y la venta es tuya completa; pagas solo el plan.' },
       { q: '¿El dominio está incluido?', a: DOMINIO },

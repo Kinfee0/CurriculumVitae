@@ -328,6 +328,11 @@ const es = {
         title: 'Un cotizador por WhatsApp que sí convierte',
         summary: 'Cómo armé un cotizador para WooCommerce: formulario corto, registro en el panel y mensaje ya escrito.',
       },
+      {
+        href: '/blog/cuanto-cuesta-una-pagina-web-chile',
+        title: '¿Cuánto cuesta una página web en Chile en 2026?',
+        summary: 'De qué depende el precio, qué se paga aparte y cuánto cobro por cada plan.',
+      },
     ],
   },
   contact: {
@@ -659,6 +664,11 @@ const en: typeof es = {
         href: '/blog/cotizador-whatsapp-woocommerce',
         title: 'A WhatsApp quote flow that actually converts',
         summary: 'How I built a WhatsApp quote flow for WooCommerce: short form, panel record and a ready-made message. (Spanish)',
+      },
+      {
+        href: '/blog/cuanto-cuesta-una-pagina-web-chile',
+        title: 'How much does a website cost in Chile in 2026?',
+        summary: 'What drives the price, what is paid separately and what each of my plans costs. (Spanish)',
       },
     ],
   },
