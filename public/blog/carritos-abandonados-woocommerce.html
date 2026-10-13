@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carritos abandonados en WooCommerce sin plugins de pago</title>
-  <meta name="description" content="Cómo construí un módulo propio de recuperación de carritos abandonados para WooCommerce: detección, cupones automáticos y recordatorios, sin suscripciones." />
+  <meta name="description" content="Cómo armé un módulo de carritos abandonados para WooCommerce: captura del correo, cupón de un solo uso, enlace que restaura el carrito y cómo medir." />
   <meta name="theme-color" content="#0C0C0C" />
   <link rel="canonical" href="https://bastiansandoval.cl/blog/carritos-abandonados-woocommerce" />
   <meta name="author" content="Bastián Sandoval" />
@@ -14,16 +14,17 @@
   <meta property="og:locale" content="es_CL" />
   <meta property="og:url" content="https://bastiansandoval.cl/blog/carritos-abandonados-woocommerce" />
   <meta property="og:title" content="Recuperar carritos abandonados en WooCommerce sin plugins de pago" />
-  <meta property="og:description" content="Cómo construí un módulo propio de recuperación de carritos abandonados para WooCommerce: detección, cupones automáticos y recordatorios, sin suscripciones." />
+  <meta property="og:description" content="Cómo armé un módulo de carritos abandonados para WooCommerce: captura del correo, cupón de un solo uso, enlace que restaura el carrito y cómo medir." />
   <meta property="og:image" content="https://bastiansandoval.cl/blog/og/carritos-abandonados-woocommerce.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Recuperar carritos abandonados en WooCommerce sin plugins de pago — Notas técnicas de Bastián Sandoval" />
   <meta property="article:published_time" content="2026-07-18T00:00:00-04:00" />
+  <meta property="article:modified_time" content="2026-10-13T12:00:00-03:00" />
   <meta property="article:author" content="https://bastiansandoval.cl/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Recuperar carritos abandonados en WooCommerce sin plugins de pago" />
-  <meta name="twitter:description" content="Cómo construí un módulo propio de recuperación de carritos abandonados para WooCommerce: detección, cupones automáticos y recordatorios, sin suscripciones." />
+  <meta name="twitter:description" content="Cómo armé un módulo de carritos abandonados para WooCommerce: captura del correo, cupón de un solo uso, enlace que restaura el carrito y cómo medir." />
   <meta name="twitter:image" content="https://bastiansandoval.cl/blog/og/carritos-abandonados-woocommerce.png" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
@@ -66,11 +67,11 @@
         "@type": "BlogPosting",
         "@id": "https://bastiansandoval.cl/blog/carritos-abandonados-woocommerce#article",
         "headline": "Recuperar carritos abandonados en WooCommerce sin plugins de pago",
-        "description": "Cómo construí un módulo propio de recuperación de carritos abandonados para WooCommerce: detección, cupones automáticos y recordatorios, sin suscripciones.",
+        "description": "Cómo armé un módulo de carritos abandonados para WooCommerce: captura del correo, cupón de un solo uso, enlace que restaura el carrito y cómo medir.",
         "image": "https://bastiansandoval.cl/blog/og/carritos-abandonados-woocommerce.png",
         "inLanguage": "es-CL",
         "datePublished": "2026-07-18T00:00:00-04:00",
-        "dateModified": "2026-07-18T00:00:00-04:00",
+        "dateModified": "2026-10-13T12:00:00-03:00",
         "mainEntityOfPage": "https://bastiansandoval.cl/blog/carritos-abandonados-woocommerce",
         "url": "https://bastiansandoval.cl/blog/carritos-abandonados-woocommerce",
         "author": {
@@ -128,42 +129,103 @@
     <a class="back" href="/blog/">← Notas técnicas</a>
     <main>
     <h1>Recuperar carritos abandonados en WooCommerce sin plugins de pago</h1>
-    <p class="meta">Bastián Sandoval · Julio 2026 · WooCommerce, PHP</p>
+    <p class="meta">Bastián Sandoval · Julio 2026 · Actualizado en octubre 2026 · WooCommerce, PHP</p>
 
-    <p>En una tienda de repuestos y maquinaria, el carrito abandonado es el pan de cada día: el cliente cotiza, compara con la competencia y se va. Los plugins comerciales que resuelven esto cuestan entre 5 y 20 USD al mes por tienda, y casi todos hacen lo mismo por debajo. Para la tienda de Motormaq preferí escribirlo a medida dentro de un plugin propio, y el módulo completo quedó en unos cientos de líneas de PHP.</p>
+    <p>En una tienda de repuestos y maquinaria, el carrito abandonado es el pan de cada día: el cliente arma una lista, compara con la competencia y se va. Hay plugins de pago que resuelven esto con una suscripción mensual por tienda y, por debajo, casi todos hacen lo mismo. Para la tienda de Motormaq preferí escribir el módulo a medida dentro de un plugin propio: son unos cientos de líneas de PHP y toda la lógica queda en tus manos.</p>
 
-    <h2>1. Detectar el abandono</h2>
-    <p>WooCommerce ya guarda la sesión del carrito; lo que falta es asociarla a un correo antes de que el cliente llegue al checkout. Dos fuentes:</p>
+    <p>Esto es lo que hace, cómo está armado y qué le falta. Está escrito sobre el código real del plugin, no sobre una receta genérica.</p>
+
+    <h2>El flujo completo en cuatro estados</h2>
+    <p>Cada carrito vive como una fila de una tabla propia, <code>wp_mv_carritos</code>, y pasa por estos estados:</p>
     <ul>
-      <li>Si el usuario está logueado, ya tienes su correo.</li>
-      <li>Si es invitado, captura el campo de correo del checkout apenas lo escriba (<code>updated_checkout</code> + un endpoint AJAX) y guarda el carrito serializado en una tabla propia con su timestamp.</li>
+      <li><strong>activo</strong>: el visitante tiene productos en el carrito.</li>
+      <li><strong>enviado</strong>: pasaron las horas de espera y se le mandó el correo de recuperación.</li>
+      <li><strong>recuperado</strong>: después del correo, el cliente terminó una compra.</li>
+      <li><strong>error</strong>: el correo no pudo enviarse (<code>wp_mail()</code> devolvió <code>false</code>).</li>
     </ul>
-    <p>Un <em>cron</em> de WordPress revisa cada hora los carritos sin orden asociada. Si pasaron más de N horas (en mi caso 3), se considera abandonado.</p>
 
-    <h2>2. El incentivo: cupón único y con vencimiento</h2>
-    <p>El correo de "se te quedó algo en el carrito" sin incentivo recupera poco. Lo que funciona es un cupón <strong>único, personal y con fecha de vencimiento corta</strong>:</p>
-    <pre><code>$coupon = new WC_Coupon();
-$coupon->set_code( 'VUELVE-' . strtoupper( wp_generate_password( 6, false ) ) );
-$coupon->set_discount_type( 'percent' );
-$coupon->set_amount( 5 );
-$coupon->set_usage_limit( 1 );
-$coupon->set_email_restrictions( [ $correo_cliente ] );
-$coupon->set_date_expires( strtotime( '+7 days' ) );
-$coupon->save();</code></pre>
-    <p>El detalle importante es <code>set_email_restrictions</code>: el cupón solo funciona con el correo del cliente que abandonó, así no termina circulando en grupos de ofertas.</p>
+    <h2>1. Capturar el carrito</h2>
+    <p>El módulo escucha <code>woocommerce_cart_updated</code>. Cada vez que el carrito cambia, guarda su contenido como JSON (producto, variación, cantidad, nombre y precio con IVA), el total y la clave de sesión de WooCommerce. Si el carrito queda vacío, borra el registro activo de esa sesión: un carrito vacío no es un carrito abandonado.</p>
+    <p>Guardar nombres y precios tal como el cliente los vio, en vez de recalcularlos después, permite armar el correo sin cargar el carrito real y deja un registro de lo que había en él.</p>
 
-    <h2>3. El recordatorio</h2>
-    <p>Un solo correo, simple, con la lista de productos, el cupón y un botón que restaura el carrito con un clic (un enlace con token que reconstruye la sesión desde la tabla). Evité las secuencias de 3 correos: para productos técnicos, el segundo y tercer correo aportan poco y queman la lista.</p>
+    <h2>2. Conseguir el correo del visitante</h2>
+    <p>Sin correo no hay a quién escribirle. Hay dos caminos:</p>
+    <ul>
+      <li>Si el usuario tiene sesión, el correo y el nombre salen de su cuenta.</li>
+      <li>Si es invitado, un pequeño script escucha el campo de correo del checkout (el clásico <code>#billing_email</code> y el del checkout por bloques, <code>#email</code>) y lo envía por AJAX apenas el visitante sale del campo:</li>
+    </ul>
+    <pre><code>$(document).on('blur change', '#billing_email, #email, input[type="email"]', function () {
+  window.setTimeout(capturarEmail, 200);
+});
+// capturarEmail() valida el formato y hace
+// $.post(ajaxUrl, { action: 'mv_guardar_email', nonce, email, nombre })</code></pre>
+    <p>Tiene que ser al salir del campo y no al enviar el pedido: quien abandona nunca llega a enviarlo. El endpoint verifica un <em>nonce</em> de WordPress y valida el correo con <code>is_email()</code> antes de guardarlo.</p>
 
-    <h2>4. Medir antes de celebrar</h2>
-    <p>El módulo marca cada carrito como <em>recuperado</em> si aparece una orden del mismo correo dentro de los 7 días siguientes, use o no el cupón. Ese matiz importa: parte de la recuperación habría ocurrido igual, y si solo mides usos del cupón te cuentas el cuento.</p>
+    <h2>3. Cerrar el carrito cuando sí compran</h2>
+    <p>Si el cliente compra, el registro deja de ser "abandonado". WooCommerce tiene dos checkouts y cada uno dispara un hook distinto, así que el módulo engancha los dos: <code>woocommerce_checkout_order_processed</code> (el clásico) y <code>woocommerce_store_api_checkout_order_processed</code> (el de bloques). Al cerrar:</p>
+    <ul>
+      <li>si el correo todavía no se había enviado, el registro se elimina;</li>
+      <li>si ya se había enviado, pasa a <strong>recuperado</strong> y guarda el total del pedido.</li>
+    </ul>
+    <p>El carrito se busca por la sesión o por el correo de facturación del pedido, lo que cubre al cliente que compra desde otro dispositivo.</p>
+
+    <h2>4. Decidir cuándo un carrito está abandonado</h2>
+    <p>Una tarea de WP-Cron corre cada hora y toma los carritos que cumplen tres condiciones: están activos, tienen correo y llevan más de N horas sin cambios (3 por defecto, configurable):</p>
+    <pre><code>SELECT * FROM wp_mv_carritos
+WHERE estado = 'activo' AND email &lt;&gt; '' AND actualizado &lt; %s
+LIMIT 20</code></pre>
+    <p>El <code>LIMIT 20</code> acota cada pasada a 20 correos como máximo, lo que evita ráfagas si de pronto hay muchos carritos pendientes. Los registros sin correo se limpian a los 15 días y todo lo demás a los 60.</p>
+
+    <h2>5. El cupón</h2>
+    <p>El correo puede incluir un cupón. El que usa el módulo es de un solo uso y vence a los pocos días:</p>
+    <pre><code>$cupon = new WC_Coupon();
+$cupon-&gt;set_code( 'VUELVE' . strtoupper( wp_generate_password( 6, false ) ) );
+$cupon-&gt;set_discount_type( 'percent' );
+$cupon-&gt;set_amount( $pct );        // 5 % por defecto
+$cupon-&gt;set_usage_limit( 1 );      // un solo uso
+$cupon-&gt;set_date_expires( time() + $dias * DAY_IN_SECONDS ); // 7 días por defecto
+$cupon-&gt;save();</code></pre>
+    <p>Una advertencia honesta: <strong>este cupón no está atado al correo del cliente</strong>. Quien reciba el código por un reenvío podría usarlo una vez. Si te preocupa que circule, el arreglo es una línea, <code>$cupon-&gt;set_email_restrictions( array( $fila-&gt;email ) )</code>, y es lo primero que le agregaría.</p>
+
+    <h2>6. El correo y el enlace que restaura el carrito</h2>
+    <p>Se manda un solo correo, sin secuencias: la tabla de productos con su subtotal, el cupón si está activado y un botón "Recuperar mi carrito". Ese botón apunta a la URL del carrito con un token aleatorio de 32 caracteres: <code>?mv_recuperar=…</code>.</p>
+    <p>Al abrirlo, el módulo busca el token, reconstruye el carrito y redirige con un aviso de confirmación. Tiene tres reglas que evitan problemas reales:</p>
+    <ul>
+      <li>solo agrega lo que no está ya en el carrito, para no duplicar cantidades si el cliente vuelve a entrar;</li>
+      <li>omite los productos que ya no se pueden comprar o no tienen stock;</li>
+      <li>si el carrito ya figura como recuperado, no hace nada.</li>
+    </ul>
+
+    <h2>7. Medir sin engañarte</h2>
+    <p>El panel del plugin muestra "carritos recuperados / correos enviados" y el monto recuperado. Ojo con lo que significa: un carrito se marca <em>recuperado</em> si, después de enviado el correo, aparece un pedido de la misma sesión o con el mismo correo, <strong>use o no el cupón</strong>. Parte de esas compras habría ocurrido igual. Es una cifra útil para ver la tendencia, no para atribuirle al correo todas esas ventas.</p>
+
+    <h2>Cómo probarlo sin esperar horas</h2>
+    <p>La espera mínima configurable es de una hora, así que para probar el flujo completo conviene adelantar el reloj a mano:</p>
+    <ol>
+      <li>Agrega un producto al carrito y escribe un correo tuyo en el checkout (sin enviar el pedido).</li>
+      <li>En la tabla <code>wp_mv_carritos</code>, retrocede el campo <code>actualizado</code> de esa fila unas 5 horas.</li>
+      <li>Fuerza la tarea con WP-CLI: <code>wp cron event run mv_revisar_carritos</code>.</li>
+    </ol>
+    <p>Debería llegarte el correo y la fila pasar a <em>enviado</em>. Si completas la compra desde el enlace del correo, pasa a <em>recuperado</em>.</p>
+
+    <h2>Lo que le falta</h2>
+    <ul>
+      <li>El cupón no está restringido por correo (ver arriba).</li>
+      <li>Es un solo correo; no hay un segundo recordatorio.</li>
+      <li>El correo no trae un enlace para darse de baja.</li>
+      <li>Los correos salen con <code>wp_mail()</code>: sin un SMTP configurado, por ejemplo con tu correo corporativo, muchos caen en spam.</li>
+      <li>Depende de WP-Cron, que se dispara con las visitas al sitio; en una tienda con poco tráfico conviene reemplazarlo por un cron real del servidor.</li>
+    </ul>
 
     <h2>Lo que aprendí</h2>
     <ul>
-      <li>La tabla propia (en vez de <em>post meta</em>) hace que las consultas del cron sean triviales y no ensucien la base de WordPress.</li>
-      <li>Restaurar el carrito con un clic sube la conversión del correo más que cualquier asunto "creativo".</li>
-      <li>Para rubros B2B chilenos, ofrecer continuar por WhatsApp en el mismo correo funciona mejor que empujar al checkout.</li>
+      <li>La tabla propia (en vez de <em>post meta</em>) hace que las consultas del cron sean triviales y no ensucia la base de WordPress.</li>
+      <li>Hay que cerrar el carrito en los dos checkouts de WooCommerce; si solo cubres uno, le mandas recordatorios a gente que ya compró.</li>
+      <li>Capturar el correo al salir del campo, y no al enviar el pedido, es lo que hace que el módulo tenga a quién escribirle.</li>
+      <li>"Recuperados sobre enviados" es una métrica honesta solo si recuerdas que no distingue entre una venta recuperada y una que igual iba a ocurrir.</li>
     </ul>
+
+    <p>Si tu tienda vende productos técnicos en los que el cliente quiere conversar antes de comprar, mira también cómo armé el <a href="/blog/cotizador-whatsapp-woocommerce">cotizador por WhatsApp</a> del mismo plugin.</p>
 
     <aside class="cta">
       <h2>¿Necesitas una página web o un menú digital?</h2>

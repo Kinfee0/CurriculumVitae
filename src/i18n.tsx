@@ -10,9 +10,9 @@ export type Lang = 'es' | 'en';
 
 const es = {
   meta: {
-    title: 'Bastián Sandoval — Desarrollador Web Full-Stack',
+    title: 'Bastián Sandoval — Páginas web y menús digitales en Chile',
     description:
-      'Portafolio de Bastián Sandoval, desarrollador web full-stack en Chile: e-commerce, aplicaciones a medida, SEO técnico y automatización.',
+      'Desarrollador web full-stack en Santiago. Páginas web desde $50.000 y menús digitales con pedidos por WhatsApp desde $70.000, más e-commerce y apps a medida.',
   },
   nav: {
     about: 'Sobre mí',
@@ -326,7 +326,7 @@ const es = {
       {
         href: '/blog/cotizador-whatsapp-woocommerce',
         title: 'Un cotizador por WhatsApp que sí convierte',
-        summary: 'Por qué en Chile el checkout a veces sobra, y cómo reemplazarlo bien.',
+        summary: 'Cómo armé un cotizador para WooCommerce: formulario corto, registro en el panel y mensaje ya escrito.',
       },
     ],
   },
@@ -351,9 +351,9 @@ const es = {
 
 const en: typeof es = {
   meta: {
-    title: 'Bastián Sandoval — Full-Stack Web Developer',
+    title: 'Bastián Sandoval — Websites and digital menus in Chile',
     description:
-      'Portfolio of Bastián Sandoval, full-stack web developer in Chile: e-commerce, custom applications, technical SEO and automation.',
+      'Full-stack web developer in Santiago, Chile. Websites from CLP 50,000 and digital menus with WhatsApp orders from CLP 70,000, plus e-commerce and custom apps.',
   },
   nav: {
     about: 'About',
@@ -658,7 +658,7 @@ const en: typeof es = {
       {
         href: '/blog/cotizador-whatsapp-woocommerce',
         title: 'A WhatsApp quote flow that actually converts',
-        summary: 'Why checkout is sometimes the wrong tool in Chile, and what to build instead. (Spanish)',
+        summary: 'How I built a WhatsApp quote flow for WooCommerce: short form, panel record and a ready-made message. (Spanish)',
       },
     ],
   },

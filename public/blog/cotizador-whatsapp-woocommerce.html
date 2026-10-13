@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Un cotizador por WhatsApp que sí convierte — Bastián Sandoval</title>
-  <meta name="description" content="Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas." />
+  <meta name="description" content="Cómo armé un cotizador por WhatsApp para WooCommerce: formulario corto, registro en el panel y un mensaje con productos y SKU ya escrito." />
   <meta name="theme-color" content="#0C0C0C" />
   <link rel="canonical" href="https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce" />
   <meta name="author" content="Bastián Sandoval" />
@@ -14,16 +14,17 @@
   <meta property="og:locale" content="es_CL" />
   <meta property="og:url" content="https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce" />
   <meta property="og:title" content="Un cotizador por WhatsApp que sí convierte" />
-  <meta property="og:description" content="Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas." />
+  <meta property="og:description" content="Cómo armé un cotizador por WhatsApp para WooCommerce: formulario corto, registro en el panel y un mensaje con productos y SKU ya escrito." />
   <meta property="og:image" content="https://bastiansandoval.cl/blog/og/cotizador-whatsapp-woocommerce.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Un cotizador por WhatsApp que sí convierte — Notas técnicas de Bastián Sandoval" />
   <meta property="article:published_time" content="2026-07-18T00:00:00-04:00" />
+  <meta property="article:modified_time" content="2026-10-13T12:00:00-03:00" />
   <meta property="article:author" content="https://bastiansandoval.cl/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Un cotizador por WhatsApp que sí convierte" />
-  <meta name="twitter:description" content="Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas." />
+  <meta name="twitter:description" content="Cómo armé un cotizador por WhatsApp para WooCommerce: formulario corto, registro en el panel y un mensaje con productos y SKU ya escrito." />
   <meta name="twitter:image" content="https://bastiansandoval.cl/blog/og/cotizador-whatsapp-woocommerce.png" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
@@ -66,11 +67,11 @@
         "@type": "BlogPosting",
         "@id": "https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce#article",
         "headline": "Un cotizador por WhatsApp que sí convierte",
-        "description": "Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas.",
+        "description": "Cómo armé un cotizador por WhatsApp para WooCommerce: formulario corto, registro en el panel y un mensaje con productos y SKU ya escrito.",
         "image": "https://bastiansandoval.cl/blog/og/cotizador-whatsapp-woocommerce.png",
         "inLanguage": "es-CL",
         "datePublished": "2026-07-18T00:00:00-04:00",
-        "dateModified": "2026-07-18T00:00:00-04:00",
+        "dateModified": "2026-10-13T12:00:00-03:00",
         "mainEntityOfPage": "https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce",
         "url": "https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce",
         "author": {
@@ -128,34 +129,66 @@
     <a class="back" href="/blog/">← Notas técnicas</a>
     <main>
     <h1>Un cotizador por WhatsApp que sí convierte</h1>
-    <p class="meta">Bastián Sandoval · Julio 2026 · E-commerce, WooCommerce</p>
+    <p class="meta">Bastián Sandoval · Julio 2026 · Actualizado en octubre 2026 · E-commerce, WooCommerce</p>
 
-    <p>En Chile, buena parte del comercio B2B no se cierra en un checkout: se cierra conversando. Repuestos, maquinaria, insumos — el cliente quiere confirmar compatibilidad, plazo de despacho y forma de pago antes de pagar. Forzarlo a un checkout tradicional genera carritos abandonados; ignorar la web y vender "solo por WhatsApp" pierde todo el tráfico de Google. El punto medio es un <strong>cotizador por WhatsApp</strong> bien diseñado.</p>
+    <p>En Chile, buena parte del comercio B2B no se cierra en un checkout: se cierra conversando. Repuestos, maquinaria, insumos: el cliente quiere confirmar compatibilidad, plazo de despacho y forma de pago antes de pagar. Forzarlo a un checkout tradicional genera carritos abandonados; vender "solo por WhatsApp" y descuidar la web pierde el tráfico que llega de Google. El punto medio es un cotizador que lleve la conversación a WhatsApp con el contexto ya armado.</p>
+
+    <p>Este es el cotizador que armé dentro del plugin de la tienda de Motormaq, con lo que hace de verdad y lo que le falta.</p>
 
     <h2>El error común: el botón pelado</h2>
-    <p>El típico botón flotante de WhatsApp abre un chat vacío. El cliente tiene que explicar qué estaba mirando, el vendedor tiene que preguntar todo de nuevo, y la mitad de las conversaciones muere ahí.</p>
+    <p>El típico botón flotante de WhatsApp abre un chat vacío. El cliente tiene que explicar qué estaba mirando, el vendedor tiene que preguntar todo de nuevo y buena parte de las conversaciones se enfría ahí.</p>
 
-    <h2>Lo que hice distinto</h2>
-    <p>El cotizador que armé para las tiendas de Motormaq arma el mensaje por el cliente, con el contexto completo:</p>
-    <pre><code>const texto = [
-  'Hola, quiero cotizar:',
-  ...carrito.map(i => `• ${i.qty}x ${i.nombre} (${i.sku})`),
-  `Total referencial: ${formatoCLP(total)}`,
-  `Despacho a: ${comuna}`,
-].join('\n');
+    <h2>Cuándo conviene un cotizador</h2>
+    <p>Suele convenir cuando el cliente necesita confirmar algo antes de pagar (la compatibilidad con su modelo de máquina, por ejemplo), cuando el precio depende del volumen o del despacho, o cuando el ticket es lo bastante alto como para que conversar sea parte natural de la compra. En un repuesto barato y estándar, un checkout directo suele bastar.</p>
 
-location.href = `https://wa.me/${FONO}?text=${encodeURIComponent(texto)}`;</code></pre>
+    <h2>Dos puntos de entrada</h2>
+    <p>El módulo agrega un botón "Solicitar cotización" en la ficha de cada producto y, en el carrito, un "Cotizar este carrito por WhatsApp". Los dos abren el mismo modal con un formulario corto:</p>
     <ul>
-      <li><strong>El carrito viaja en el mensaje</strong>: producto, SKU y cantidades. El vendedor responde cotizando, no preguntando.</li>
-      <li><strong>Total referencial visible</strong>: ancla la conversación y filtra al que solo estaba mirando.</li>
-      <li><strong>Registro en el servidor</strong>: antes de redirigir, el clic se guarda como "cotización iniciada" — sin eso no puedes medir conversión ni hacer seguimiento.</li>
+      <li><strong>nombre y teléfono</strong>, obligatorios;</li>
+      <li>correo, opcional;</li>
+      <li>cantidad, cuando se cotiza un producto suelto;</li>
+      <li>un mensaje libre, con el ejemplo "máquina, modelo, urgencia…".</li>
+    </ul>
+    <p>Con solo dos datos obligatorios el formulario se completa en segundos; cada campo extra es una excusa para irse.</p>
+
+    <h2>Qué pasa al enviar</h2>
+    <p>Una sola petición AJAX hace tres cosas:</p>
+    <ol>
+      <li><strong>Guarda la cotización</strong> como un tipo de contenido propio (<code>mv_cotizacion</code>) con nombre, teléfono, correo, mensaje y la lista de productos con SKU, cantidad y precio de referencia.</li>
+      <li><strong>Avisa por correo</strong> al responsable de ventas, con el detalle y un enlace directo a esa cotización en el panel.</li>
+      <li><strong>Devuelve el enlace de WhatsApp</strong> con el mensaje ya escrito.</li>
+    </ol>
+    <p>El mensaje se arma en el servidor con lo que el cliente estaba cotizando:</p>
+    <pre><code>$texto = "¡Hola! Quiero cotizar:\n";
+foreach ( $lineas as $l ) {
+  $texto .= sprintf( "• %d x %s%s\n", $l['cantidad'], $l['nombre'],
+    $l['sku'] ? ' (SKU ' . $l['sku'] . ')' : '' );
+}
+$texto .= "\nMi nombre: {$nombre}";
+$url = 'https://wa.me/' . $whatsapp . '?text=' . rawurlencode( $texto );</code></pre>
+    <p>El vendedor recibe producto, SKU y cantidad: responde cotizando, no preguntando qué quería.</p>
+
+    <h2>Por qué se guarda antes de abrir WhatsApp</h2>
+    <p>Si el cliente cierra WhatsApp sin enviar nada, la cotización igual quedó registrada con su teléfono. En el panel cada una aparece como <em>Nueva</em> o <em>Atendida</em>, con el teléfono como enlace a <code>wa.me</code> para escribirle de vuelta y un total referencial calculado con los precios de la tienda. Sin ese registro no tienes cómo saber cuántas cotizaciones llegaron, cuántas atendiste ni cuántas se enfriaron.</p>
+
+    <h2>Checkout y cotización conviven</h2>
+    <p>El botón de cotizar no reemplaza al de comprar: ambos aparecen en la misma ficha y en el mismo carrito, y el cliente elige. Para un repuesto estándar compra directo; para algo técnico o de volumen, cotiza. Hoy el módulo muestra el botón en todos los productos; decidir producto por producto cuál es el principal es una mejora pendiente.</p>
+
+    <h2>El mismo patrón, sin WooCommerce</h2>
+    <p>La idea de fondo, que el cliente arme su pedido y llegue a WhatsApp ya escrito, no depende de la tienda. Es lo que hice en el <a href="/menu-digital-restaurantes">menú digital con pedidos por WhatsApp</a>: en San Francisco Pizza, al local le llega cada pedido completo (productos, total, delivery o retiro y forma de pago) y en Gaspy Burgers el pedido sale listo por WhatsApp.</p>
+
+    <h2>Lo que le falta</h2>
+    <ul>
+      <li>El mensaje de WhatsApp lleva productos, SKU y cantidades, pero no el total ni la comuna de despacho; el total referencial solo lo ve quien atiende, en el panel.</li>
+      <li>La protección contra spam es el <em>nonce</em> de WordPress; si recibes cotizaciones basura, el siguiente paso es un campo trampa (<em>honeypot</em>) o Cloudflare Turnstile.</li>
+      <li>Los precios de referencia son los de la tienda en ese momento: no consideran descuentos pactados con el cliente.</li>
+      <li>No hay seguimiento posterior: marcar una cotización como <em>Atendida</em> no la conecta con una venta.</li>
     </ul>
 
-    <h2>Checkout y WhatsApp no compiten</h2>
-    <p>La clave es no elegir uno: el producto estándar y barato se compra directo con checkout; el producto técnico o de alto valor se cotiza. En la práctica ambos botones conviven en la misma ficha, y cada producto define cuál es el principal según su precio y complejidad.</p>
+    <h2>Qué mediría</h2>
+    <p>Con este registro ya puedes responder tres preguntas: cuántas cotizaciones entran por semana, cuántas quedan sin atender y, cruzando con los pedidos, cuántas terminaron en venta. El panel del plugin cuenta las cotizaciones nuevas y el total; la tercera pregunta todavía se responde a mano. Es el dato que justifica, o no, tener el botón.</p>
 
-    <h2>Resultados que puedes esperar</h2>
-    <p>Donde mejor rinde este patrón es en catálogos técnicos con precios sobre ~50.000 CLP: ahí la conversación no es fricción, es parte de la venta. Y como el mensaje llega estructurado, un solo vendedor puede atender muchas cotizaciones sin perder el hilo.</p>
+    <p>Y si lo que te interesa es la otra cara, la del cliente que sí llegó al checkout y se fue, lee cómo armé la <a href="/blog/carritos-abandonados-woocommerce">recuperación de carritos abandonados</a> del mismo plugin.</p>
 
     <aside class="cta">
       <h2>¿Necesitas una página web o un menú digital?</h2>
