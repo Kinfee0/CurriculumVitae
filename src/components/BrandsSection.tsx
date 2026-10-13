@@ -27,8 +27,7 @@ export function BrandsSection() {
               alt={logo.alt}
               loading="lazy"
               decoding="async"
-              className="h-8 sm:h-10 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
-              style={{ filter: 'brightness(0) invert(1)' }}
+              className="h-8 sm:h-10 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
             />
           ))}
           {TEXT_BRANDS.map((brand) => (
