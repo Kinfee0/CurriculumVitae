@@ -1,0 +1,22 @@
+# Bastián Sandoval
+
+> Desarrollador web full-stack en Santiago, Chile. Crea páginas web para emprendedores y menús digitales con pedidos por WhatsApp para restaurantes, además de e-commerce (WooCommerce) y aplicaciones a medida. Precios en pesos chilenos (CLP).
+
+## Servicios
+
+- [Páginas web para emprendedores](https://bastiansandoval.cl/paginas-web-emprendedores): tres planes desde $50.000 (Básico $50.000, Intermedio $120.000, Full $180.000); 3 a 7 días hábiles. Dominio y hosting aparte; el código y los accesos quedan a nombre del cliente.
+- [Menú digital para restaurantes](https://bastiansandoval.cl/menu-digital-restaurantes): carta online con pedidos por WhatsApp, sin apps ni comisiones; tres planes desde $70.000.
+
+## Portafolio y blog
+
+- [Portafolio](https://bastiansandoval.cl/): proyectos reales (Motormaq, Kubota, Yanmar, San Francisco Pizza, Gaspy Burgers) y datos de contacto.
+- [Blog](https://bastiansandoval.cl/blog/): notas técnicas basadas en proyectos propios.
+- [Recuperación de carritos abandonados en WooCommerce](https://bastiansandoval.cl/blog/carritos-abandonados-woocommerce): cómo funciona un módulo propio, con código y límites.
+- [Cotizador por WhatsApp en WooCommerce](https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce): formulario corto, registro en el panel y mensaje ya escrito.
+- [SEO local para maquinaria en Chile](https://bastiansandoval.cl/blog/seo-local-maquinaria-chile)
+
+## Contacto
+
+- Sitio: https://bastiansandoval.cl
+- GitHub: https://github.com/Kinfee0
+- LinkedIn: https://www.linkedin.com/in/bastiansandovals/

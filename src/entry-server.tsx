@@ -61,6 +61,14 @@ export function jsonLd(page: PageId): string | null {
         })),
       },
       {
+        '@type': 'FAQPage',
+        mainEntity: s.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${BASE}/` },
