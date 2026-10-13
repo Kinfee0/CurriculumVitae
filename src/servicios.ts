@@ -1,8 +1,9 @@
 // Contenido de las páginas de servicio (paginas-web-emprendedores.html y
 // menu-digital-restaurantes.html). Solo en español: son ofertas con precio en
 // pesos chilenos. Lo que él definió: tres planes (Básico, Intermedio, Full),
-// solo precios "desde" (sin rangos), hosting sin mensualidad incluido (hosting
-// de pago y dominio, aparte) y plazo de 3 a 7 días hábiles. Los planes se
+// solo precios "desde" (sin rangos), primer mes de alojamiento incluido y
+// después alojamiento/cuidado mensual opcional (CARE; o se lleva la página con
+// una guía), dominio aparte y plazo de 3 a 7 días hábiles. Los planes se
 // diferencian por qué hace la página (presenta / muestra y recoge consultas /
 // hace algo), secciones o productos, diseño (base / propio / desde cero) y
 // quién pone textos y fotos. Precios del menú: PROPUESTA pendiente de que él confirme.
@@ -20,6 +21,17 @@ export type Plan = {
   features: string[];
   time: string;
   featured?: boolean;
+};
+
+export type CareOption = {
+  name: string;
+  /** "$10.000" (más IVA, mensual) */
+  price: string;
+  summary: string;
+  features: string[];
+  /** Pago trimestral y anual, ya con descuento (más IVA) */
+  quarter: string;
+  year: string;
 };
 
 export type Service = {
@@ -57,9 +69,57 @@ export type Service = {
 };
 
 const DOMINIO =
-  'No. El dominio (por ejemplo, tunegocio.cl) se paga aparte; un .cl cuesta cerca de $10.000 al año en NIC Chile.';
+  'No. El dominio (por ejemplo, tunegocio.cl) se paga aparte, directo a NIC Chile: cerca de $10.000 al año. No gano nada con él y queda a tu nombre.';
 const HOSTING =
-  'No. Queda publicada en un hosting sin costo mensual. Si prefieres un hosting de pago, también se puede, y se cotiza aparte.';
+  'El primer mes de alojamiento va incluido. Después, si quieres que yo la aloje, son $10.000 + IVA al mes ($15.000 con ajustes, $20.000 con cuidado completo), y puedes pagar cada mes, cada tres meses o al año con descuento. Si prefieres no tener mensualidad, te la entrego con una guía y la publicas en tu propia cuenta.';
+const LLEVARLA =
+  'Sí. Te entrego la página con una guía paso a paso para publicarla en tu propia cuenta, sin mensualidad conmigo. Si prefieres no ocuparte, el alojamiento va a mi cargo.';
+
+/** Lo que viene después de publicar. Igual para las dos páginas de servicio. */
+export const CARE: {
+  heading: string;
+  intro: string;
+  options: [CareOption, CareOption, CareOption];
+  notes: string[];
+} = {
+  heading: 'Después de publicar',
+  intro: 'El primer mes de alojamiento va incluido. Después eliges: que yo la aloje y la cuide, o llevártela y publicarla tú con mi guía, sin mensualidad conmigo.',
+  options: [
+    {
+      name: 'Alojamiento',
+      price: '$10.000',
+      summary: 'Tu página siempre en línea.',
+      features: ['Publicada en mi infraestructura, con HTTPS', 'Respaldo de la página', 'Tu dominio conectado y funcionando'],
+      quarter: '$28.500',
+      year: '$100.000',
+    },
+    {
+      name: 'Alojamiento + ajustes',
+      price: '$15.000',
+      summary: 'Para una página que cambia seguido.',
+      features: ['Todo lo del Alojamiento', 'Hasta 2 cambios pequeños al mes: textos, precios o fotos'],
+      quarter: '$42.750',
+      year: '$150.000',
+    },
+    {
+      name: 'Cuidado completo',
+      price: '$20.000',
+      summary: 'Alguien pendiente de tu página y de Google.',
+      features: [
+        'Todo lo anterior, con hasta 4 cambios al mes',
+        'Informe mensual de visitas y búsquedas en Google',
+        'Reviso que Google la tenga indexada y te aviso si algo falla',
+      ],
+      quarter: '$57.000',
+      year: '$200.000',
+    },
+  ],
+  notes: [
+    'Valores mensuales + IVA. Pago trimestral con 5% menos; anual con 2 meses gratis.',
+    'El dominio (.cl, cerca de $10.000 al año) se paga aparte, directo a NIC Chile; yo no gano nada con él y queda a tu nombre.',
+    'Los cambios grandes o funciones nuevas se cotizan aparte.',
+  ],
+};
 const FUERA_DE_PLAN =
   'Lo conversamos y te lo cotizo aparte. Los planes son un punto de partida, no una camisa de fuerza.';
 const PLAZO =
@@ -132,14 +192,14 @@ export const SERVICES: Record<ServiceId, Service> = {
         time: 'Lista en 7 días hábiles',
       },
     ],
-    plansCommon: ['Sin mensualidad de hosting', 'El código y los accesos quedan a tu nombre', 'Ajustes de las primeras semanas incluidos'],
+    plansCommon: ['Primer mes de alojamiento incluido', 'El código y el dominio quedan a tu nombre', 'Ajustes de las primeras semanas incluidos'],
     includesHeading: 'Siempre incluido',
     includes: [
       { title: 'Diseño pensado para el celular', text: 'Es donde tus clientes te van a ver primero; desde ahí se adapta al computador.' },
       { title: 'Tu WhatsApp a un toque', text: 'Botones que abren la conversación con el mensaje ya escrito, para que te escriban sin pensarlo dos veces.' },
       { title: 'Carga rápida', text: 'Imágenes optimizadas y código liviano: nadie espera a una página lenta, y Google tampoco.' },
       { title: 'SEO básico para Google', text: 'Título, descripción y datos estructurados para que tu negocio aparezca bien en los resultados.' },
-      { title: 'Publicada y funcionando', text: 'La dejo en línea en un hosting sin costo mensual, lista para compartir en tus redes.' },
+      { title: 'Publicada y funcionando', text: 'La dejo en línea y funcionando, con el primer mes de alojamiento incluido, lista para compartir en tus redes.' },
       { title: 'Ajustes de las primeras semanas', text: 'Si algo hay que cambiar después de publicar, lo vemos sin costo extra.' },
     ],
     projectsHeading: 'Proyectos',
@@ -148,16 +208,17 @@ export const SERVICES: Record<ServiceId, Service> = {
       { title: 'Conversamos', text: 'Me cuentas por WhatsApp qué vendes y qué necesitas. Sin costo y sin compromiso.' },
       { title: 'Elegimos el plan', text: 'Te propongo el que calza con lo que necesitas y lo dejamos por escrito. Sin sorpresas después.' },
       { title: 'Construyo', text: 'Entre 3 y 7 días hábiles según el plan, desde que tengo el material.' },
-      { title: 'Publico y te entrego', text: 'La página queda en línea y los accesos, a tu nombre.' },
+      { title: 'Publico y te entrego', text: 'La página queda en línea y el dominio, a tu nombre.' },
     ],
     faqs: [
       { q: '¿Qué plan me conviene?', a: 'Si solo necesitas que te encuentren y te escriban, el Básico. Si quieres mostrar tus productos o servicios con detalle y que te consulten, el Intermedio. Si quieres que el cliente haga algo en la página (arme su pedido, cotice, filtre) y a ti te llegue resuelto, el Full. Si no sabes, conversemos y te recomiendo uno.' },
       { q: '¿Cuál es la diferencia entre el Intermedio y el Full?', a: 'En el Intermedio el cliente mira y te escribe. En el Full el cliente hace algo en la página, como armar su pedido, cotizar o filtrar, y a ti te llega resuelto.' },
       { q: '¿El dominio está incluido?', a: DOMINIO },
       { q: '¿Tengo que pagar hosting todos los meses?', a: HOSTING },
+      { q: '¿Puedo llevarme la página y publicarla yo?', a: LLEVARLA },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
       { q: '¿Y si necesito algo que no está en ningún plan?', a: FUERA_DE_PLAN },
-      { q: '¿Quién es dueño de la página?', a: 'Tú. El código, el dominio y los accesos quedan a tu nombre desde el primer día; no quedas amarrado a mí.' },
+      { q: '¿Quién es dueño de la página?', a: 'Tú. El código y el dominio quedan a tu nombre desde el primer día y no quedas amarrado a mí: si dejas el alojamiento, te entrego la página con una guía para publicarla por tu cuenta.' },
     ],
     other: { label: 'Menú digital', href: '/menu-digital-restaurantes' },
   },
@@ -229,14 +290,14 @@ export const SERVICES: Record<ServiceId, Service> = {
         time: 'Lista en 7 días hábiles',
       },
     ],
-    plansCommon: ['Sin comisiones por pedido', 'Sin mensualidad de hosting', 'Ajustes de las primeras semanas incluidos'],
+    plansCommon: ['Sin comisiones por pedido', 'Primer mes de alojamiento incluido', 'Ajustes de las primeras semanas incluidos'],
     includesHeading: 'Siempre incluido',
     includes: [
       { title: 'Tu carta en el celular', text: 'Productos, fotos y precios, fácil de recorrer con el pulgar.' },
       { title: 'El pedido llega armado', text: 'A tu WhatsApp, con lo que pidió el cliente y el total. Nada de ida y vuelta preguntando.' },
       { title: 'Sin apps ni comisiones', text: 'Tus clientes piden desde el navegador y la venta es 100% tuya: no hay intermediarios.' },
       { title: 'Rápida y liviana', text: 'Se abre al tiro desde un link de Instagram o un código QR en la mesa.' },
-      { title: 'Publicada y funcionando', text: 'La dejo en línea en un hosting sin costo mensual, con SEO básico para Google.' },
+      { title: 'Publicada y funcionando', text: 'La dejo en línea y funcionando, con el primer mes de alojamiento incluido y SEO básico para Google.' },
       { title: 'Ajustes de las primeras semanas', text: 'Si hay que corregir un precio o un producto después de publicar, lo vemos sin costo extra.' },
     ],
     projectsHeading: 'Proyectos',
@@ -254,6 +315,7 @@ export const SERVICES: Record<ServiceId, Service> = {
       { q: '¿Cobras comisión por pedido?', a: 'No. Los pedidos llegan directo a tu WhatsApp y la venta es tuya completa; pagas solo el plan.' },
       { q: '¿El dominio está incluido?', a: DOMINIO },
       { q: '¿Tengo que pagar hosting todos los meses?', a: HOSTING },
+      { q: '¿Puedo llevarme la página y publicarla yo?', a: LLEVARLA },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
       { q: '¿Y si necesito algo que no está en ningún plan?', a: FUERA_DE_PLAN },
     ],

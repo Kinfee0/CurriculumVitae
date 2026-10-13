@@ -10,7 +10,7 @@ import {
 import { MarqueeSection } from '../components/MarqueeSection';
 import { ProjectsSection } from '../components/ProjectsSection';
 import { Footer } from '../components/Footer';
-import { SERVICES, type Plan, type Service, type ServiceId } from '../servicios';
+import { CARE, SERVICES, type CareOption, type Plan, type Service, type ServiceId } from '../servicios';
 
 const waLink = (text: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
 
@@ -187,6 +187,70 @@ function PlanCard({ s, plan }: { s: Service; plan: Plan }) {
   );
 }
 
+function CareCard({ s, option }: { s: Service; option: CareOption }) {
+  const texto = `Hola Bastián, me interesa el alojamiento "${option.name}" para mi ${s.noun}`;
+  return (
+    <div className="glass-card rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 h-full flex flex-col">
+      <h4 className="text-[#D7E2EA] font-medium uppercase tracking-widest text-sm">{option.name}</h4>
+      <p className="mt-3 flex items-baseline gap-2 text-[#D7E2EA]">
+        <span className="project-number font-black leading-none tracking-tight text-3xl sm:text-4xl">{option.price}</span>
+        <span className="text-[#D7E2EA]/60 font-light text-sm">/mes + IVA</span>
+      </p>
+      <p className="text-[#D7E2EA]/60 font-light text-sm leading-snug mt-3">{option.summary}</p>
+      <ul className="flex flex-col gap-2.5 mt-5 mb-6">
+        {option.features.map((feature) => (
+          <li key={feature} className="flex gap-3 text-[#D7E2EA]/80 font-light text-sm leading-snug">
+            <Check className="w-4 h-4 shrink-0 mt-[0.15rem] text-[#3DDC84]" strokeWidth={2.2} aria-hidden />
+            {feature}
+          </li>
+        ))}
+      </ul>
+      <div className="mt-auto">
+        <p className="text-[#D7E2EA]/60 font-light text-xs leading-relaxed">
+          Trimestral {option.quarter} · Anual {option.year} (+ IVA)
+        </p>
+        <a
+          href={waLink(texto)}
+          className="inline-block mt-4 text-[#D7E2EA] font-medium uppercase tracking-widest text-xs underline underline-offset-4 decoration-[#D7E2EA]/30 hover:decoration-[#D7E2EA] transition-colors"
+        >
+          Consultar
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function CareBlock({ s }: { s: Service }) {
+  return (
+    <div id="alojamiento" className="mt-20 sm:mt-28">
+      <FadeIn delay={0} y={30}>
+        <h3 className="hero-heading font-black uppercase text-center leading-none tracking-tight" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.2rem)' }}>
+          {CARE.heading}
+        </h3>
+      </FadeIn>
+      <FadeIn delay={0.1} y={20}>
+        <p className="text-[#D7E2EA]/70 font-light leading-relaxed text-center max-w-2xl mx-auto mt-5" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)' }}>
+          {CARE.intro}
+        </p>
+      </FadeIn>
+      <div className="grid md:grid-cols-3 gap-5 mt-10 sm:mt-12 items-stretch">
+        {CARE.options.map((option, i) => (
+          <FadeIn key={option.name} delay={0.1 + i * 0.1} y={30} className="h-full">
+            <CareCard s={s} option={option} />
+          </FadeIn>
+        ))}
+      </div>
+      <FadeIn delay={0.2} y={20}>
+        <ul className="max-w-2xl mx-auto mt-8 flex flex-col gap-2 text-[#D7E2EA]/60 font-light text-xs sm:text-sm leading-relaxed text-center">
+          {CARE.notes.map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      </FadeIn>
+    </div>
+  );
+}
+
 function PlansSection({ s }: { s: Service }) {
   return (
     <section id="planes" className="relative px-5 sm:px-8 md:px-10 py-20 sm:py-28 md:py-32 overflow-hidden">
@@ -223,6 +287,8 @@ function PlansSection({ s }: { s: Service }) {
             ))}
           </div>
         </FadeIn>
+
+        <CareBlock s={s} />
       </div>
     </section>
   );
