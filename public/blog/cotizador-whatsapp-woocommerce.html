@@ -19,13 +19,19 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Un cotizador por WhatsApp que sí convierte — Notas técnicas de Bastián Sandoval" />
-  <meta property="article:published_time" content="2026-07-18" />
+  <meta property="article:published_time" content="2026-07-18T00:00:00-04:00" />
   <meta property="article:author" content="https://bastiansandoval.cl/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Un cotizador por WhatsApp que sí convierte" />
   <meta name="twitter:description" content="Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas." />
   <meta name="twitter:image" content="https://bastiansandoval.cl/blog/og/cotizador-whatsapp-woocommerce.png" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/fonts/kanit-latin-900.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/kanit-latin-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/kanit-latin-300.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/kanit.css" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +41,7 @@
     .back { display: inline-block; font-size: .85rem; text-transform: uppercase; letter-spacing: .15em; opacity: .6; text-decoration: none; margin-bottom: 40px; }
     .back:hover { opacity: 1; }
     h1 { font-weight: 900; line-height: 1.1; font-size: clamp(1.8rem, 5.5vw, 2.8rem); background: linear-gradient(180deg, #8b929e, #BBCCD7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
-    .meta { font-weight: 300; font-size: .85rem; opacity: .5; margin-bottom: 36px; }
+    .meta { font-weight: 300; font-size: .85rem; opacity: .7; margin-bottom: 36px; }
     h2 { font-weight: 500; font-size: 1.3rem; margin: 36px 0 12px; }
     p { font-weight: 300; margin-bottom: 16px; }
     ul, ol { font-weight: 300; margin: 0 0 16px 22px; }
@@ -44,7 +50,13 @@
     pre { background: rgba(215,226,234,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px; overflow-x: auto; margin-bottom: 16px; }
     pre code { background: none; padding: 0; }
     strong { font-weight: 500; }
-    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .4; }
+    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .7; }
+    .cta { margin-top: 56px; padding: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: rgba(215,226,234,.06); }
+    .cta h2 { margin-top: 0; }
+    .cta p { opacity: .8; }
+    .cta-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+    .cta-links a { display: inline-block; text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-weight: 500; font-size: .78rem; padding: 12px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(215,226,234,.08); transition: background .2s; }
+    .cta-links a:hover { background: rgba(215,226,234,.18); }
   </style>
   <script type="application/ld+json">
   {
@@ -57,8 +69,8 @@
         "description": "Por qué en el e-commerce B2B chileno el checkout a veces sobra, y cómo diseñar un flujo de cotización por WhatsApp que no pierde ventas.",
         "image": "https://bastiansandoval.cl/blog/og/cotizador-whatsapp-woocommerce.png",
         "inLanguage": "es-CL",
-        "datePublished": "2026-07-18",
-        "dateModified": "2026-07-18",
+        "datePublished": "2026-07-18T00:00:00-04:00",
+        "dateModified": "2026-07-18T00:00:00-04:00",
         "mainEntityOfPage": "https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce",
         "url": "https://bastiansandoval.cl/blog/cotizador-whatsapp-woocommerce",
         "author": {
@@ -114,6 +126,7 @@
 <body>
   <div class="wrap">
     <a class="back" href="/blog/">← Notas técnicas</a>
+    <main>
     <h1>Un cotizador por WhatsApp que sí convierte</h1>
     <p class="meta">Bastián Sandoval · Julio 2026 · E-commerce, WooCommerce</p>
 
@@ -144,7 +157,14 @@ location.href = `https://wa.me/${FONO}?text=${encodeURIComponent(texto)}`;</code
     <h2>Resultados que puedes esperar</h2>
     <p>Donde mejor rinde este patrón es en catálogos técnicos con precios sobre ~50.000 CLP: ahí la conversación no es fricción, es parte de la venta. Y como el mensaje llega estructurado, un solo vendedor puede atender muchas cotizaciones sin perder el hilo.</p>
 
-    <footer>© 2026 Bastián Sandoval · <a href="/">bastiansandoval — portafolio</a></footer>
+    <aside class="cta">
+      <h2>¿Necesitas una página web o un menú digital?</h2>
+      <p>Páginas web desde $50.000 y menús digitales con pedidos por WhatsApp desde $70.000, listos en 3 a 7 días hábiles.</p>
+      <p class="cta-links"><a href="/paginas-web-emprendedores">Ver planes de páginas web</a><a href="/menu-digital-restaurantes">Ver planes de menú digital</a></p>
+    </aside>
+    </main>
+
+    <footer>© 2026 Bastián Sandoval · <a href="/">Portafolio</a> · <a href="/paginas-web-emprendedores">Páginas web</a> · <a href="/menu-digital-restaurantes">Menú digital</a> · <a href="/blog/">Notas técnicas</a></footer>
   </div>
 </body>
 </html>

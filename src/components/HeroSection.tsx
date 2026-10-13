@@ -11,6 +11,7 @@ export function HeroSection() {
     { label: t.nav.services, href: '#services' },
     { label: t.nav.projects, href: '#projects' },
     { label: t.nav.freelance, href: '#freelance' },
+    { label: t.nav.plans, href: '/paginas-web-emprendedores' },
     { label: t.nav.notes, href: '/blog/' },
     { label: t.nav.contact, href: '#contact' },
   ];
@@ -36,7 +37,7 @@ export function HeroSection() {
             type="button"
             onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
             className="glass-tile rounded-full text-[#D7E2EA] font-medium uppercase tracking-widest text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 hover:bg-[#D7E2EA]/15 transition-colors duration-200"
-            aria-label={lang === 'es' ? 'Switch to English' : 'Cambiar a español'}
+            aria-label={lang === 'es' ? 'EN · Switch to English' : 'ES · Cambiar a español'}
           >
             {lang === 'es' ? 'EN' : 'ES'}
           </button>

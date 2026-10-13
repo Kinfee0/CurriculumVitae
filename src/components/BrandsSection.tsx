@@ -2,9 +2,9 @@ import { FadeIn } from './Shared';
 import { useT } from '../i18n';
 
 const LOGOS = [
-  { src: '/img/logos/motorman.webp', alt: 'Motorman' },
-  { src: '/img/logos/kubota.webp', alt: 'Kubota' },
-  { src: '/img/logos/yanmaq.webp', alt: 'Yanmaq' },
+  { src: '/img/logos/motorman.webp', alt: 'Motorman', w: 171, h: 120 },
+  { src: '/img/logos/kubota.webp', alt: 'Kubota', w: 531, h: 120 },
+  { src: '/img/logos/yanmaq.webp', alt: 'Yanmaq', w: 544, h: 120 },
 ];
 
 const TEXT_BRANDS = ['Nebuna', 'Motormaq', 'San Francisco Pizza'];
@@ -25,6 +25,8 @@ export function BrandsSection() {
               key={logo.alt}
               src={logo.src}
               alt={logo.alt}
+              width={logo.w}
+              height={logo.h}
               loading="lazy"
               decoding="async"
               className="h-8 sm:h-10 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300"

@@ -140,6 +140,18 @@ export function Footer() {
         </div>
       </FadeIn>
 
+      <nav aria-label={t.contact.linksLabel} className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        {t.contact.links.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="text-[#D7E2EA]/75 font-medium uppercase tracking-widest text-xs hover:text-[#D7E2EA] transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
       <p className="text-[#D7E2EA]/60 font-light text-xs sm:text-sm tracking-wide text-center">
         {t.contact.footer}
       </p>

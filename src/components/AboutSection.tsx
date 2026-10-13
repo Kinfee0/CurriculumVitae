@@ -5,6 +5,8 @@ const DECOR = [
   {
     src: '/img/decor/motor-yanmar.webp',
     alt: 'Motor diésel Yanmar',
+    w: 480,
+    h: 441,
     className:
       'absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] w-[84px] sm:w-[160px] md:w-[210px]',
     delay: 0.1,
@@ -13,6 +15,8 @@ const DECOR = [
   {
     src: '/img/decor/logo-motorman.webp',
     alt: 'Logo Motorman',
+    w: 480,
+    h: 337,
     className:
       'absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] w-[60px] sm:w-[120px] md:w-[150px]',
     delay: 0.25,
@@ -21,6 +25,8 @@ const DECOR = [
   {
     src: '/img/decor/mascota-nebuna.webp',
     alt: 'Mascota de Nebuna',
+    w: 480,
+    h: 480,
     className:
       'absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] w-[76px] sm:w-[150px] md:w-[190px]',
     delay: 0.15,
@@ -29,6 +35,8 @@ const DECOR = [
   {
     src: '/img/decor/excavadora.webp',
     alt: 'Miniexcavadora Yanmar ViO17',
+    w: 480,
+    h: 514,
     className:
       'absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] w-[92px] sm:w-[170px] md:w-[220px]',
     delay: 0.3,
@@ -52,7 +60,15 @@ export function AboutSection() {
           duration={0.9}
           className={`${item.className} pointer-events-none`}
         >
-          <img src={item.src} alt={item.alt} className="w-full h-auto" loading="lazy" decoding="async" />
+          <img
+            src={item.src}
+            alt={item.alt}
+            width={item.w}
+            height={item.h}
+            className="w-full h-auto"
+            loading="lazy"
+            decoding="async"
+          />
         </FadeIn>
       ))}
 

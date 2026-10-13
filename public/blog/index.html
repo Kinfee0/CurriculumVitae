@@ -21,7 +21,13 @@
   <meta name="twitter:title" content="Notas técnicas — Bastián Sandoval" />
   <meta name="twitter:description" content="Notas técnicas de Bastián Sandoval: WooCommerce, SEO local, cotizadores por WhatsApp y desarrollo web en Chile." />
   <meta name="twitter:image" content="https://bastiansandoval.cl/og.png" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/fonts/kanit-latin-900.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/kanit-latin-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/kanit-latin-300.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/kanit.css" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,8 +40,14 @@
     .card { display: block; border: 1px solid rgba(255,255,255,.14); background: rgba(215,226,234,.06); border-radius: 24px; padding: 28px; margin-bottom: 18px; text-decoration: none; transition: background .2s; }
     .card:hover { background: rgba(215,226,234,.12); }
     .card h2 { font-weight: 500; font-size: 1.15rem; line-height: 1.4; margin-bottom: 6px; }
-    .card p { font-weight: 300; font-size: .95rem; opacity: .65; }
-    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .4; }
+    .card p { font-weight: 300; font-size: .95rem; opacity: .75; }
+    footer { margin-top: 56px; font-weight: 300; font-size: .8rem; opacity: .7; }
+    .cta { margin-top: 56px; padding: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: rgba(215,226,234,.06); }
+    .cta h2 { margin-top: 0; }
+    .cta p { opacity: .8; }
+    .cta-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+    .cta-links a { display: inline-block; text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-weight: 500; font-size: .78rem; padding: 12px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(215,226,234,.08); transition: background .2s; }
+    .cta-links a:hover { background: rgba(215,226,234,.18); }
   </style>
   <script type="application/ld+json">
   {
@@ -110,6 +122,7 @@
 <body>
   <div class="wrap">
     <a class="back" href="/">← Volver al portafolio</a>
+    <main>
     <h1>Notas técnicas</h1>
     <a class="card" href="/blog/carritos-abandonados-woocommerce">
       <h2>Recuperar carritos abandonados en WooCommerce sin plugins de pago</h2>
@@ -123,7 +136,14 @@
       <h2>Un cotizador por WhatsApp que sí convierte</h2>
       <p>Por qué en Chile el checkout a veces sobra, y cómo reemplazarlo sin perder el control de la venta.</p>
     </a>
-    <footer>© 2026 Bastián Sandoval · Desarrollador Web Full-Stack · Santiago, Chile</footer>
+    <aside class="cta">
+      <h2>¿Necesitas una página web o un menú digital?</h2>
+      <p>Páginas web desde $50.000 y menús digitales con pedidos por WhatsApp desde $70.000, listos en 3 a 7 días hábiles.</p>
+      <p class="cta-links"><a href="/paginas-web-emprendedores">Ver planes de páginas web</a><a href="/menu-digital-restaurantes">Ver planes de menú digital</a></p>
+    </aside>
+    </main>
+
+    <footer>© 2026 Bastián Sandoval · <a href="/">Portafolio</a> · <a href="/paginas-web-emprendedores">Páginas web</a> · <a href="/menu-digital-restaurantes">Menú digital</a> · <a href="/blog/">Notas técnicas</a></footer>
   </div>
 </body>
 </html>

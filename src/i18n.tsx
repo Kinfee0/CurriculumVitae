@@ -19,6 +19,7 @@ const es = {
     services: 'Servicios',
     freelance: 'Freelance',
     projects: 'Proyectos',
+    plans: 'Planes',
     notes: 'Notas',
     contact: 'Contacto',
   },
@@ -336,6 +337,14 @@ const es = {
     message: 'Cuéntame tu proyecto',
     sendWhatsApp: 'Enviar por WhatsApp',
     sendEmail: 'Enviar por correo',
+    // Enlaces del pie: llevan a las páginas de servicio y al blog desde todo el sitio
+    linksLabel: 'Más páginas del sitio',
+    links: [
+      { label: 'Páginas web', href: '/paginas-web-emprendedores' },
+      { label: 'Menú digital', href: '/menu-digital-restaurantes' },
+      { label: 'Notas técnicas', href: '/blog/' },
+      { label: 'Portafolio', href: '/' },
+    ],
     footer: '© 2026 Bastián Sandoval · Desarrollador Web Full-Stack · Santiago, Chile',
   },
 };
@@ -351,6 +360,7 @@ const en: typeof es = {
     services: 'Services',
     freelance: 'Freelance',
     projects: 'Projects',
+    plans: 'Plans',
     notes: 'Notes',
     contact: 'Contact',
   },
@@ -659,6 +669,13 @@ const en: typeof es = {
     message: 'Tell me about your project',
     sendWhatsApp: 'Send via WhatsApp',
     sendEmail: 'Send via email',
+    linksLabel: 'More pages on this site',
+    links: [
+      { label: 'Web pages (ES)', href: '/paginas-web-emprendedores' },
+      { label: 'Digital menu (ES)', href: '/menu-digital-restaurantes' },
+      { label: 'Tech notes', href: '/blog/' },
+      { label: 'Portfolio', href: '/' },
+    ],
     footer: '© 2026 Bastián Sandoval · Full-Stack Web Developer · Santiago, Chile',
   },
 };
