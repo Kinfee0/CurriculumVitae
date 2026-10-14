@@ -12,7 +12,7 @@ const es = {
   meta: {
     title: 'Bastián Sandoval — Páginas web y menús digitales en Chile',
     description:
-      'Desarrollador web full-stack en Santiago. Páginas web desde $50.000 y menús digitales con pedidos por WhatsApp desde $70.000, más e-commerce y apps a medida.',
+      'Desarrollador web en Santiago. Páginas web desde $69.990 + IVA y menús digitales con pedidos por WhatsApp desde $89.990 + IVA, más e-commerce y apps a medida.',
   },
   nav: {
     about: 'Sobre mí',
@@ -130,8 +130,8 @@ const es = {
     offersHeading: 'Para emprendimientos y locales de comida',
     offersCta: 'Ver qué incluye →',
     offers: [
-      { name: 'Página web para tu emprendimiento', price: 'Desde $50.000', href: '/paginas-web-emprendedores' },
-      { name: 'Menú digital con pedidos por WhatsApp', price: 'Desde $70.000', href: '/menu-digital-restaurantes' },
+      { name: 'Página web para tu emprendimiento', price: 'Desde $69.990 + IVA', href: '/paginas-web-emprendedores' },
+      { name: 'Menú digital con pedidos por WhatsApp', price: 'Desde $89.990 + IVA', href: '/menu-digital-restaurantes' },
     ],
   },
   projects: {
@@ -358,7 +358,7 @@ const en: typeof es = {
   meta: {
     title: 'Bastián Sandoval — Websites and digital menus in Chile',
     description:
-      'Full-stack web developer in Santiago, Chile. Websites from CLP 50,000 and digital menus with WhatsApp orders from CLP 70,000, plus e-commerce and custom apps.',
+      'Web developer in Santiago, Chile. Websites from CLP 69,990 + VAT and digital menus with WhatsApp orders from CLP 89,990 + VAT, plus e-commerce and custom apps.',
   },
   nav: {
     about: 'About',
@@ -469,8 +469,8 @@ const en: typeof es = {
     offersHeading: 'For small businesses and restaurants in Chile',
     offersCta: "See what's included (in Spanish) →",
     offers: [
-      { name: 'A website for your small business', price: 'From CLP 50,000', href: '/paginas-web-emprendedores' },
-      { name: 'Digital menu with WhatsApp orders', price: 'From CLP 70,000', href: '/menu-digital-restaurantes' },
+      { name: 'A website for your small business', price: 'From CLP 69,990 + VAT', href: '/paginas-web-emprendedores' },
+      { name: 'Digital menu with WhatsApp orders', price: 'From CLP 89,990 + VAT', href: '/menu-digital-restaurantes' },
     ],
   },
   projects: {

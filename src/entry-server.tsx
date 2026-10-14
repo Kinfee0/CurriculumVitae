@@ -57,6 +57,12 @@ export function jsonLd(page: PageId): string | null {
           description: plan.summary,
           price: String(plan.amount),
           priceCurrency: 'CLP',
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            price: String(plan.amount),
+            priceCurrency: 'CLP',
+            valueAddedTaxIncluded: false,
+          },
           url: `${url}#planes`,
         })),
       },

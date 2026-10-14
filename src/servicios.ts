@@ -13,7 +13,7 @@ export type ServiceId = 'paginas-web' | 'menu-digital';
 
 export type Plan = {
   name: string;
-  /** Precio para mostrar ("$120.000") */
+  /** Precio para mostrar ("$119.990") */
   price: string;
   /** Precio en número, para el JSON-LD de la página */
   amount: number;
@@ -25,13 +25,14 @@ export type Plan = {
 
 export type CareOption = {
   name: string;
-  /** "$10.000" (más IVA, mensual) */
+  /** "$10.000" o "$20.000 a $60.000" (más IVA) */
   price: string;
+  /** Lo que va después del precio: "/mes + IVA" */
+  unit: string;
   summary: string;
   features: string[];
-  /** Pago trimestral y anual, ya con descuento (más IVA) */
-  quarter: string;
-  year: string;
+  /** Pago trimestral y anual, ya con descuento (más IVA). Solo las suscripciones. */
+  periods?: { quarter: string; year: string };
 };
 
 export type Service = {
@@ -71,9 +72,13 @@ export type Service = {
 const DOMINIO =
   'No. El dominio (por ejemplo, tunegocio.cl) se paga aparte, directo a NIC Chile: cerca de $10.000 al año. No gano nada con él y queda a tu nombre.';
 const HOSTING =
-  'El primer mes de alojamiento va incluido. Después, si quieres que yo la aloje, son $10.000 + IVA al mes ($15.000 con ajustes, $20.000 con cuidado completo), y puedes pagar cada mes, cada tres meses o al año con descuento. Si prefieres no tener mensualidad, te la entrego con una guía y la publicas en tu propia cuenta.';
+  'El primer mes de alojamiento va incluido. Después, si quieres que yo la aloje, son $10.000 + IVA al mes, o $20.000 + IVA si además quieres cambios de contenido. Puedes pagar cada mes, cada tres meses o al año con descuento. Si prefieres no tener mensualidad, te la entrego con una guía y la publicas en tu propia cuenta.';
+const FACTURA =
+  'Sí. Emito factura por el plan y por el alojamiento. Los precios publicados son más IVA.';
 const LLEVARLA =
   'Sí. Te entrego la página con una guía paso a paso para publicarla en tu propia cuenta, sin mensualidad conmigo. Si prefieres no ocuparte, el alojamiento va a mi cargo.';
+const GARANTIA =
+  'Al entregarte la página tienes una semana para revisarla y pedir cambios sin costo. Cuando aceptas la versión final empieza un mes de garantía: cualquier error de lo que entregué lo corrijo sin costo. Después, los cambios de contenido se hacen con el plan de cambios o como cambio puntual.';
 
 /** Lo que viene después de publicar. Igual para las dos páginas de servicio. */
 export const CARE: {
@@ -83,39 +88,38 @@ export const CARE: {
   notes: string[];
 } = {
   heading: 'Después de publicar',
-  intro: 'El primer mes de alojamiento va incluido. Después eliges: que yo la aloje y la cuide, o llevártela y publicarla tú con mi guía, sin mensualidad conmigo.',
+  intro: 'El primer mes de alojamiento va incluido. Después eliges: que yo la aloje, que además me encargue de tus cambios, o llevártela y publicarla tú con mi guía.',
   options: [
     {
       name: 'Alojamiento',
       price: '$10.000',
+      unit: '/mes + IVA',
       summary: 'Tu página siempre en línea.',
       features: ['Publicada en mi infraestructura, con HTTPS', 'Respaldo de la página', 'Tu dominio conectado y funcionando'],
-      quarter: '$28.500',
-      year: '$100.000',
+      periods: { quarter: '$27.500', year: '$100.000' },
     },
     {
-      name: 'Alojamiento + ajustes',
-      price: '$15.000',
-      summary: 'Para una página que cambia seguido.',
-      features: ['Todo lo del Alojamiento', 'Hasta 2 cambios pequeños al mes: textos, precios o fotos'],
-      quarter: '$42.750',
-      year: '$150.000',
-    },
-    {
-      name: 'Cuidado completo',
+      name: 'Alojamiento + cambios',
       price: '$20.000',
-      summary: 'Alguien pendiente de tu página y de Google.',
+      unit: '/mes + IVA',
+      summary: 'Para una página que cambia seguido.',
       features: [
-        'Todo lo anterior, con hasta 4 cambios al mes',
-        'Informe mensual de visitas y búsquedas en Google',
-        'Reviso que Google la tenga indexada y te aviso si algo falla',
+        'Todo lo del Alojamiento',
+        'Cambios de contenido razonables: productos, precios, textos, fotos u ofertas',
+        'Respuesta en 1 día hábil',
       ],
-      quarter: '$57.000',
-      year: '$200.000',
+      periods: { quarter: '$55.000', year: '$200.000' },
+    },
+    {
+      name: 'Cambio puntual',
+      price: '$20.000 a $60.000',
+      unit: '+ IVA, sin suscripción',
+      summary: 'Pagas solo cuando necesitas un cambio.',
+      features: ['Según la cantidad de productos, noticias o textos a cambiar', 'Te lo cotizo por WhatsApp antes de hacerlo'],
     },
   ],
   notes: [
-    'Valores mensuales + IVA. Pago trimestral con 5% menos; anual con 2 meses gratis.',
+    'Valores + IVA, con factura. Pago trimestral con cerca de 8% menos; anual con 2 meses gratis.',
     'El dominio (.cl, cerca de $10.000 al año) se paga aparte, directo a NIC Chile; yo no gano nada con él y queda a tu nombre.',
     'Los cambios grandes o funciones nuevas se cotizan aparte.',
   ],
@@ -132,12 +136,12 @@ export const SERVICES: Record<ServiceId, Service> = {
     seo: {
       name: 'Página web para emprendedores',
       serviceType: 'Diseño y desarrollo de páginas web',
-      description: 'Páginas web para emprendimientos en Chile: pensadas para el celular, rápidas, con botón de WhatsApp y SEO básico. Tres planes desde $50.000, listas en 3 a 7 días hábiles.',
+      description: 'Páginas web para emprendimientos en Chile: pensadas para el celular, rápidas, con botón de WhatsApp y SEO básico. Tres planes desde $69.990 + IVA, listas en 3 a 7 días hábiles.',
     },
     noun: 'página web',
     heading: 'Páginas web',
-    headingSr: ' para emprendedores en Chile, desde $50.000',
-    badge: 'Desde $50.000',
+    headingSr: ' para emprendedores en Chile, desde $69.990 + IVA',
+    badge: 'Desde $69.990 + IVA',
     tagline: 'Para emprendedores: rápidas, pensadas para el celular y con tu WhatsApp a un toque. Listas en 3 a 7 días hábiles.',
     cta: 'Cotizar por WhatsApp',
     ctaShort: 'Cotizar',
@@ -151,8 +155,8 @@ export const SERVICES: Record<ServiceId, Service> = {
     plans: [
       {
         name: 'Básico',
-        price: '$50.000',
-        amount: 50000,
+        price: '$69.990',
+        amount: 69990,
         summary: 'Presenta tu negocio y lleva a tus clientes a WhatsApp.',
         features: [
           'Página de una sección: quién eres, qué ofreces y cómo contactarte',
@@ -164,8 +168,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       },
       {
         name: 'Intermedio',
-        price: '$120.000',
-        amount: 120000,
+        price: '$119.990',
+        amount: 119990,
         summary: 'Muestra tu oferta con detalle y recibe consultas.',
         features: [
           'Hasta 5 secciones: servicios, catálogo, galería, preguntas y contacto',
@@ -179,8 +183,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       },
       {
         name: 'Full',
-        price: '$180.000',
-        amount: 180000,
+        price: '$179.990',
+        amount: 179990,
         summary: 'Hace cosas por ti: arma pedidos, cotiza, filtra.',
         features: [
           'Todo lo del plan Intermedio, con hasta 10 secciones',
@@ -192,7 +196,7 @@ export const SERVICES: Record<ServiceId, Service> = {
         time: 'Lista en 7 días hábiles',
       },
     ],
-    plansCommon: ['Primer mes de alojamiento incluido', 'El código y el dominio quedan a tu nombre', 'Ajustes de las primeras semanas incluidos'],
+    plansCommon: ['Precios + IVA, con factura', 'Primer mes de alojamiento incluido', 'El código y el dominio quedan a tu nombre', 'Una semana de revisión y un mes de garantía'],
     includesHeading: 'Siempre incluido',
     includes: [
       { title: 'Diseño pensado para el celular', text: 'Es donde tus clientes te van a ver primero; desde ahí se adapta al computador.' },
@@ -200,7 +204,7 @@ export const SERVICES: Record<ServiceId, Service> = {
       { title: 'Carga rápida', text: 'Imágenes optimizadas y código liviano: nadie espera a una página lenta, y Google tampoco.' },
       { title: 'SEO básico para Google', text: 'Título, descripción y datos estructurados para que tu negocio aparezca bien en los resultados.' },
       { title: 'Publicada y funcionando', text: 'La dejo en línea y funcionando, con el primer mes de alojamiento incluido, lista para compartir en tus redes.' },
-      { title: 'Ajustes de las primeras semanas', text: 'Si algo hay que cambiar después de publicar, lo vemos sin costo extra.' },
+      { title: 'Una semana de revisión y un mes de garantía', text: 'Tienes una semana para revisarla y pedir cambios sin costo. Al aceptar la versión final, un mes de garantía para cualquier error.' },
     ],
     projectsHeading: 'Proyectos',
     projects: ['nebuna', 'sfpizza', 'gaspy', 'mtqchile'],
@@ -208,7 +212,7 @@ export const SERVICES: Record<ServiceId, Service> = {
       { title: 'Conversamos', text: 'Me cuentas por WhatsApp qué vendes y qué necesitas. Sin costo y sin compromiso.' },
       { title: 'Elegimos el plan', text: 'Te propongo el que calza con lo que necesitas y lo dejamos por escrito. Sin sorpresas después.' },
       { title: 'Construyo', text: 'Entre 3 y 7 días hábiles según el plan, desde que tengo el material.' },
-      { title: 'Publico y te entrego', text: 'La página queda en línea y el dominio, a tu nombre.' },
+      { title: 'Publico y te entrego', text: 'La página queda en línea y el dominio, a tu nombre. Tienes una semana para pedir cambios sin costo.' },
     ],
     faqs: [
       { q: '¿Qué plan me conviene?', a: 'Si solo necesitas que te encuentren y te escriban, el Básico. Si quieres mostrar tus productos o servicios con detalle y que te consulten, el Intermedio. Si quieres que el cliente haga algo en la página (arme su pedido, cotice, filtre) y a ti te llegue resuelto, el Full. Si no sabes, conversemos y te recomiendo uno.' },
@@ -216,6 +220,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       { q: '¿El dominio está incluido?', a: DOMINIO },
       { q: '¿Tengo que pagar hosting todos los meses?', a: HOSTING },
       { q: '¿Puedo llevarme la página y publicarla yo?', a: LLEVARLA },
+      { q: '¿Emites factura? ¿Los precios incluyen IVA?', a: FACTURA },
+      { q: '¿Qué pasa si algo falla o no me gusta?', a: GARANTIA },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
       { q: '¿Y si necesito algo que no está en ningún plan?', a: FUERA_DE_PLAN },
       { q: '¿Quién es dueño de la página?', a: 'Tú. El código y el dominio quedan a tu nombre desde el primer día y no quedas amarrado a mí: si dejas el alojamiento, te entrego la página con una guía para publicarla por tu cuenta.' },
@@ -229,12 +235,12 @@ export const SERVICES: Record<ServiceId, Service> = {
     seo: {
       name: 'Menú digital con pedidos por WhatsApp',
       serviceType: 'Menú digital y pedidos online para restaurantes',
-      description: 'Carta online para restaurantes, pizzerías y locales de comida en Chile: el cliente arma su pedido y llega al WhatsApp del local, sin apps ni comisiones. Tres planes desde $70.000, listos en 3 a 7 días hábiles.',
+      description: 'Carta online para restaurantes, pizzerías y locales de comida en Chile: el cliente arma su pedido y llega al WhatsApp del local, sin apps ni comisiones. Tres planes desde $89.990 + IVA, listos en 3 a 7 días hábiles.',
     },
     noun: 'menú digital',
     heading: 'Menú digital',
-    headingSr: ' con pedidos por WhatsApp para restaurantes en Chile, desde $70.000',
-    badge: 'Desde $70.000',
+    headingSr: ' con pedidos por WhatsApp para restaurantes en Chile, desde $89.990 + IVA',
+    badge: 'Desde $89.990 + IVA',
     tagline: 'Para locales de comida: el cliente arma el pedido y te llega completo a tu WhatsApp. Sin apps ni comisiones.',
     cta: 'Cotizar por WhatsApp',
     ctaShort: 'Cotizar',
@@ -248,8 +254,8 @@ export const SERVICES: Record<ServiceId, Service> = {
     plans: [
       {
         name: 'Básico',
-        price: '$70.000',
-        amount: 70000,
+        price: '$89.990',
+        amount: 89990,
         summary: 'Tu carta online, recibiendo pedidos.',
         features: [
           'Carta de hasta 20 productos, con foto y precio',
@@ -262,8 +268,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       },
       {
         name: 'Intermedio',
-        price: '$140.000',
-        amount: 140000,
+        price: '$139.990',
+        amount: 139990,
         summary: 'La carta completa de tu local.',
         features: [
           'Hasta 60 productos, con categorías, tamaños y agregados',
@@ -276,8 +282,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       },
       {
         name: 'Full',
-        price: '$200.000',
-        amount: 200000,
+        price: '$199.990',
+        amount: 199990,
         summary: 'Una carta que se recuerda, como San Francisco Pizza y Gaspy Burgers.',
         features: [
           'Todo lo del plan Intermedio, sin límite de productos',
@@ -290,7 +296,7 @@ export const SERVICES: Record<ServiceId, Service> = {
         time: 'Lista en 7 días hábiles',
       },
     ],
-    plansCommon: ['Sin comisiones por pedido', 'Primer mes de alojamiento incluido', 'Ajustes de las primeras semanas incluidos'],
+    plansCommon: ['Precios + IVA, con factura', 'Sin comisiones por pedido', 'Primer mes de alojamiento incluido', 'Una semana de revisión y un mes de garantía'],
     includesHeading: 'Siempre incluido',
     includes: [
       { title: 'Tu carta en el celular', text: 'Productos, fotos y precios, fácil de recorrer con el pulgar.' },
@@ -298,7 +304,7 @@ export const SERVICES: Record<ServiceId, Service> = {
       { title: 'Sin apps ni comisiones', text: 'Tus clientes piden desde el navegador y la venta es 100% tuya: no hay intermediarios.' },
       { title: 'Rápida y liviana', text: 'Se abre al tiro desde un link de Instagram o un código QR en la mesa.' },
       { title: 'Publicada y funcionando', text: 'La dejo en línea y funcionando, con el primer mes de alojamiento incluido y SEO básico para Google.' },
-      { title: 'Ajustes de las primeras semanas', text: 'Si hay que corregir un precio o un producto después de publicar, lo vemos sin costo extra.' },
+      { title: 'Una semana de revisión y un mes de garantía', text: 'Tienes una semana para revisarla y corregir precios o productos sin costo. Al aceptar la versión final, un mes de garantía para cualquier error.' },
     ],
     projectsHeading: 'Proyectos',
     projects: ['sfpizza', 'gaspy'],
@@ -316,6 +322,8 @@ export const SERVICES: Record<ServiceId, Service> = {
       { q: '¿El dominio está incluido?', a: DOMINIO },
       { q: '¿Tengo que pagar hosting todos los meses?', a: HOSTING },
       { q: '¿Puedo llevarme la página y publicarla yo?', a: LLEVARLA },
+      { q: '¿Emites factura? ¿Los precios incluyen IVA?', a: FACTURA },
+      { q: '¿Qué pasa si algo falla o no me gusta?', a: GARANTIA },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
       { q: '¿Y si necesito algo que no está en ningún plan?', a: FUERA_DE_PLAN },
     ],

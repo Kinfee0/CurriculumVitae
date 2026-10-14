@@ -142,7 +142,7 @@ function ServiceHero({ s }: { s: Service }) {
 /* ---------------------------------- Planes --------------------------------- */
 
 function PlanCard({ s, plan }: { s: Service; plan: Plan }) {
-  const texto = `Hola Bastián, me interesa el plan ${plan.name} de ${s.noun} (${plan.price})`;
+  const texto = `Hola Bastián, me interesa el plan ${plan.name} de ${s.noun} (${plan.price} + IVA)`;
   return (
     <div
       className={`glass-card relative rounded-[28px] sm:rounded-[36px] p-6 sm:p-8 h-full flex flex-col ${
@@ -158,8 +158,11 @@ function PlanCard({ s, plan }: { s: Service; plan: Plan }) {
         </span>
       )}
       <h3 className="text-[#D7E2EA] font-medium uppercase tracking-widest text-sm sm:text-base">{plan.name}</h3>
-      <p className="project-number font-black leading-none tracking-tight mt-3" style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)' }}>
-        {plan.price}
+      <p className="mt-3 flex items-baseline gap-2">
+        <span className="project-number font-black leading-none tracking-tight" style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)' }}>
+          {plan.price}
+        </span>
+        <span className="text-[#D7E2EA]/60 font-light text-sm">+ IVA</span>
       </p>
       <p className="text-[#D7E2EA]/60 font-light text-sm leading-snug mt-3 lg:min-h-[2.5rem]">{plan.summary}</p>
       <ul className="flex flex-col gap-3 mt-6 mb-8">
@@ -193,8 +196,8 @@ function CareCard({ s, option }: { s: Service; option: CareOption }) {
     <div className="glass-card rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 h-full flex flex-col">
       <h4 className="text-[#D7E2EA] font-medium uppercase tracking-widest text-sm">{option.name}</h4>
       <p className="mt-3 flex items-baseline gap-2 text-[#D7E2EA]">
-        <span className="project-number font-black leading-none tracking-tight text-3xl sm:text-4xl">{option.price}</span>
-        <span className="text-[#D7E2EA]/60 font-light text-sm">/mes + IVA</span>
+        <span className="project-number font-black leading-none tracking-tight text-2xl sm:text-3xl">{option.price}</span>
+        <span className="text-[#D7E2EA]/60 font-light text-sm">{option.unit}</span>
       </p>
       <p className="text-[#D7E2EA]/60 font-light text-sm leading-snug mt-3">{option.summary}</p>
       <ul className="flex flex-col gap-2.5 mt-5 mb-6">
@@ -206,9 +209,11 @@ function CareCard({ s, option }: { s: Service; option: CareOption }) {
         ))}
       </ul>
       <div className="mt-auto">
-        <p className="text-[#D7E2EA]/60 font-light text-xs leading-relaxed">
-          Trimestral {option.quarter} · Anual {option.year} (+ IVA)
-        </p>
+        {option.periods && (
+          <p className="text-[#D7E2EA]/60 font-light text-xs leading-relaxed">
+            Trimestral {option.periods.quarter} · Anual {option.periods.year} (+ IVA)
+          </p>
+        )}
         <a
           href={waLink(texto)}
           className="inline-block mt-4 text-[#D7E2EA] font-medium uppercase tracking-widest text-xs underline underline-offset-4 decoration-[#D7E2EA]/30 hover:decoration-[#D7E2EA] transition-colors"
