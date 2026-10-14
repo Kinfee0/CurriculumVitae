@@ -38,3 +38,6 @@ CV-*.pdf
 Diploma-*.jpeg
 portal-*.png
 google-maps/
+
+# Entregables para clientes (PDF y su fuente)
+clientes/

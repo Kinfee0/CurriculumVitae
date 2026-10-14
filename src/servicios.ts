@@ -72,7 +72,7 @@ export type Service = {
 const DOMINIO =
   'No. El dominio (por ejemplo, tunegocio.cl) se paga aparte, directo a NIC Chile: cerca de $10.000 al año. No gano nada con él y queda a tu nombre.';
 const HOSTING =
-  'El primer mes de alojamiento va incluido. Después, si quieres que yo la aloje, son $10.000 + IVA al mes, o $20.000 + IVA si además quieres cambios de contenido. Puedes pagar cada mes, cada tres meses o al año con descuento. Si prefieres no tener mensualidad, te la entrego con una guía y la publicas en tu propia cuenta.';
+  'El primer mes de alojamiento va incluido. Después, si quieres que yo la aloje, son $9.990 + IVA al mes, o $19.990 + IVA si además quieres cambios de contenido. Puedes pagar cada mes, cada tres meses o al año con descuento. Si prefieres no tener mensualidad, te la entrego con una guía y la publicas en tu propia cuenta.';
 const FACTURA =
   'Sí. Emito factura por el plan y por el alojamiento. Los precios publicados son más IVA.';
 const LLEVARLA =
@@ -92,15 +92,15 @@ export const CARE: {
   options: [
     {
       name: 'Alojamiento',
-      price: '$10.000',
+      price: '$9.990',
       unit: '/mes + IVA',
       summary: 'Tu página siempre en línea.',
       features: ['Publicada en mi infraestructura, con HTTPS', 'Respaldo de la página', 'Tu dominio conectado y funcionando'],
-      periods: { quarter: '$27.500', year: '$100.000' },
+      periods: { quarter: '$27.490', year: '$99.990' },
     },
     {
       name: 'Alojamiento + cambios',
-      price: '$20.000',
+      price: '$19.990',
       unit: '/mes + IVA',
       summary: 'Para una página que cambia seguido.',
       features: [
@@ -108,11 +108,11 @@ export const CARE: {
         'Cambios de contenido razonables: productos, precios, textos, fotos u ofertas',
         'Respuesta en 1 día hábil',
       ],
-      periods: { quarter: '$55.000', year: '$200.000' },
+      periods: { quarter: '$54.990', year: '$199.990' },
     },
     {
       name: 'Cambio puntual',
-      price: '$20.000 a $60.000',
+      price: '$19.990 a $59.990',
       unit: '+ IVA, sin suscripción',
       summary: 'Pagas solo cuando necesitas un cambio.',
       features: ['Según la cantidad de productos, noticias o textos a cambiar', 'Te lo cotizo por WhatsApp antes de hacerlo'],
