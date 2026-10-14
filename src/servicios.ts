@@ -77,6 +77,8 @@ const FACTURA =
   'Sí. Emito factura por el plan y por el alojamiento. Los precios publicados son más IVA.';
 const LLEVARLA =
   'Sí. Te entrego la página con una guía paso a paso para publicarla en tu propia cuenta, sin mensualidad conmigo. Si prefieres no ocuparte, el alojamiento va a mi cargo.';
+const QUE_ES_UN_CAMBIO =
+  'Un cambio es modificar algo que ya existe: un producto (nombre, precio, foto o descripción), un texto, una foto o una oferta. El plan de cambios incluye hasta 4 solicitudes al mes, de hasta 5 elementos cada una, que no se acumulan de un mes a otro. Si necesitas algo puntual, un cambio de hasta 5 elementos cuesta $19.990 + IVA, hasta 15 elementos $39.990 y hasta 30 o una sección completa $59.990. Agregar una sección nueva o una función se cotiza aparte.';
 const GARANTIA =
   'Al entregarte la página tienes una semana para revisarla y pedir cambios sin costo. Cuando aceptas la versión final empieza un mes de garantía: cualquier error de lo que entregué lo corrijo sin costo. Después, los cambios de contenido se hacen con el plan de cambios o como cambio puntual.';
 
@@ -105,8 +107,8 @@ export const CARE: {
       summary: 'Para una página que cambia seguido.',
       features: [
         'Todo lo del Alojamiento',
-        'Cambios de contenido razonables: productos, precios, textos, fotos u ofertas',
-        'Respuesta en 1 día hábil',
+        'Hasta 4 solicitudes de cambio al mes, de hasta 5 elementos cada una (productos, precios, textos, fotos u ofertas)',
+        'Respuesta en 1 día hábil y publicado en 2 días hábiles',
       ],
       periods: { quarter: '$54.990', year: '$199.990' },
     },
@@ -115,13 +117,14 @@ export const CARE: {
       price: '$19.990 a $59.990',
       unit: '+ IVA, sin suscripción',
       summary: 'Pagas solo cuando necesitas un cambio.',
-      features: ['Según la cantidad de productos, noticias o textos a cambiar', 'Te lo cotizo por WhatsApp antes de hacerlo'],
+      features: ['Hasta 5 elementos: $19.990', 'Hasta 15 elementos: $39.990', 'Hasta 30 elementos o una sección completa: $59.990'],
     },
   ],
   notes: [
     'Valores + IVA, con factura. Pago trimestral con cerca de 8% menos; anual con 2 meses gratis.',
     'El dominio (.cl, cerca de $10.000 al año) se paga aparte, directo a NIC Chile; yo no gano nada con él y queda a tu nombre.',
-    'Los cambios grandes o funciones nuevas se cotizan aparte.',
+    'Un elemento es un producto, un texto, una foto o una oferta. Las solicitudes de cada mes no se acumulan.',
+    'Los cambios grandes, una sección nueva o funciones nuevas se cotizan aparte.',
   ],
 };
 const FUERA_DE_PLAN =
@@ -222,6 +225,7 @@ export const SERVICES: Record<ServiceId, Service> = {
       { q: '¿Puedo llevarme la página y publicarla yo?', a: LLEVARLA },
       { q: '¿Emites factura? ¿Los precios incluyen IVA?', a: FACTURA },
       { q: '¿Qué pasa si algo falla o no me gusta?', a: GARANTIA },
+      { q: '¿Qué cuenta como un cambio?', a: QUE_ES_UN_CAMBIO },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
       { q: '¿Y si necesito algo que no está en ningún plan?', a: FUERA_DE_PLAN },
       { q: '¿Quién es dueño de la página?', a: 'Tú. El código y el dominio quedan a tu nombre desde el primer día y no quedas amarrado a mí: si dejas el alojamiento, te entrego la página con una guía para publicarla por tu cuenta.' },
@@ -324,6 +328,7 @@ export const SERVICES: Record<ServiceId, Service> = {
       { q: '¿Puedo llevarme la página y publicarla yo?', a: LLEVARLA },
       { q: '¿Emites factura? ¿Los precios incluyen IVA?', a: FACTURA },
       { q: '¿Qué pasa si algo falla o no me gusta?', a: GARANTIA },
+      { q: '¿Qué cuenta como un cambio?', a: QUE_ES_UN_CAMBIO },
       { q: '¿En cuánto tiempo está lista?', a: PLAZO },
       { q: '¿Y si necesito algo que no está en ningún plan?', a: FUERA_DE_PLAN },
     ],
