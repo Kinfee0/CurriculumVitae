@@ -1,0 +1,6 @@
+# Las páginas de servicio y el artículo de precios se mudaron a nebuna.cl
+# (los precios y planes tienen una sola fuente allá).
+# https://developers.cloudflare.com/workers/static-assets/redirects/
+/paginas-web-emprendedores https://nebuna.cl/paginas-web-emprendedores 301
+/menu-digital-restaurantes https://nebuna.cl/menu-digital-restaurantes 301
+/blog/cuanto-cuesta-una-pagina-web-chile https://nebuna.cl/blog/cuanto-cuesta-una-pagina-web-chile 301

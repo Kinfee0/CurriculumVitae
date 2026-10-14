@@ -13,7 +13,7 @@ export function BlogSection() {
           {t.blog.heading}
         </h2>
       </FadeIn>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
+      <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
         {t.blog.items.map((item, i) => (
           <FadeIn key={item.href} delay={i * 0.1} y={30}>
             <a

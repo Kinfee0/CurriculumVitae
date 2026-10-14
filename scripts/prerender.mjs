@@ -17,13 +17,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ssrDir = resolve(root, 'dist-ssr');
 
-const PAGES = [
-  { file: 'dist/index.html', page: 'home' },
-  { file: 'dist/paginas-web-emprendedores.html', page: 'paginas-web' },
-  { file: 'dist/menu-digital-restaurantes.html', page: 'menu-digital' },
-];
+const PAGES = [{ file: 'dist/index.html', page: 'home' }];
 
-const { render, jsonLd } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href);
+const { render } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href);
 const placeholder = /<div id="root"([^>]*)><\/div>/;
 
 for (const { file, page } of PAGES) {
@@ -36,14 +32,7 @@ for (const { file, page } of PAGES) {
   if (!appHtml.includes('<h1')) {
     throw new Error(`El prerender de "${page}" no generó el <h1>: revisa src/entry-server.tsx`);
   }
-  let out = html.replace(placeholder, (_, attrs) => `<div id="root"${attrs}>${appHtml}</div>`);
-  // Las páginas de servicio no traen JSON-LD en su HTML: se genera desde
-  // src/servicios.ts (precios de los planes) y se inserta al final del <head>
-  const ld = jsonLd(page);
-  if (ld) {
-    if (out.includes('application/ld+json')) throw new Error(`${file} ya trae JSON-LD: quítalo del HTML`);
-    out = out.replace('</head>', () => `  <script type="application/ld+json">${ld}</script>\n</head>`);
-  }
+  const out = html.replace(placeholder, (_, attrs) => `<div id="root"${attrs}>${appHtml}</div>`);
   await writeFile(htmlPath, out);
   console.log(`prerender: ${file} (+${(appHtml.length / 1024).toFixed(1)} KB de HTML)`);
 }

@@ -13,13 +13,11 @@ export default defineConfig({
     port: process.env.PORT ? Number(process.env.PORT) : 5173,
   },
   build: {
-    // Multipágina: la home y las páginas de servicio (cada una con su HTML,
-    // su <head> propio y su prerender en scripts/prerender.mjs)
+    // La home es la única entrada (su prerender está en scripts/prerender.mjs).
+    // Las páginas de servicio viven ahora en nebuna.cl.
     rollupOptions: {
       input: {
         main: page('./index.html'),
-        'paginas-web-emprendedores': page('./paginas-web-emprendedores.html'),
-        'menu-digital-restaurantes': page('./menu-digital-restaurantes.html'),
       },
     },
   },

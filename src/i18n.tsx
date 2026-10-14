@@ -10,9 +10,9 @@ export type Lang = 'es' | 'en';
 
 const es = {
   meta: {
-    title: 'Bastián Sandoval — Páginas web y menús digitales en Chile',
+    title: 'Bastián Sandoval — Desarrollador web full-stack en Chile',
     description:
-      'Desarrollador web en Santiago. Páginas web desde $69.990 + IVA y menús digitales con pedidos por WhatsApp desde $89.990 + IVA, más e-commerce y apps a medida.',
+      'Desarrollador web full-stack en Santiago. Cofundador de Nebuna (nebuna.cl): páginas web y menús digitales para emprendedores. E-commerce y apps a medida.',
   },
   nav: {
     about: 'Sobre mí',
@@ -130,8 +130,8 @@ const es = {
     offersHeading: 'Para emprendimientos y locales de comida',
     offersCta: 'Ver qué incluye →',
     offers: [
-      { name: 'Página web para tu emprendimiento', price: 'Desde $69.990 + IVA', href: '/paginas-web-emprendedores' },
-      { name: 'Menú digital con pedidos por WhatsApp', price: 'Desde $89.990 + IVA', href: '/menu-digital-restaurantes' },
+      { name: 'Página web para tu emprendimiento', price: 'Desde $69.990 + IVA', href: 'https://nebuna.cl/paginas-web-emprendedores' },
+      { name: 'Menú digital con pedidos por WhatsApp', price: 'Desde $89.990 + IVA', href: 'https://nebuna.cl/menu-digital-restaurantes' },
     ],
   },
   projects: {
@@ -328,11 +328,6 @@ const es = {
         title: 'Un cotizador por WhatsApp que sí convierte',
         summary: 'Cómo armé un cotizador para WooCommerce: formulario corto, registro en el panel y mensaje ya escrito.',
       },
-      {
-        href: '/blog/cuanto-cuesta-una-pagina-web-chile',
-        title: '¿Cuánto cuesta una página web en Chile en 2026?',
-        summary: 'De qué depende el precio, qué se paga aparte y cuánto cobro por cada plan.',
-      },
     ],
   },
   contact: {
@@ -345,8 +340,8 @@ const es = {
     // Enlaces del pie: llevan a las páginas de servicio y al blog desde todo el sitio
     linksLabel: 'Más páginas del sitio',
     links: [
-      { label: 'Páginas web', href: '/paginas-web-emprendedores' },
-      { label: 'Menú digital', href: '/menu-digital-restaurantes' },
+      { label: 'Páginas web', href: 'https://nebuna.cl/paginas-web-emprendedores' },
+      { label: 'Menú digital', href: 'https://nebuna.cl/menu-digital-restaurantes' },
       { label: 'Notas técnicas', href: '/blog/' },
       { label: 'Portafolio', href: '/' },
     ],
@@ -356,9 +351,9 @@ const es = {
 
 const en: typeof es = {
   meta: {
-    title: 'Bastián Sandoval — Websites and digital menus in Chile',
+    title: 'Bastián Sandoval — Full-stack web developer in Chile',
     description:
-      'Web developer in Santiago, Chile. Websites from CLP 69,990 + VAT and digital menus with WhatsApp orders from CLP 89,990 + VAT, plus e-commerce and custom apps.',
+      'Full-stack web developer in Santiago, Chile. Co-founder of Nebuna (nebuna.cl): websites and digital menus for small businesses. E-commerce and custom apps.',
   },
   nav: {
     about: 'About',
@@ -469,8 +464,8 @@ const en: typeof es = {
     offersHeading: 'For small businesses and restaurants in Chile',
     offersCta: "See what's included (in Spanish) →",
     offers: [
-      { name: 'A website for your small business', price: 'From CLP 69,990 + VAT', href: '/paginas-web-emprendedores' },
-      { name: 'Digital menu with WhatsApp orders', price: 'From CLP 89,990 + VAT', href: '/menu-digital-restaurantes' },
+      { name: 'A website for your small business', price: 'From CLP 69,990 + VAT', href: 'https://nebuna.cl/paginas-web-emprendedores' },
+      { name: 'Digital menu with WhatsApp orders', price: 'From CLP 89,990 + VAT', href: 'https://nebuna.cl/menu-digital-restaurantes' },
     ],
   },
   projects: {
@@ -665,11 +660,6 @@ const en: typeof es = {
         title: 'A WhatsApp quote flow that actually converts',
         summary: 'How I built a WhatsApp quote flow for WooCommerce: short form, panel record and a ready-made message. (Spanish)',
       },
-      {
-        href: '/blog/cuanto-cuesta-una-pagina-web-chile',
-        title: 'How much does a website cost in Chile in 2026?',
-        summary: 'What drives the price, what is paid separately and what each of my plans costs. (Spanish)',
-      },
     ],
   },
   contact: {
@@ -681,8 +671,8 @@ const en: typeof es = {
     sendEmail: 'Send via email',
     linksLabel: 'More pages on this site',
     links: [
-      { label: 'Web pages (ES)', href: '/paginas-web-emprendedores' },
-      { label: 'Digital menu (ES)', href: '/menu-digital-restaurantes' },
+      { label: 'Web pages (ES)', href: 'https://nebuna.cl/paginas-web-emprendedores' },
+      { label: 'Digital menu (ES)', href: 'https://nebuna.cl/menu-digital-restaurantes' },
       { label: 'Tech notes', href: '/blog/' },
       { label: 'Portfolio', href: '/' },
     ],

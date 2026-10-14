@@ -1,11 +1,13 @@
 # Bastián Sandoval
 
-> Desarrollador web full-stack en Santiago, Chile. Crea páginas web para emprendedores y menús digitales con pedidos por WhatsApp para restaurantes, además de e-commerce (WooCommerce) y aplicaciones a medida. Precios en pesos chilenos (CLP).
+> Desarrollador web full-stack en Santiago, Chile, y cofundador de Nebuna (nebuna.cl), que crea páginas web para emprendedores y menús digitales con pedidos por WhatsApp. Además trabaja en e-commerce (WooCommerce) y aplicaciones a medida.
 
-## Servicios
+## Servicios para emprendedores (Nebuna)
 
-- [Páginas web para emprendedores](https://bastiansandoval.cl/paginas-web-emprendedores): tres planes desde $69.990 + IVA (Básico $69.990, Intermedio $119.990, Full $179.990; todos más IVA, con factura); 3 a 7 días hábiles. Primer mes de alojamiento incluido; después $9.990 + IVA al mes de alojamiento ($19.990 + IVA con hasta 4 solicitudes de cambio al mes de hasta 5 elementos cada una; cambio puntual de $19.990 a $59.990 + IVA según la cantidad de elementos), o el cliente se lleva la página con una guía. Una semana de revisión sin costo y un mes de garantía tras aceptar la versión final. El dominio (.cl, cerca de $10.000 al año en NIC Chile) se paga aparte; el código y el dominio quedan a nombre del cliente.
-- [Menú digital para restaurantes](https://bastiansandoval.cl/menu-digital-restaurantes): carta online con pedidos por WhatsApp, sin apps ni comisiones; tres planes desde $89.990 + IVA.
+- [Nebuna](https://nebuna.cl/): páginas web y menús digitales con pedidos por WhatsApp, con precios en pesos chilenos más IVA y factura.
+- [Páginas web para emprendedores](https://nebuna.cl/paginas-web-emprendedores): tres planes desde $69.990 + IVA.
+- [Menú digital para restaurantes](https://nebuna.cl/menu-digital-restaurantes): carta online con pedidos por WhatsApp, sin apps ni comisiones; tres planes desde $89.990 + IVA.
+- [¿Cuánto cuesta una página web en Chile en 2026?](https://nebuna.cl/blog/cuanto-cuesta-una-pagina-web-chile)
 
 ## Portafolio y blog
 

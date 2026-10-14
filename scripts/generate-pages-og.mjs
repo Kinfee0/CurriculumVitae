@@ -42,18 +42,6 @@ const PAGES = [
     title: '¿Cuánto cuesta una página web en Chile en 2026?',
     tags: 'Páginas web · Precios',
   },
-  {
-    out: 'public/og/paginas-web-emprendedores.png',
-    kicker: 'Para emprendedores',
-    title: 'Tu página web,\nlista en 3 a 7 días.\nDesde $69.990 + IVA',
-    tags: 'Celular · WhatsApp · Google',
-  },
-  {
-    out: 'public/og/menu-digital-restaurantes.png',
-    kicker: 'Para restaurantes',
-    title: 'Menú digital con pedidos\ndirecto a tu WhatsApp.\nDesde $89.990 + IVA',
-    tags: 'Sin apps · Sin comisiones',
-  },
 ];
 
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

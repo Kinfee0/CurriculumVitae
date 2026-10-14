@@ -11,7 +11,7 @@ export function HeroSection() {
     { label: t.nav.services, href: '#services' },
     { label: t.nav.projects, href: '#projects' },
     { label: t.nav.freelance, href: '#freelance' },
-    { label: t.nav.plans, href: '/paginas-web-emprendedores' },
+    { label: t.nav.plans, href: 'https://nebuna.cl/paginas-web-emprendedores' },
     { label: t.nav.notes, href: '/blog/' },
     { label: t.nav.contact, href: '#contact' },
   ];
